@@ -3,6 +3,7 @@ package com.example.rupali.thalassaemiaapp;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -80,20 +81,34 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_thalassaemia) {
+            ThalassaemiaFragment thalassaemiaFragment= new ThalassaemiaFragment();
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.container_main,thalassaemiaFragment).commit();
+        } else if (id == R.id.nav_be_a_blood_donor) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_regis_patients) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_be_a_support) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_explore) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_about) {
+            AboutFragment aboutFragment= new AboutFragment();
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.container_main,aboutFragment).commit();
+
+        } else if (id == R.id.nav_contact_us) {
 
         }
+        else if (id == R.id.nav_report_a_bug) {
 
+        }
+        else if (id == R.id.nav_share) {
+
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

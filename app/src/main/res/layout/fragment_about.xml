@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AboutFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+   <android.support.constraint.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       <ImageView
+           android:id="@+id/logo2"
+           android:layout_width="80dp"
+           android:layout_height="80dp"
+           android:layout_marginLeft="16dp"
+           android:layout_marginStart="16dp"
+           android:layout_marginTop="16dp"
+           android:src="@drawable/logo_min"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent" />
+
+       <TextView
+           android:id="@+id/about_us"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginBottom="8dp"
+           android:layout_marginEnd="8dp"
+           android:layout_marginLeft="8dp"
+           android:layout_marginRight="8dp"
+           android:layout_marginStart="8dp"
+           android:layout_marginTop="8dp"
+           android:text="About Us"
+           android:textAppearance="@style/TextAppearance.AppCompat.Large"
+           android:textColor="#3E2723"
+           android:textSize="40dp"
+           app:layout_constraintBottom_toBottomOf="@+id/logo2"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toEndOf="@+id/logo2"
+           app:layout_constraintTop_toTopOf="parent" />
+
+       <TextView
+           android:id="@+id/about_us_content"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_marginBottom="8dp"
+           android:layout_marginEnd="8dp"
+           android:layout_marginLeft="8dp"
+           android:layout_marginRight="8dp"
+           android:layout_marginStart="8dp"
+           android:layout_marginTop="8dp"
+           android:text="@string/about_content"
+           android:textColor="@color/brown"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/logo2" />
+
+   </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

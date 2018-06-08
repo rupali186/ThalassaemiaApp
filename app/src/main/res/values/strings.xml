@@ -6,4 +6,66 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="about_content"> Foundation Against Thalassaemia (Regd.) is an NGO registered under Indian Societies
+        Act 1860/21, working for the Care and Welfare of thalassaemic children since 1995, with a vision to make India
+        Thalassaemia Free.\n\nThalassaemia is a life threatening inherited blood disorder wherein the body cannot make healthy
+        haemoglobin and the person is dependent on regular blood transfusions, at an interval of every 15-21 days, throughout
+        life to survive.\n\nIt is disheartening that India is the Thalassaemia capital of the world with 50 million thalassaemia
+        carriers and over 1,25,000 thalassaemia majors. Every year, approximately 100,000 children with Thalassaemia Major are
+        born world over, of which 10-12% are born in India.\n\nOur Foundation provides free care to about 200 thalassaemic
+        children registered with us from Delhi NCR and farther areas of North India.  This involves providing free medicines,
+        blood and blood transfusion set-up, regular health check-ups by doctors from reputed Hospitals and other activities like
+        organising trips, painting competitions, cultural programs, skill development courses, meetings with celebrities etc.
+        for their physical and psychological welfare and to make them self dependent. The average monthly expense for each such
+        child is INR 7,500-10,000 (US$ 110 - 125).\n\nOur objective is that every individual must be aware if he/she is a
+        thalassaemia carrier, to save a lifelong of pain and trauma for a child. And, our Mission is to *Make India Thalassaemia
+        Free by 2025*. This mission can be achieved only by creating mass level education and awareness and motivating people to
+        go for Thalassaemia Carrier (HbA2) screening during pre-marital, pre-conception or early-pregnency stages.\n\nOur
+        organization has endorsements, patronage and moral support from some of India's top personalities like Hon'ble President
+        of India Shri Ram Nath Kovind, late Dr  APJ Abdul Kalam, Shri Pranab Mukherjee, Smt Pratibha Patil, ex-Prime Minister
+        Dr. Manmohan Singh, Bollywood star Karishma Kapoor, Iconic Cricket Stars Kapil Dev, Virender Sehwag, Bhajan Samrat
+        Narender Chanchal, etc. to name a few.\n\nWe are a Member of Thalassaemia International Federation and have also been
+        granted exemption by Indian Government Us 80G of Income tax Act 1961.\n\n
+    </string>
+    <string name="thalassaemia_content"><b>What is Thalassaemia ?</b>\n\n
+
+Thalassaemia (originated from Greek words  is an inherited blood disorder that causes your body to make less haemoglobin or abnormal
+        haemoglobin. Haemoglobin helps red blood cells spread oxygen through your body. Low levels of haemoglobin may cause anaemia,
+        an illness that makes you feel weak and tired. Severe anemia can damage organs and lead to death.\n\n
+
+There are two main types:\n
+Alpha and Beta. Beta thalassaemia is the most common.
+
+\n\n<b>Beta thalassaeemia</b>\n\n
+You need both alpha and beta globin to make haemoglobin. Beta thalassaemia occurs when one or both of the two genes that make
+        beta-globin don\'t work or only partly work as they should.\n\n
+
+If you have one damaged gene, you may have mild anaemia and probably won\'t need treatment. This is called beta thalassaemia minor or beta thalassaemia trait. It happens when you get a normal gene from one parent and a thalassaemia gene from the other.
+
+\n\nWhen both genes are damaged, it means you got a thalassaemia gene from each parent. You may have moderate or severe anemia.
+
+\n\nIf you have moderate anemia (beta thalassaemia intermedia), you may need blood transfusions.
+
+\n\nPeople with severe anemia (called beta thalassaemia major or Cooley\'s anemia) need blood transfusions throughout life. Symptoms of anemia usually begin within a few months after birth.
+
+\n\n<b>Alpha thalassaemia</b>\n\n
+
+This type occurs when one or more of the four alpha-globin genes that make haemoglobin are missing or damaged.\n\n
+
+If one gene is missing or damaged: Your red blood cells might be smaller than normal. You will have no symptoms and you
+        will not need treatment. But you are a silent carrier. This means you don\'t have the disease but can pass the defective gene to your child.
+
+\n\nIf two genes are missing or damaged: You will have very mild anaemia that will typically not need treatment. This is called alpha thalassaemia minor or alpha thalassaemia trait.
+
+\n\nIf three genes are missing: You will have mild to moderately severe anemia. This is sometimes called hemoglobin H disease. If it is severe, you may need blood transfusions.
+
+\n\nIf all four genes are missing: This is called alpha thalassaemia major or hydrops fetalis. The fetus will be still-born, or the child will die soon after birth.
+
+\n\nA defect in one or more genes causes thalassaemia.
+
+\n\nIf you, either parent, or any of your siblings have thalassaemia or carry a gene for thalassaemia and you\'re thinking about having a child, you may want to talk to a genetic counselor before you get pregnant. A genetic counselor can tell you how likely it is that your child will have the disease and how severe it might be.
+    \n</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

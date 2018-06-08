@@ -5,33 +5,45 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_thalassaemia"
+            android:icon="@drawable/ic_blood_drop_svg"
+            android:title="Thalassaemia" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_be_a_blood_donor"
+            android:icon="@drawable/ic_blood_donor"
+            android:title="Be a Blood Donor" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/nav_regis_patients"
+            android:icon="@drawable/ic_add_patient"
+            android:title="Registration For Thalassaemics" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_be_a_support"
+            android:icon="@drawable/ic_contribute_icon"
+            android:title="Be A Support" />
+        <item
+            android:id="@+id/nav_explore"
+            android:icon="@android:drawable/ic_menu_search"
+            android:title="Explore" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_about_icon"
+            android:title="About Us" />
     </group>
 
     <item android:title="Communicate">
         <menu>
             <item
+                android:id="@+id/nav_contact_us"
+                android:icon="@android:drawable/stat_notify_chat"
+                android:title="Contact Us" />
+            <item
+                android:id="@+id/nav_report_a_bug"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Report A Bug" />
+            <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
                 android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
         </menu>
     </item>
 
