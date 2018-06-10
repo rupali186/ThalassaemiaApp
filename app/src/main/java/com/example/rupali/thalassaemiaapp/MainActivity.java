@@ -1,5 +1,7 @@
 package com.example.rupali.thalassaemiaapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -102,11 +104,24 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_contact_us) {
 
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:fa.thalassaemia@gmail.com"));
+            //intent.putExtra(Intent.EXTRA_SUBJECT,"Feedback or subject");
+            startActivity(intent);
+
         }
         else if (id == R.id.nav_report_a_bug) {
 
         }
         else if (id == R.id.nav_share) {
+
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_SEND);
+            intent.putExtra(Intent.EXTRA_TEXT,"Share our app and spread awareness :" +
+                    " https://play.google.com/store/apps/apps/details?456=thalassaemia.456");
+            intent.setType("text/plain");
+            startActivity(intent);
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
