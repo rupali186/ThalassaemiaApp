@@ -33,6 +33,16 @@ public class AboutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_about, container, false);
+
+        twitter = view.findViewById(R.id.twitter);
+        insta=view.findViewById(R.id.insta);
+        facebook = view.findViewById(R.id.facebook);
+        whatsapp =view.findViewById(R.id.whatsapp);
+        youtube = view.findViewById(R.id.youtube);
+
+
 
         twitter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,32 +83,33 @@ public class AboutFragment extends Fragment {
         youtube.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                String url = "https://youtu.be/OrM6m8Qoq_M";
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
             }
         });
 
         whatsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String smsNumber = "9811089975"; //without '+'
-//                try {
-//                    Intent sendIntent = new Intent("android.intent.action.MAIN");
-//                    //sendIntent.setComponent(new ComponentName("com.whatsapp", "com.whatsapp.Conversation"));
-//                    sendIntent.setAction(Intent.ACTION_SEND);
-//                    sendIntent.setType("text/plain");
-//                    sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
-//                    sendIntent.putExtra("jid", smsNumber + "@s.whatsapp.net"); //phone number without "+" prefix
-//                    sendIntent.setPackage("com.whatsapp");
-//                    startActivity(sendIntent);
-//                } catch(Exception e) {
-//                    Toast.makeText(this, "Error/n" + e.toString(), Toast.LENGTH_SHORT).show();
-//                }
+                String toNumber = "+91 98110 89975"; //without '+'
+                //String toNumber = "+91 98765 43210"; // contains spaces.
+                toNumber = toNumber.replace("+", "").replace(" ", "");
+
+                Intent sendIntent = new Intent("android.intent.action.MAIN");
+                sendIntent.putExtra("jid", toNumber + "@s.whatsapp.net");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "hello");
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.setPackage("com.whatsapp");
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
             }
         });
 
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about, container, false);
+       return view;
     }
 
 }
