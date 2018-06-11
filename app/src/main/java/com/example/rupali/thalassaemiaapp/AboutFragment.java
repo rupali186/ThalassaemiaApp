@@ -22,7 +22,7 @@ public class AboutFragment extends Fragment {
     ImageView facebook;
     ImageView whatsapp;
     ImageView youtube;
-
+    ImageView pinterest;
 
     public AboutFragment() {
         // Required empty public constructor
@@ -41,6 +41,7 @@ public class AboutFragment extends Fragment {
         facebook = view.findViewById(R.id.facebook);
         whatsapp =view.findViewById(R.id.whatsapp);
         youtube = view.findViewById(R.id.youtube);
+        pinterest=view.findViewById(R.id.pinterest);
 
 
 
@@ -79,13 +80,24 @@ public class AboutFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        pinterest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                String url = "https://pin.it/h5hq32uaefasme";
+                intent.setData(Uri.parse(url));
+                //intent.setType("text/plain");
+                startActivity(intent);
+            }
+        });
 
         youtube.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
-                String url = "https://youtu.be/OrM6m8Qoq_M";
+                String url = "https://youtube.com/channel/UCATPmbfDePZNrqjikz_1-0A";
                 intent.setData(Uri.parse(url));
                 startActivity(intent);
             }

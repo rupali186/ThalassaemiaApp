@@ -15,7 +15,7 @@
         <item
             android:id="@+id/nav_regis_patients"
             android:icon="@drawable/ic_add_patient"
-            android:title="Registration For Thalassaemics" />
+            android:title="Thalassaemics Registration" />
         <item
             android:id="@+id/nav_be_a_support"
             android:icon="@drawable/ic_contribute_icon"

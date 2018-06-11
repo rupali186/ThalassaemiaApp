@@ -15,9 +15,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    TextView toolbarTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +27,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-//comment
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        toolbarTitle=findViewById(R.id.main_act_toolbar_text);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbarTitle.setText("Thalassaemia");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -88,19 +84,25 @@ public class MainActivity extends AppCompatActivity
             android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.container_main,thalassaemiaFragment).commit();
+            toolbarTitle.setText("Thalassaemia");
         } else if (id == R.id.nav_be_a_blood_donor) {
+            toolbarTitle.setText("Be a Blood Donor");
 
         } else if (id == R.id.nav_regis_patients) {
+            toolbarTitle.setText("Thalassaemics Registration");
 
         } else if (id == R.id.nav_be_a_support) {
+            toolbarTitle.setText("Be A Support");
 
         } else if (id == R.id.nav_explore) {
+            toolbarTitle.setText("Explore");
 
         } else if (id == R.id.nav_about) {
             AboutFragment aboutFragment= new AboutFragment();
             android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.container_main,aboutFragment).commit();
+            toolbarTitle.setText("About Us");
 
         } else if (id == R.id.nav_contact_us) {
 
