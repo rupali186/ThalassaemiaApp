@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="40dp"
+    tools:context="com.example.rupali.thalassaemiaapp.LoginActivity">
+
+    <TextView
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:typeface="serif"
+        android:padding="5dp"
+        android:textColor="#99000000"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:text="Sign in with : " />
+
+    <Button
+        android:id="@+id/login_button_google"
+        android:padding="5dp"
+        android:textColor="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login using google"/>
+
+    <Button
+        android:id="@+id/login_button_facebook"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:textColor="#fff"
+        android:layout_marginBottom="30dp"
+        android:text="Login using facebook"/>
+
+    <View style="@style/Divider"/>
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="E-mail id"/>
+
+    <EditText
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"/>
+
+    <Button
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:textColor="#fff"
+        android:text="Login"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:typeface="serif"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:textColor="#000000"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+        android:text="Forgot your Password? " />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:typeface="serif"
+        android:padding="10dp"
+        android:textColor="#475bda"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+        android:text="Haven't got an account? Sign up." />
+
+</LinearLayout>
