@@ -68,4 +68,5 @@ If one gene is missing or damaged: Your red blood cells might be smaller than no
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_thalassaemics_reg">ThalassaemicsReg</string>
 </resources>

@@ -91,6 +91,8 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_regis_patients) {
             toolbarTitle.setText("Thalassaemics Registration");
+            Intent intent = new Intent(this,ThalassaemicsReg.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_be_a_support) {
             toolbarTitle.setText("Be A Support");
