@@ -25,7 +25,8 @@
         <activity
             android:name=".ThalassaemicsReg"
             android:label="@string/title_activity_thalassaemics_reg"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ThalassaemicsRegistration"></activity>
     </application>
 
 </manifest>
