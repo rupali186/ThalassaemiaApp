@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BeABloodDonorFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ThalassaemicsRegistration"
         android:background="@color/gray"
         android:padding="20dp">
 
@@ -161,37 +162,7 @@
             app:layout_constraintStart_toEndOf="@+id/declaration_checkbox"
             app:layout_constraintTop_toTopOf="@+id/declaration_checkbox" />
 
-        <RadioGroup
-            android:id="@+id/radioGroup2"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_marginBottom="32dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10">
 
-            <RadioButton
-                android:id="@+id/major"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Major" />
-
-            <RadioButton
-                android:id="@+id/minor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Minor" />
-
-            <RadioButton
-                android:id="@+id/intermediate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Intermediate" />
-        </RadioGroup>
 
         <TextView
             android:id="@+id/textView3"
@@ -339,19 +310,6 @@
 
         </RadioGroup>
 
-        <TextView
-            android:id="@+id/textView10"
-            android:textColor="@color/colorPrimary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:text="Type"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
         <CheckBox
             android:id="@+id/declaration_checkbox"
             android:layout_width="wrap_content"
@@ -360,7 +318,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
         <RadioGroup
             android:id="@+id/radioGroup3"
@@ -404,6 +362,6 @@
             android:textColor="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pin_code" />
-
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>
+

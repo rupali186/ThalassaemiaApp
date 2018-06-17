@@ -87,7 +87,11 @@ public class MainActivity extends AppCompatActivity
             transaction.replace(R.id.container_main,thalassaemiaFragment).commit();
             toolbarTitle.setText("Thalassaemia");
         } else if (id == R.id.nav_be_a_blood_donor) {
-            toolbarTitle.setText("Be a Blood Donor");
+            BeABloodDonorFragment beABloodDonorFragment= new BeABloodDonorFragment();
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.container_main,beABloodDonorFragment).commit();
+            toolbarTitle.setText("Thalassaemia");
 
         } else if (id == R.id.nav_regis_patients) {
             toolbarTitle.setText("Thalassaemics Registration");
