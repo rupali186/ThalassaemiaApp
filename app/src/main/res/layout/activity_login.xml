@@ -9,76 +9,79 @@
     tools:context="com.example.rupali.thalassaemiaapp.LoginActivity">
 
     <TextView
-        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:typeface="serif"
+        android:layout_marginTop="30dp"
         android:padding="5dp"
-        android:textColor="#99000000"
+        android:text="Sign in with : "
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        android:text="Sign in with : " />
+        android:textColor="@color/colorPrimary"
+        android:typeface="serif" />
 
     <Button
         android:id="@+id/login_button_google"
-        android:padding="5dp"
-        android:textColor="#fff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login using google"/>
+        android:padding="5dp"
+        android:text="Login using google"
+        android:textColor="#fff" />
 
     <Button
         android:id="@+id/login_button_facebook"
-        android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
-        android:textColor="#fff"
         android:layout_marginBottom="30dp"
-        android:text="Login using facebook"/>
+        android:padding="5dp"
+        android:paddingBottom="20dp"
+        android:text="Login using facebook"
+        android:textColor="#fff" />
 
-    <View style="@style/Divider"/>
+    <View
+        style="@style/Divider"
+        android:layout_width="400dp"
+        android:layout_gravity="center_horizontal" />
 
     <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:hint="E-mail id"
         android:inputType="textEmailAddress"
-        android:hint="E-mail id"/>
+        android:padding="10dp" />
 
     <EditText
-        android:padding="10dp"
-        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:hint="Password"
         android:inputType="textPassword"
-        android:hint="Password"/>
+        android:padding="10dp" />
 
     <Button
-        android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="5dp"
         android:paddingBottom="20dp"
-        android:textColor="#fff"
-        android:text="Login"/>
+        android:text="Login"
+        android:textColor="#fff" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:typeface="serif"
-        android:paddingTop="10dp"
         android:paddingLeft="10dp"
-        android:textColor="#000000"
+        android:paddingTop="10dp"
+        android:text="Forgot your Password? "
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-        android:text="Forgot your Password? " />
+        android:textColor="#000000"
+        android:typeface="serif" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:typeface="serif"
         android:padding="10dp"
-        android:textColor="#475bda"
+        android:text="Haven't got an account? Sign up."
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-        android:text="Haven't got an account? Sign up." />
+        android:textColor="#475bda"
+        android:typeface="serif" />
 
 </LinearLayout>
