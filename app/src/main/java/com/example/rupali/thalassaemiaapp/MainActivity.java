@@ -15,11 +15,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     TextView toolbarTitle;
+    private FirebaseAuth mAuth;
+    ImageView profileImage;
+    TextView profileName;
+    TextView profileEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +38,7 @@ public class MainActivity extends AppCompatActivity
         toolbarTitle=findViewById(R.id.main_act_toolbar_text);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbarTitle.setText("Thalassaemia");
-
+        mAuth=FirebaseAuth.getInstance();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -39,6 +47,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        profileName=(TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_name);
+        profileEmail=(TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_email);
+        profileImage=(ImageView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_profile_image);
     }
 
     @Override
@@ -69,10 +80,32 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.login_icon) {
             Intent intent = new Intent(this,LoginActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent,Constants.LOGIN_ACTIVITY_REQUEST_CODE);
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==Constants.LOGIN_ACTIVITY_REQUEST_CODE&&resultCode==Constants.LOGIN_ACTIVITY_RESULT_CODE){
+            FirebaseUser user = mAuth.getCurrentUser();
+            if (user != null) {
+                // Name, email address, and profile photo Url
+                String name = user.getDisplayName();
+                String email = user.getEmail();
+                Uri photoUrl = user.getPhotoUrl();
+                profileEmail.setText(email);
+                // Check if user's email is verified
+                boolean emailVerified = user.isEmailVerified();
+
+                // The user's ID, unique to the Firebase project. Do NOT use this value to
+                // authenticate with your backend server, if you have one. Use
+                // FirebaseUser.getIdToken() instead.
+                String uid = user.getUid();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

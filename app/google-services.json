@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "872116028415",
+    "firebase_url": "https://thalassaemiaapp.firebaseio.com",
+    "project_id": "thalassaemiaapp",
+    "storage_bucket": "thalassaemiaapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:872116028415:android:45a877badb6e8aea",
+        "android_client_info": {
+          "package_name": "com.example.rupali.thalassaemiaapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "872116028415-s1gadgsp85lihe42p4pb90o9bj9fgvhu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rupali.thalassaemiaapp",
+            "certificate_hash": "bb739c7181afc0cfbe0f0a33b9e6496d0cc1d15b"
+          }
+        },
+        {
+          "client_id": "872116028415-o3kglda0itcfs6tr543l0r3i0ud35pc2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rupali.thalassaemiaapp",
+            "certificate_hash": "5c85417844a6a2ca1c3d44b49e32af83a0441d5c"
+          }
+        },
+        {
+          "client_id": "872116028415-aonnj1du9bq14i2rpsuga37umg6ifvhq.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "872116028415-aonnj1du9bq14i2rpsuga37umg6ifvhq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEXr1TnuRzrWFRc5AUfrErqKGavRp1du8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "872116028415-aonnj1du9bq14i2rpsuga37umg6ifvhq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
