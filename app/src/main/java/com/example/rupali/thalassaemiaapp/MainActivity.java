@@ -1,11 +1,14 @@
 package com.example.rupali.thalassaemiaapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -27,8 +30,8 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth mAuth;
     ImageView profileImage;
     TextView profileName;
-    TextView profileEmail;
-
+    TextView logInOrSignUp;
+    boolean loggedIn=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,10 +51,76 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         profileName=(TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_name);
-        profileEmail=(TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_email);
         profileImage=(ImageView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_profile_image);
+        logInOrSignUp=(TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_login_text);
+        logInOrSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(loggedIn) {
+                    logout();
+                }
+                else {
+                    Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+                    startActivityForResult(intent,Constants.LOGIN_ACTIVITY_REQUEST_CODE);
+                }
+            }
+        });
+
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
     }
 
+    private void updateUI(FirebaseUser currentUser) {
+        if (currentUser != null) {
+            // Name, email address, and profile photo Url
+            String name = currentUser.getDisplayName();
+            String email = currentUser.getEmail();
+            Uri photoUrl = currentUser.getPhotoUrl();
+            profileName.setText(email);
+            // Check if user's email is verified
+            boolean emailVerified = currentUser.isEmailVerified();
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getIdToken() instead.
+            String uid = currentUser.getUid();
+            loggedIn=true;
+            logInOrSignUp.setText("Log Out!");
+        }else {
+            profileImage.setImageDrawable(null);
+            profileImage.setBackgroundResource(R.drawable.profile_i);
+            profileName.setText("Welcome !");
+            logInOrSignUp.setText("Log In Or Sign Up!");
+            loggedIn=false;
+        }
+    }
+    private void logout() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("Do you want to Log Out?");
+        builder.setTitle("Confirm Log Out !");
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mAuth.signOut();
+                FirebaseUser user=mAuth.getCurrentUser();
+                updateUI(user);
+                dialogInterface.dismiss();
+
+            }
+        });
+        builder.show();
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -90,20 +159,7 @@ public class MainActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==Constants.LOGIN_ACTIVITY_REQUEST_CODE&&resultCode==Constants.LOGIN_ACTIVITY_RESULT_CODE){
             FirebaseUser user = mAuth.getCurrentUser();
-            if (user != null) {
-                // Name, email address, and profile photo Url
-                String name = user.getDisplayName();
-                String email = user.getEmail();
-                Uri photoUrl = user.getPhotoUrl();
-                profileEmail.setText(email);
-                // Check if user's email is verified
-                boolean emailVerified = user.isEmailVerified();
-
-                // The user's ID, unique to the Firebase project. Do NOT use this value to
-                // authenticate with your backend server, if you have one. Use
-                // FirebaseUser.getIdToken() instead.
-                String uid = user.getUid();
-            }
+            updateUI(user);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

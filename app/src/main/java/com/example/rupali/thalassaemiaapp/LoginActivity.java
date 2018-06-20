@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     String email_text;
     String password_text;
     private FirebaseAuth mAuth;
+    TextView resetPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         email_edittext=findViewById(R.id.login_email);
         password_edittext=findViewById(R.id.login_password);
+        resetPassword=findViewById(R.id.reset_password_text);
         signIn=findViewById(R.id.signin_button);
         signUp=findViewById(R.id.signup_button);
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -47,10 +50,29 @@ public class LoginActivity extends AppCompatActivity {
                 signUpToYourAccount();
             }
         });
+        resetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetPassword();
+            }
+        });
 
 
+    }
 
+    private void resetPassword() {
+        String emailAddress = email_edittext.getText().toString();
 
+        mAuth.sendPasswordResetEmail(emailAddress)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(LoginActivity.this,"Email sent",Toast.LENGTH_SHORT).show();
+                            Log.d("Authentication", "Email sent.");
+                        }
+                    }
+                });
     }
 
     private void signUpToYourAccount() {
