@@ -20,14 +20,17 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="#5e5b5b"
             android:typeface="serif" />
-
-        <Button
+        <com.google.android.gms.common.SignInButton
             android:id="@+id/login_button_google"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="Login using google"
-            android:textColor="#fff" />
+            android:layout_height="wrap_content" />
+        <!--<Button-->
+            <!--android:id="@+id/login_button_google"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:padding="5dp"-->
+            <!--android:text="Login using google"-->
+            <!--android:textColor="#fff" />-->
 
         <Button
             android:id="@+id/login_button_facebook"

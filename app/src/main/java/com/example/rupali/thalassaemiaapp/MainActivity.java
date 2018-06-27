@@ -21,8 +21,13 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,7 +36,10 @@ public class MainActivity extends AppCompatActivity
     ImageView profileImage;
     TextView profileName;
     TextView logInOrSignUp;
+    FirebaseUser currentUser;
+    GoogleSignInAccount account;
     boolean loggedIn=false;
+    GoogleSignInClient mGoogleSignInClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,14 +73,48 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail().requestProfile()
+                .build();
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
     }
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+        currentUser = mAuth.getCurrentUser();
+        account = GoogleSignIn.getLastSignedInAccount(this);
+        if(currentUser!=null) {
+            updateUI(currentUser);
+        }
+        else if(account!=null) {
+            updateGoogleUI(account);
+        }
+    }
+
+    private void updateGoogleUI(GoogleSignInAccount account) {
+        if(account!=null){
+            String email=account.getEmail();
+            String name=account.getDisplayName();
+            Uri photoUrl=account.getPhotoUrl();
+            profileName.setText("Welcome "+name+"!");
+            if(photoUrl!=null){
+                Picasso.get().load(photoUrl).into(profileImage);
+            }
+            loggedIn=true;
+            logInOrSignUp.setText("Log Out!");
+        }else {
+            profileImage.setImageDrawable(null);
+            profileImage.setBackgroundResource(R.drawable.profile_i);
+            profileName.setText("Welcome !");
+            logInOrSignUp.setText("Log In Or Sign Up!");
+            loggedIn=false;
+        }
+
     }
 
     private void updateUI(FirebaseUser currentUser) {
@@ -112,9 +154,15 @@ public class MainActivity extends AppCompatActivity
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                mAuth.signOut();
-                FirebaseUser user=mAuth.getCurrentUser();
-                updateUI(user);
+                if(currentUser!=null) {
+                    mAuth.signOut();
+                    updateUI(currentUser);
+                }
+                else if(account!=null){
+                    mGoogleSignInClient.signOut();
+                    account=GoogleSignIn.getLastSignedInAccount(MainActivity.this);
+                    updateGoogleUI(account);
+                }
                 dialogInterface.dismiss();
 
             }
@@ -212,7 +260,11 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_report_a_bug) {
 
-
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:rupalichawla186@gmail.com"));
+            //intent.putExtra(Intent.EXTRA_SUBJECT,"Feedback or subject");
+            startActivity(intent);
 
         }
         else if (id == R.id.nav_share) {

@@ -11,6 +11,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -27,7 +33,9 @@ public class LoginActivity extends AppCompatActivity {
     String password_text;
     private FirebaseAuth mAuth;
     TextView resetPassword;
-
+    SignInButton googleLogin;
+    Button facebookLogin;
+    GoogleSignInClient mGoogleSignInClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,12 +44,28 @@ public class LoginActivity extends AppCompatActivity {
         email_edittext=findViewById(R.id.login_email);
         password_edittext=findViewById(R.id.login_password);
         resetPassword=findViewById(R.id.reset_password_text);
+        googleLogin=findViewById(R.id.login_button_google);
+        facebookLogin=findViewById(R.id.login_button_facebook);
         signIn=findViewById(R.id.signin_button);
         signUp=findViewById(R.id.signup_button);
+        googleLogin.setSize(SignInButton.SIZE_STANDARD);
+        // Configure sign-in to request the user's ID, email address, and basic
+// profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail().requestProfile()
+                .build();
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signInToYourAccount();
+            }
+        });
+        googleLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signInWithGoogle();
             }
         });
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +84,38 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void signInWithGoogle() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, Constants.RC_SIGN_IN);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == Constants.RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            Log.w("Authentication", "signInResult:google success");
+            Intent intent=new Intent();
+            setResult(Constants.LOGIN_ACTIVITY_RESULT_CODE);
+            finish();
+            // Signed in successfully, show authenticated UI.
+//            updateUI(account);
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w("Authentication", "signInResult:failed code=" + e.getStatusCode());
+//            updateUI(null);
+        }
+    }
     private void resetPassword() {
         String emailAddress = email_edittext.getText().toString();
 
@@ -87,6 +143,9 @@ public class LoginActivity extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d("Authentication", "createUserWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
+                                Intent intent=new Intent();
+                                setResult(Constants.LOGIN_ACTIVITY_RESULT_CODE);
+                                finish();
 //                            updateUI(user);
                             } else {
                                 // If sign in fails, display a message to the user.
