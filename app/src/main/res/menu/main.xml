@@ -4,7 +4,8 @@
     <item
         android:id="@+id/login_icon"
         android:orderInCategory="1"
-        android:icon="@drawable/login_img"
+        android:icon="@drawable/ic_person_black_24dp"
         app:showAsAction="always"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
         android:title="Login" />
 </menu>
