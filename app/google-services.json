@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "872116028415-s1gadgsp85lihe42p4pb90o9bj9fgvhu.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.rupali.thalassaemiaapp",
-            "certificate_hash": "bb739c7181afc0cfbe0f0a33b9e6496d0cc1d15b"
-          }
-        },
-        {
           "client_id": "872116028415-o3kglda0itcfs6tr543l0r3i0ud35pc2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -31,8 +23,12 @@
           }
         },
         {
-          "client_id": "872116028415-aonnj1du9bq14i2rpsuga37umg6ifvhq.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "872116028415-s1gadgsp85lihe42p4pb90o9bj9fgvhu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rupali.thalassaemiaapp",
+            "certificate_hash": "bb739c7181afc0cfbe0f0a33b9e6496d0cc1d15b"
+          }
         },
         {
           "client_id": "872116028415-aonnj1du9bq14i2rpsuga37umg6ifvhq.apps.googleusercontent.com",
