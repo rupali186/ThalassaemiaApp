@@ -5,6 +5,10 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
+
+    <string name="facebook_app_id">2031797653740303</string>
+    <string name="fb_login_protocol_scheme">fb2031797653740303</string>
+
     <string name="action_settings">Settings</string>
     <string name="about_content"> Foundation Against Thalassaemia (Regd.) is an NGO registered under Indian Societies
         Act 1860/21, working for the Care and Welfare of thalassaemic children since 1995, with a vision to make India

@@ -32,12 +32,14 @@
             <!--android:text="Login using google"-->
             <!--android:textColor="#fff" />-->
 
+
         <Button
             android:id="@+id/login_button_facebook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:padding="5dp"
+            android:background="#2e3fd1"
             android:paddingBottom="20dp"
             android:text="Login using facebook"
             android:textColor="#fff" />
