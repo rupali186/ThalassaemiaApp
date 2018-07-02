@@ -22,10 +22,10 @@ public class ThalassaemicsRegistration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_thalassaemics_reg);
-        dropdown=findViewById(R.id.button_dropdown);
-        dob=findViewById(R.id.patient_dob);
-        email=findViewById(R.id.patient_email);
-        phoneNo=findViewById(R.id.patient_phone);
+        dropdown=findViewById(R.id.donor_calender_dropdown);
+        dob=findViewById(R.id.donor_dob);
+        email=findViewById(R.id.donor_email);
+        phoneNo=findViewById(R.id.donor_phone);
 
         dropdown.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,24 +1,15 @@
 package com.example.rupali.thalassaemiaapp;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class ThalassaemicsReg extends AppCompatActivity {
@@ -34,10 +25,10 @@ public class ThalassaemicsReg extends AppCompatActivity {
         setContentView(R.layout.activity_thalassaemics_reg);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        dropdown=findViewById(R.id.button_dropdown);
-        dob=findViewById(R.id.patient_dob);
-        email=findViewById(R.id.patient_email);
-        phoneNo=findViewById(R.id.patient_phone);
+        dropdown=findViewById(R.id.donor_calender_dropdown);
+        dob=findViewById(R.id.donor_dob);
+        email=findViewById(R.id.donor_email);
+        phoneNo=findViewById(R.id.donor_phone);
 
         dropdown.setOnClickListener(new View.OnClickListener() {
             @Override

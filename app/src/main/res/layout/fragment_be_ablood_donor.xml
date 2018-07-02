@@ -14,7 +14,7 @@
         android:padding="20dp">
 
         <EditText
-            android:id="@+id/patient_name"
+            android:id="@+id/donor_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -32,25 +32,26 @@
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <EditText
-            android:id="@+id/patient_phone"
+            android:id="@+id/donor_phone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="+91"
             android:background="@drawable/text_input_border"
-            android:padding="5dp"
+            android:ems="10"
             android:inputType="phone"
+            android:padding="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/donor_phone_code"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/donor_phone_code"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
         <EditText
-            android:id="@+id/patient_email"
+            android:id="@+id/donor_email"
             android:layout_width="0dp"
             android:layout_height="44dp"
             android:layout_marginEnd="8dp"
@@ -68,7 +69,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
         <TextView
-            android:id="@+id/patient_dob"
+            android:id="@+id/donor_dob"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -82,14 +83,14 @@
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         <ImageView
-            android:id="@+id/button_dropdown"
+            android:id="@+id/donor_calender_dropdown"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/patient_dob"
-            app:layout_constraintStart_toEndOf="@+id/patient_dob"
-            app:layout_constraintTop_toTopOf="@+id/patient_dob"
+            app:layout_constraintBottom_toBottomOf="@+id/donor_dob"
+            app:layout_constraintStart_toEndOf="@+id/donor_dob"
+            app:layout_constraintTop_toTopOf="@+id/donor_dob"
             app:srcCompat="@android:drawable/btn_dropdown" />
 
         <TextView
@@ -118,7 +119,7 @@
             android:text="Date Of Birth:"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patient_name" />
+            app:layout_constraintTop_toBottomOf="@+id/donor_name" />
 
         <TextView
             android:id="@+id/textView6"
@@ -132,7 +133,7 @@
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_dropdown" />
+            app:layout_constraintTop_toBottomOf="@+id/donor_calender_dropdown" />
 
         <TextView
             android:id="@+id/textView7"
@@ -146,7 +147,7 @@
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patient_phone" />
+            app:layout_constraintTop_toBottomOf="@+id/donor_phone" />
 
         <TextView
             android:id="@+id/declaration_text"
@@ -158,57 +159,67 @@
             android:layout_marginTop="8dp"
             android:text="declaration"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintBottom_toBottomOf="@+id/declaration_checkbox"
-            app:layout_constraintStart_toEndOf="@+id/declaration_checkbox"
-            app:layout_constraintTop_toTopOf="@+id/declaration_checkbox" />
-
+            app:layout_constraintBottom_toBottomOf="@+id/donor_declaration_checkbox"
+            app:layout_constraintStart_toEndOf="@+id/donor_declaration_checkbox"
+            app:layout_constraintTop_toTopOf="@+id/donor_declaration_checkbox" />
 
 
         <TextView
             android:id="@+id/textView3"
-            android:textColor="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="Address"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patient_email" />
+            app:layout_constraintTop_toBottomOf="@+id/donor_email" />
 
-        <Spinner
-            android:id="@+id/country_spinner"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/donor_country"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:hint="Country"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-        <Spinner
-            android:id="@+id/state_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toEndOf="@+id/country_spinner"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-        <Spinner
-            android:id="@+id/city_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toEndOf="@+id/state_spinner"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <EditText
-            android:id="@+id/address_complete"
+            android:id="@+id/donor_state"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:hint="State"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/donor_country" />
+
+        <EditText
+            android:id="@+id/donor_city"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="City"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/donor_state" />
+
+        <EditText
+            android:id="@+id/donor_address_complete"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -221,10 +232,10 @@
             android:inputType="textPostalAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/country_spinner" />
+            app:layout_constraintTop_toBottomOf="@+id/donor_city" />
 
         <EditText
-            android:id="@+id/pin_code"
+            android:id="@+id/donor_pin_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -234,7 +245,7 @@
             android:hint="Pincode"
             android:inputType="number"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/address_complete" />
+            app:layout_constraintTop_toBottomOf="@+id/donor_address_complete" />
 
         <TextView
             android:id="@+id/textView9"
@@ -247,10 +258,10 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup3" />
+            app:layout_constraintTop_toBottomOf="@+id/donor_gender_radiogroup" />
 
         <RadioGroup
-            android:id="@+id/radioGroup"
+            android:id="@+id/donor_blood_group_radiogroup"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -311,17 +322,17 @@
         </RadioGroup>
 
         <CheckBox
-            android:id="@+id/declaration_checkbox"
+            android:id="@+id/donor_declaration_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+            app:layout_constraintTop_toBottomOf="@+id/donor_blood_group_radiogroup" />
 
         <RadioGroup
-            android:id="@+id/radioGroup3"
+            android:id="@+id/donor_gender_radiogroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -361,7 +372,38 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pin_code" />
+            app:layout_constraintTop_toBottomOf="@+id/donor_pin_code" />
+
+        <EditText
+            android:id="@+id/donor_phone_code"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:inputType="number"
+            android:text="+91"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <Button
+            android:id="@+id/submit_form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Submit"
+            android:background="@drawable/submit_button_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/donor_declaration_checkbox" />
+
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>
 
