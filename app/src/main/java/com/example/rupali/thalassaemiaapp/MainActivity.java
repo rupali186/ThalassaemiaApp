@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -233,8 +234,10 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_regis_patients) {
             toolbarTitle.setText("Thalassaemics Registration");
-            Intent intent = new Intent(this,ThalassaemicsRegistration.class);
-            startActivity(intent);
+            ThalassaemicsRegistrationFragment thalassaemicsRegistrationFragment = new ThalassaemicsRegistrationFragment();
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.container_main,thalassaemicsRegistrationFragment).commit();
 
         } else if (id == R.id.nav_be_a_support) {
             toolbarTitle.setText("Be A Support");

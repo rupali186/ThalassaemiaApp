@@ -26,26 +26,28 @@ import java.util.Calendar;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BeABloodDonorFragment extends Fragment {
+public class ThalassaemicsRegistrationFragment extends Fragment {
 
-    EditText nameEditText;
-    TextView dobTextView;
-    EditText contactNoEditText;
-    EditText emailEditText;
+
+    EditText name;
+    EditText phoneNo;
+    EditText email;
     EditText countryEditText;
     EditText stateEditText;
     EditText cityEditText;
     EditText completePostalAdEditText;
     EditText pincodeEditText;
+    EditText phoneCodeEditText;
+    TextView dob;
+    ImageView dropdown;
     RadioGroup genderRadioGroup;
     RadioGroup bloodGroupRadioGroup;
+    RadioGroup typeRadioGroup;
     CheckBox declarationCheckbox;
-    ImageView dropdown;
-    EditText phoneCodeEditText;
-    String name;
-    String dob;
+    String names;
+    String dobs;
     String contactNo;
-    String email;
+    String emails;
     String country;
     String state;
     String city;
@@ -53,12 +55,17 @@ public class BeABloodDonorFragment extends Fragment {
     String pincode;
     String gender;
     String bloodGroup;
-    Boolean declarationIsChecked;
-    private int mYear, mMonth, mDay;
-    FirebaseDatabase database;
-    DatabaseReference myRef;
+    String types;
     Button submitForm;
-    public BeABloodDonorFragment() {
+    Boolean declarationIsChecked;
+
+    private int mYear, mMonth, mDay;
+
+    DatabaseReference patients;
+    FirebaseDatabase patientDatanase;
+
+
+    public ThalassaemicsRegistrationFragment() {
         // Required empty public constructor
     }
 
@@ -67,22 +74,29 @@ public class BeABloodDonorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_be_ablood_donor, container, false);
-        nameEditText=view.findViewById(R.id.patient_name);
-        dobTextView=view.findViewById(R.id.patient_dob);
-        contactNoEditText=view.findViewById(R.id.patient_phone);
-        phoneCodeEditText=view.findViewById(R.id.donor_phone_code);
-        emailEditText=view.findViewById(R.id.patient_email);
-        countryEditText=view.findViewById(R.id.patient_address);
-        stateEditText=view.findViewById(R.id.donor_state);
-        cityEditText=view.findViewById(R.id.donor_city);
-        completePostalAdEditText=view.findViewById(R.id.patient_country);
-        pincodeEditText=view.findViewById(R.id.patient_pin_code);
-        genderRadioGroup=view.findViewById(R.id.patient_gender_radiogroup);
-        bloodGroupRadioGroup=view.findViewById(R.id.patient_blood_group_radiogroup);
-        declarationCheckbox=view.findViewById(R.id.patient_declaration_checkbox);
-        submitForm=view.findViewById(R.id.submit_form);
-        dropdown=view.findViewById(R.id.patient_calender_dropdown);
+        final View view = inflater.inflate(R.layout.content_thalassaemics_reg, container, false);
+
+        //setContentView(R.layout.content_thalassaemics_reg);
+
+        patients = FirebaseDatabase.getInstance().getReference("patients");
+
+        dropdown = view.findViewById(R.id.patient_calender_dropdown);
+        dob = view.findViewById(R.id.patient_dob);
+        email = view.findViewById(R.id.patient_email);
+        phoneNo = view.findViewById(R.id.patient_phone);
+        phoneCodeEditText = view.findViewById(R.id.patient_phone_code);
+        countryEditText = view.findViewById(R.id.patient_country);
+        stateEditText = view.findViewById(R.id.patient_state);
+        cityEditText = view.findViewById(R.id.patient_city);
+        completePostalAdEditText = view.findViewById(R.id.patient_address);
+        pincodeEditText = view.findViewById(R.id.patient_pin_code);
+        name = view.findViewById(R.id.patient_name);
+        genderRadioGroup = view.findViewById(R.id.patient_gender_radiogroup);
+        typeRadioGroup = view.findViewById(R.id.patient_type);
+        bloodGroupRadioGroup = view.findViewById(R.id.patient_blood_group_radiogroup);
+        declarationCheckbox = view.findViewById(R.id.patient_declaration_checkbox);
+        submitForm = view.findViewById(R.id.button_thallaesimic);
+
         dropdown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,44 +113,44 @@ public class BeABloodDonorFragment extends Fragment {
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
 
-                                dobTextView.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                dob.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
                             }
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();
             }
         });
-        database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Donor");
+
         submitForm.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                addDonor(view);
+            public void onClick(View v) {
+                addPatient(view);
             }
         });
-
 
         return view;
     }
 
-    private void addDonor(View view) {
-        name=nameEditText.getText().toString();
-        if(name.isEmpty()){
+    private void addPatient(View view)
+    {
+
+        names=name.getText().toString();
+        if(names.isEmpty()){
             Toast.makeText(getContext(),"Name is required",Toast.LENGTH_SHORT).show();
             return;
         }
-        dob=dobTextView.getText().toString();
-        if(dob.isEmpty()){
+        dobs=dob.getText().toString();
+        if(dobs.isEmpty()){
             Toast.makeText(getContext(),"DOB is required",Toast.LENGTH_SHORT).show();
             return;
         }
-        contactNo=phoneCodeEditText.getText().toString()+contactNoEditText.getText().toString();
+        contactNo=phoneCodeEditText.getText().toString()+phoneNo.getText().toString();
         if(contactNo.length()<13){
             Toast.makeText(getContext(),"Contact No. has to be 10 digits ",Toast.LENGTH_SHORT).show();
             return;
         }
-        email=emailEditText.getText().toString();
-        if(email.isEmpty()){
+        emails=email.getText().toString();
+        if(emails.isEmpty()){
             Toast.makeText(getContext(),"Email is Required ",Toast.LENGTH_SHORT).show();
             return;
         }
@@ -185,14 +199,27 @@ public class BeABloodDonorFragment extends Fragment {
             RadioButton radioButton = (RadioButton) bloodGroupRadioGroup.findViewById(bGCheckedRadioButonId);
             bloodGroup =radioButton.getText().toString();
         }
+        int typeRadioButtonId = typeRadioGroup.getCheckedRadioButtonId();
+        if(typeRadioButtonId==-1)
+        {
+            Toast.makeText(getContext(),"No type Selected ",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else
+        {
+            RadioButton radioButton = typeRadioGroup.findViewById(typeRadioButtonId);
+            types = radioButton.getText().toString();
+        }
         declarationIsChecked=declarationCheckbox.isChecked();
         if(declarationIsChecked.booleanValue()==false){
             Toast.makeText(getContext(),"Please accept the declaration to continue. ",Toast.LENGTH_SHORT).show();
             return;
         }
-        String id=myRef.push().getKey();
-        Donor donor=new Donor(name,dob,contactNo,email,country,state,city,completePostalAd,pincode,gender,bloodGroup,declarationIsChecked);
-        myRef.child(id).setValue(donor);
+        String id = patients.push().getKey();
+        Thalassaemics thalassaemic = new Thalassaemics(names,dobs,contactNo, emails, country, state, city, completePostalAd, pincode, gender, bloodGroup, types,declarationIsChecked);
+        patients.child(id).setValue(thalassaemic);
+
+
     }
 
 }

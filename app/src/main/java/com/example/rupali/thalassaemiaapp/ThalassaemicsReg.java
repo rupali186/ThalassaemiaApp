@@ -25,10 +25,10 @@ public class ThalassaemicsReg extends AppCompatActivity {
         setContentView(R.layout.activity_thalassaemics_reg);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        dropdown=findViewById(R.id.donor_calender_dropdown);
-        dob=findViewById(R.id.donor_dob);
-        email=findViewById(R.id.donor_email);
-        phoneNo=findViewById(R.id.donor_phone);
+        dropdown=findViewById(R.id.patient_calender_dropdown);
+        dob=findViewById(R.id.patient_dob);
+        email=findViewById(R.id.patient_email);
+        phoneNo=findViewById(R.id.patient_phone);
 
         dropdown.setOnClickListener(new View.OnClickListener() {
             @Override
