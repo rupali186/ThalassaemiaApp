@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -21,11 +24,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
@@ -41,6 +47,9 @@ public class MainActivity extends AppCompatActivity
     GoogleSignInAccount account;
     boolean loggedIn=false;
     GoogleSignInClient mGoogleSignInClient;
+    private boolean exit=false;
+    TextView emailVerification;
+    boolean isEmailVerified=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +71,19 @@ public class MainActivity extends AppCompatActivity
         profileName=(TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_name);
         profileImage=(ImageView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_profile_image);
         logInOrSignUp=(TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_login_text);
+        emailVerification=(TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_head_email_verification);
+        if(isEmailVerified){
+            emailVerification.setVisibility(View.GONE);
+        }
+        else if(loggedIn){
+            emailVerification.setVisibility(View.VISIBLE);
+        }
+        emailVerification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendVerificationEmail();
+            }
+        });
         logInOrSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,7 +148,16 @@ public class MainActivity extends AppCompatActivity
             Uri photoUrl = currentUser.getPhotoUrl();
             profileName.setText(email);
             // Check if user's email is verified
-            boolean emailVerified = currentUser.isEmailVerified();
+             isEmailVerified = currentUser.isEmailVerified();
+            if(!isEmailVerified){
+                Toast.makeText(MainActivity.this,"Verify email to accesss all the features...",Toast.LENGTH_SHORT).show();
+                isEmailVerified=false;
+                emailVerification.setVisibility(View.VISIBLE);
+            }
+            else{
+                isEmailVerified=true;
+                emailVerification.setVisibility(View.GONE);
+            }
 
             // The user's ID, unique to the Firebase project. Do NOT use this value to
             // authenticate with your backend server, if you have one. Use
@@ -139,6 +170,8 @@ public class MainActivity extends AppCompatActivity
             profileImage.setBackgroundResource(R.drawable.profile_i);
             profileName.setText("Welcome !");
             logInOrSignUp.setText("Log In Or Sign Up!");
+            isEmailVerified=true;
+            emailVerification.setVisibility(View.GONE);
             loggedIn=false;
         }
     }
@@ -157,6 +190,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(DialogInterface dialogInterface, int i) {
                 if(currentUser!=null) {
                     mAuth.signOut();
+                    currentUser=mAuth.getCurrentUser();
                     updateUI(currentUser);
                 }
                 else if(account!=null){
@@ -176,8 +210,38 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+//            super.onBackPressed();
+            if (exit) {
+                super.onBackPressed();
+                return;
+            }
+
+            try {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                Fragment fragment = fragmentManager.findFragmentByTag("HOME");
+                if (fragment != null) {
+                    if (fragment.isVisible()) {
+                        this.exit = true;
+                        Toast.makeText(this, "Press Back again to Exit", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else {
+                    fragment = ThalassaemiaFragment.class.newInstance();
+                    getFragmentManager().popBackStack();
+                    fragmentManager.beginTransaction().replace(R.id.container_main, fragment, "HOME").commit();
+                }
+            } catch (Exception e) {
+
+            }
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 2000);
         }
+
+
     }
 
     @Override
@@ -212,7 +276,40 @@ public class MainActivity extends AppCompatActivity
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+    private void sendVerificationEmail()
+    {
+        FirebaseUser user = mAuth.getCurrentUser();
 
+        user.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            // email sent
+
+
+                            // after email is sent just logout the user and finish this activity
+                            mAuth.signOut();
+                            currentUser = mAuth.getCurrentUser();
+                            updateUI(currentUser);
+                            Toast.makeText(MainActivity.this,"Verification email sent. Verify your email" +
+                                    " and sign in again to continue...",Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            // email not sent, so display message and restart the activity or do whatever you wish to do
+
+                            Toast.makeText(MainActivity.this,"Email Verification pending! ",Toast.LENGTH_SHORT).show();
+                            //restart this activity
+//                            overridePendingTransition(0, 0);
+//                            finish();
+//                            overridePendingTransition(0, 0);
+//                            startActivity(getIntent());
+
+                        }
+                    }
+                });
+    }
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -223,27 +320,46 @@ public class MainActivity extends AppCompatActivity
             ThalassaemiaFragment thalassaemiaFragment= new ThalassaemiaFragment();
             android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.container_main,thalassaemiaFragment).commit();
+            transaction.replace(R.id.container_main,thalassaemiaFragment,"HOME").commit();
             toolbarTitle.setText("Thalassaemia");
+            exit=false;
         } else if (id == R.id.nav_be_a_blood_donor) {
-            BeABloodDonorFragment beABloodDonorFragment= new BeABloodDonorFragment();
-            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.container_main,beABloodDonorFragment).commit();
-            toolbarTitle.setText("Thalassaemia");
+            if(!loggedIn){
+                Toast.makeText(MainActivity.this,"You need to b logged in to continue! ",Toast.LENGTH_SHORT).show();
+            }
+            else if(!isEmailVerified){
+                Toast.makeText(MainActivity.this,"Verify your email to continue! ",Toast.LENGTH_SHORT).show();
 
+            }else {
+                BeABloodDonorFragment beABloodDonorFragment = new BeABloodDonorFragment();
+                android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.container_main, beABloodDonorFragment).commit();
+                toolbarTitle.setText("Thalassaemia");
+                exit = false;
+            }
         } else if (id == R.id.nav_regis_patients) {
-            toolbarTitle.setText("Thalassaemics Registration");
-            ThalassaemicsRegistrationFragment thalassaemicsRegistrationFragment = new ThalassaemicsRegistrationFragment();
-            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.container_main,thalassaemicsRegistrationFragment).commit();
+            if(!loggedIn){
+                Toast.makeText(MainActivity.this,"You need to b logged in to continue! ",Toast.LENGTH_SHORT).show();
+            } else if(!isEmailVerified){
+                Toast.makeText(MainActivity.this,"Verify your email to continue! ",Toast.LENGTH_SHORT).show();
+
+            }else{
+                toolbarTitle.setText("Thalassaemics Reg");
+                ThalassaemicsRegistrationFragment thalassaemicsRegistrationFragment = new ThalassaemicsRegistrationFragment();
+                android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.container_main,thalassaemicsRegistrationFragment).commit();
+                exit=false;
+            }
 
         } else if (id == R.id.nav_be_a_support) {
             toolbarTitle.setText("Be A Support");
+            exit=false;
 
         } else if (id == R.id.nav_explore) {
             toolbarTitle.setText("Explore");
+            exit=false;
 
         } else if (id == R.id.nav_about) {
             AboutFragment aboutFragment= new AboutFragment();
@@ -251,6 +367,7 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.container_main,aboutFragment).commit();
             toolbarTitle.setText("About Us");
+            exit=false;
 
         } else if (id == R.id.nav_contact_us) {
 

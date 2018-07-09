@@ -3,7 +3,10 @@ package com.example.rupali.thalassaemiaapp;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -74,9 +78,9 @@ public class ThalassaemicsRegistrationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.content_thalassaemics_reg, container, false);
+        final View view = inflater.inflate(R.layout.fragment_thalassaemics_registration, container, false);
 
-        //setContentView(R.layout.content_thalassaemics_reg);
+        //setContentView(R.layout.fragment_thalassaemics_registration);
 
         patients = FirebaseDatabase.getInstance().getReference("patients");
 
@@ -217,7 +221,22 @@ public class ThalassaemicsRegistrationFragment extends Fragment {
         }
         String id = patients.push().getKey();
         Thalassaemics thalassaemic = new Thalassaemics(names,dobs,contactNo, emails, country, state, city, completePostalAd, pincode, gender, bloodGroup, types,declarationIsChecked);
-        patients.child(id).setValue(thalassaemic);
+        patients.child(id).setValue(thalassaemic, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                if(databaseError==null) {
+                    Toast.makeText(getContext(), "Form successfully submitted ", Toast.LENGTH_SHORT).show();
+                    Log.d("RealtimeDatabase","success");
+                    getActivity().onBackPressed();
+
+                }
+                else{
+                    Toast.makeText(getContext(), "An error occured while submitting form. Try again", Toast.LENGTH_SHORT).show();
+                    Log.d("RealtimeDatabase","Failure "+databaseError.getMessage());
+                }
+            }
+        });
+
 
 
     }
