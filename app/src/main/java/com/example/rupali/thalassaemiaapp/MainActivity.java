@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -34,10 +35,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.razorpay.Checkout;
+import com.razorpay.PaymentResultListener;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,PaymentResultListener{
     TextView toolbarTitle;
     private FirebaseAuth mAuth;
     ImageView profileImage;
@@ -103,6 +106,7 @@ public class MainActivity extends AppCompatActivity
                 .build();
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        Checkout.preload(getApplicationContext());
 
     }
     @Override
@@ -354,6 +358,10 @@ public class MainActivity extends AppCompatActivity
             }
 
         } else if (id == R.id.nav_be_a_support) {
+            BeASupportFragment beASupportFragment= new BeASupportFragment();
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.container_main,beASupportFragment).commit();
             toolbarTitle.setText("Be A Support");
             exit=false;
 
@@ -400,5 +408,18 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onPaymentSuccess(String razorpayPaymentID) {
+        Log.d("RazopayPayment", "Razorpay payment success");
+        Toast.makeText(this,"Payment Successful",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPaymentError(int code, String response) {
+        Log.d("RazopayPayment", "Razorpay Payment failed code: "+code+" response: "+response);
+        Toast.makeText(this,"Payment Failed",Toast.LENGTH_SHORT).show();
+
     }
 }
