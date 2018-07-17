@@ -2,13 +2,10 @@ package com.example.rupali.thalassaemiaapp;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -32,9 +29,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 import com.squareup.picasso.Picasso;
@@ -107,6 +108,34 @@ public class MainActivity extends AppCompatActivity
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         Checkout.preload(getApplicationContext());
+//        Intent intent=getIntent();
+//        if (intent.getExtras() != null) {
+//            Bundle bundle = new Bundle();
+//            bundle.putString(Constants.NotifiactionActivityConstantts.IMAGE_URI, intent.getStringExtra(Constants.NotifiactionActivityConstantts.IMAGE_URI));
+//            bundle.putString(Constants.NotifiactionActivityConstantts.TITLE, intent.getStringExtra(Constants.NotifiactionActivityConstantts.TITLE));
+//            bundle.putString(Constants.NotifiactionActivityConstantts.MESSAGE, intent.getStringExtra(Constants.NotifiactionActivityConstantts.MESSAGE));
+//            if (intent.hasExtra(Constants.NotifiactionActivityConstantts.NOTI_ACT_TRUE_OR_FALSE)) {
+//                Intent intent1 = new Intent(MainActivity.this, NotificationsActivity.class);
+//                intent1.putExtras(bundle);
+//                startActivity(intent1);
+//                finish();
+//            }
+//        }
+
+//            for (String key : getIntent().getExtras().keySet()) {
+//                String value = getIntent().getExtras().getString(key);
+//
+//                if (key.equals(Constants.NotifiactionActivityConstantts.NOTI_ACT_TRUE_OR_FALSE) && value.equals("True")) {
+//                    Intent intent = new Intent(this, NotificationsActivity.class);
+//                    intent.putExtra("value", value);
+//                    startActivity(intent);
+//                    finish();
+//                }
+//
+//            }
+
+
+        subscribeToPushService();
 
     }
     @Override
@@ -122,7 +151,26 @@ public class MainActivity extends AppCompatActivity
             updateGoogleUI(account);
         }
     }
+    private void subscribeToPushService() {
+        FirebaseMessaging.getInstance().subscribeToTopic("global");
 
+        Log.d("AndroidBash", "Subscribed");
+       // Toast.makeText(MainActivity.this, "Subscribed", Toast.LENGTH_SHORT).show();
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( MainActivity.this,  new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                String newToken = instanceIdResult.getToken();
+                Log.e("newToken",newToken);
+                Log.d("AndroidBash", newToken);
+                //Toast.makeText(MainActivity.this, newToken, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        // Log and toast
+
+    }
     private void updateGoogleUI(GoogleSignInAccount account) {
         if(account!=null){
             String email=account.getEmail();
@@ -264,9 +312,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.login_icon) {
-            Intent intent = new Intent(this,LoginActivity.class);
-            startActivityForResult(intent,Constants.LOGIN_ACTIVITY_REQUEST_CODE);
+        if (id == R.id.notification_icon) {
+            Intent intent = new Intent(this,NotificationsActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

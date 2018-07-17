@@ -72,7 +72,7 @@ public class BeASupportFragment extends Fragment {
                  *     Invoice Payment
                  *     etc.
                  */
-                options.put("description", "Order #123456");
+                options.put("description", "Donation");
 
                 options.put("currency", "INR");
 
@@ -80,8 +80,12 @@ public class BeASupportFragment extends Fragment {
                  * Amount is always passed in PAISE
                  * Eg: "500" = Rs 5.00
                  */
-                options.put("amount",amount);
-
+                options.put("amount",amount*100);
+//                JSONObject preFill = new JSONObject();
+//                preFill.put("email", "thalassaemia12@gmail.com");
+//                preFill.put("contact", "8750639133");
+//
+//                options.put("prefill", preFill);
                 checkout.open(activity, options);
             } catch(Exception e) {
                 Log.e("RazopayPayment", "Error in starting Razorpay Checkout", e);
