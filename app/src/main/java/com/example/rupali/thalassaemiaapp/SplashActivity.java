@@ -2,7 +2,13 @@ package com.example.rupali.thalassaemiaapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.util.Log;
+import android.view.View;
+
+import com.squareup.picasso.Picasso;
 
 public class SplashActivity extends Activity {
 
@@ -23,11 +29,22 @@ public class SplashActivity extends Activity {
                     // do nothing
                 } finally {
                     finish();
-                    Intent i = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(i);
+                    SharedPreferences sharedPreferences=getSharedPreferences(Constants.SHARED_PREF_NAME,MODE_PRIVATE);
+                    Boolean ispreviouslyStarted =sharedPreferences.getBoolean(Constants.PREVIOUSLY_STARTED, false);
+                    if (!ispreviouslyStarted) {
+                        //show start activity
+                        startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+
+                    }
+                    else {
+                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    }
+//                    Intent i = new Intent(SplashActivity.this, MainActivity.class);
+//                    startActivity(i);
                 }
             }
         };
         splashThread.start();
+
     }
 }
