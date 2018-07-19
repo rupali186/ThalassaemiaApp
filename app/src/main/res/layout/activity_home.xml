@@ -3,6 +3,7 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/white"
     tools:context=".HomeActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:layout_weight="1">
             <android.support.v4.view.ViewPager
                 android:layout_marginTop="20dp"
@@ -52,14 +53,18 @@
             android:layout_weight="1">
 
 
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/login_button"
+            <Button
+                android:id="@+id/home_login_button"
+                android:text="Continue With Google"
+                android:backgroundTint="@color/google"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/sign_up_button_bg"
+                android:textColor="@android:color/white"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginBottom="8dp" />
 
         </LinearLayout>

@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,7 @@ public class NotificationsActivity extends AppCompatActivity {
     NotiOpenHelper notiOpenHelper;
     SQLiteDatabase database;
     RecyclerView recyclerView;
+    TextView toolbarTitle;
     int count=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,9 @@ public class NotificationsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notifications);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbarTitle=findViewById(R.id.noti_act_toolbar_text);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbarTitle.setText("Notifications");
         notificationContentArrayList=new ArrayList<>();
         notificationAdapter=new NotificationAdapter(this, notificationContentArrayList, new NotificationAdapter.OnItemClickListener() {
             @Override

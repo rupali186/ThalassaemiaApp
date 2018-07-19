@@ -27,12 +27,12 @@ public class ViewPagerAdapter extends PagerAdapter {
             R.drawable.blood_donation_background_min
     };
     String [] des_list={
-            "Explore the latest, popular, upcoming ,top rated movies and much more... ",
-            "Stay updated about whats on the Tv. Get info about newly launched, top rated and popular shows.",
-            "Never miss interesting information about your favourite celebs. Get their birthdays, biography etc in one go.",
-            "Search your favourite movies, tv shows and celebs.",
-            "Mark your movies, tv shows and celebs as favourites and save your time from searching them again.",
-            "Share your favourite movies, tv shows and celebs with your loved ones."
+            "A single pint can save 3 lives...",
+            "A single gesture can create million smiles.",
+            "Help us to support our mission of thalassaemia free India by 2025.",
+            "Register yourself a blood donor today and help in saving million lives.",
+            "Register for the thalassaemic carrier Hba2 test today and get your test done.",
+            "They need your support."
     };
     @Override
     public int getCount() {

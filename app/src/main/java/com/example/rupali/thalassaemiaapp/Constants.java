@@ -9,10 +9,6 @@ public class Constants {
     static final int VERSION=10;
     final static String SHARED_PREF_NAME="loginInfo";
     final static String PREVIOUSLY_STARTED="previouslyStarted";
-    final static String LOGIN_NAME="login name";
-    final static String CONNECT_WITH_GOOGLE="connect_with_google";
-    final static String EMAIL_PASSWORD_LOGIN="email_password_login";
-
 
     public class NotifiactionActivityConstantts{
         static final String IMAGE_URI="image";

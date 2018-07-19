@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity
     private boolean exit=false;
     TextView emailVerification;
     boolean isEmailVerified=false;
+    boolean islogInWithGoogle=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -181,15 +182,18 @@ public class MainActivity extends AppCompatActivity
                 Picasso.get().load(photoUrl).into(profileImage);
             }
             loggedIn=true;
+            islogInWithGoogle=true;
             logInOrSignUp.setText("Log Out!");
         }else {
             profileImage.setImageDrawable(null);
             profileImage.setBackgroundResource(R.drawable.profile_i);
             profileName.setText("Welcome !");
             logInOrSignUp.setText("Log In Or Sign Up!");
+            islogInWithGoogle=false;
             loggedIn=false;
         }
-
+        isEmailVerified=true;
+        emailVerification.setVisibility(View.GONE);
     }
 
     private void updateUI(FirebaseUser currentUser) {
@@ -215,6 +219,7 @@ public class MainActivity extends AppCompatActivity
             // authenticate with your backend server, if you have one. Use
             // FirebaseUser.getIdToken() instead.
             String uid = currentUser.getUid();
+            islogInWithGoogle=false;
             loggedIn=true;
             logInOrSignUp.setText("Log Out!");
         }else {
@@ -222,6 +227,7 @@ public class MainActivity extends AppCompatActivity
             profileImage.setBackgroundResource(R.drawable.profile_i);
             profileName.setText("Welcome !");
             logInOrSignUp.setText("Log In Or Sign Up!");
+            islogInWithGoogle=false;
             isEmailVerified=true;
             emailVerification.setVisibility(View.GONE);
             loggedIn=false;
@@ -377,7 +383,7 @@ public class MainActivity extends AppCompatActivity
             exit=false;
         } else if (id == R.id.nav_be_a_blood_donor) {
             if(!loggedIn){
-                Toast.makeText(MainActivity.this,"You need to b logged in to continue! ",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"You need to be logged in to continue! ",Toast.LENGTH_SHORT).show();
             }
             else if(!isEmailVerified){
                 Toast.makeText(MainActivity.this,"Verify your email to continue! ",Toast.LENGTH_SHORT).show();
@@ -387,12 +393,12 @@ public class MainActivity extends AppCompatActivity
                 android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.container_main, beABloodDonorFragment).commit();
-                toolbarTitle.setText("Thalassaemia");
+                toolbarTitle.setText("Be A Donor");
                 exit = false;
             }
         } else if (id == R.id.nav_regis_patients) {
             if(!loggedIn){
-                Toast.makeText(MainActivity.this,"You need to b logged in to continue! ",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"You need to be logged in to continue! ",Toast.LENGTH_SHORT).show();
             } else if(!isEmailVerified){
                 Toast.makeText(MainActivity.this,"Verify your email to continue! ",Toast.LENGTH_SHORT).show();
 
@@ -406,12 +412,19 @@ public class MainActivity extends AppCompatActivity
             }
 
         } else if (id == R.id.nav_be_a_support) {
-            BeASupportFragment beASupportFragment= new BeASupportFragment();
-            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.container_main,beASupportFragment).commit();
-            toolbarTitle.setText("Be A Support");
-            exit=false;
+            if(!loggedIn){
+                Toast.makeText(MainActivity.this,"You need to be logged in to continue! ",Toast.LENGTH_SHORT).show();
+            } else if(!isEmailVerified){
+                Toast.makeText(MainActivity.this,"Verify your email to continue! ",Toast.LENGTH_SHORT).show();
+
+            }else {
+                BeASupportFragment beASupportFragment = new BeASupportFragment();
+                android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.container_main, beASupportFragment).commit();
+                toolbarTitle.setText("Be A Support");
+                exit = false;
+            }
 
         } else if (id == R.id.nav_explore) {
             toolbarTitle.setText("Explore");

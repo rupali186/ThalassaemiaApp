@@ -3,11 +3,11 @@
     android:shape="rectangle" >
 
     <corners
-        android:bottomLeftRadius="20dp"
-        android:bottomRightRadius="20dp"
-        android:radius="60dp"
-        android:topLeftRadius="20dp"
-        android:topRightRadius="20dp" />
+        android:bottomLeftRadius="10dp"
+        android:bottomRightRadius="10dp"
+        android:radius="30dp"
+        android:topLeftRadius="10dp"
+        android:topRightRadius="10dp" />
 
 
     <stroke android:width="2dp"
@@ -17,13 +17,5 @@
         android:left="0dp"
         android:right="0dp"
         android:top="0dp" />
-
-    <size
-        android:height="60dp"
-        android:width="270dp" />
-    <!--<gradient android:angle="90"-->
-        <!--android:startColor="#b3f292"-->
-        <!--android:centerColor="#6de253"-->
-        <!--android:endColor="#71c627"/>-->
 
 </shape>

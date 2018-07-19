@@ -75,4 +75,14 @@ If one gene is missing or damaged: Your red blood cells might be smaller than no
     <string name="default_notification_channel_id">default</string>
     <string name="title_activity_thalassaemics_reg">ThalassaemicsReg</string>
     <string name="title_activity_notifications">NotificationsActivity</string>
+    <string name="support_us_content">Our Foundation provides free care to about 200 thalassaemic
+        children registered with us from Delhi NCR and farther areas of North India.  This involves providing free medicines,
+        blood and blood transfusion set-up, regular health check-ups by doctors from reputed Hospitals and other activities like
+        organising trips, painting competitions, cultural programs, skill development courses, meetings with celebrities etc.
+        for their physical and psychological welfare and to make them self dependent. The average monthly expense for each such
+        child is INR 7,500-10,000 (US$ 110 - 125).\n\nSponsor a Thalassaemic Child\'s Case and Welfare for as little as Re 5,100/- per month:\nMedicines: Rs 5,100/-\n
+    Complete Care: Rs 11,000/-\n\n</string>
+    <string name="title_activity_login1">LoginActivity1</string>
+    <string name="title_activity_login">LoginActivity</string>
+
 </resources>
