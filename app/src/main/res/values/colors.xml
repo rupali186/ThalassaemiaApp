@@ -12,4 +12,6 @@
     <color name="login">#880E4F</color>
     <color name="facebook">#3b5998 </color>
     <color name="google">#DD4B39</color>
+    <color name="submit_button">#50a730</color>
+
 </resources>

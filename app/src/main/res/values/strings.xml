@@ -80,9 +80,13 @@ If one gene is missing or damaged: Your red blood cells might be smaller than no
         blood and blood transfusion set-up, regular health check-ups by doctors from reputed Hospitals and other activities like
         organising trips, painting competitions, cultural programs, skill development courses, meetings with celebrities etc.
         for their physical and psychological welfare and to make them self dependent. The average monthly expense for each such
-        child is INR 7,500-10,000 (US$ 110 - 125).\n\nSponsor a Thalassaemic Child\'s Case and Welfare for as little as Re 5,100/- per month:\nMedicines: Rs 5,100/-\n
-    Complete Care: Rs 11,000/-\n\n</string>
+        child is INR 7,500-10,000 (US$ 100 - 125).\n\nSponsor a Thalassaemic Child\'s Care and Welfare for as little as Rs
+        5,100/- per month:\n\nMedicines: Rs 5,100/-\nComplete Care and Welfare: Rs 11,000/-\n\n</string>
     <string name="title_activity_login1">LoginActivity1</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="home_content"><b>Foundation Against Thalassaemia (Regd.)</b>, is an NGO registered under Indian Societies
+        Act 1860/21, working for the Care and Welfare of thalassaemic children since 1995, with a vision to make India
+        Thalassaemia Free.</string>
+
 
 </resources>

@@ -29,7 +29,7 @@
         android:background="@drawable/submit_button_bg"
         android:drawableLeft="@drawable/ic_contribute_icon"
         android:padding="10dp"
-        android:drawableTint="#50a730"
+        android:drawableTint="@color/submit_button"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"

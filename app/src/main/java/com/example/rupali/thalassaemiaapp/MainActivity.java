@@ -109,34 +109,14 @@ public class MainActivity extends AppCompatActivity
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         Checkout.preload(getApplicationContext());
-//        Intent intent=getIntent();
-//        if (intent.getExtras() != null) {
-//            Bundle bundle = new Bundle();
-//            bundle.putString(Constants.NotifiactionActivityConstantts.IMAGE_URI, intent.getStringExtra(Constants.NotifiactionActivityConstantts.IMAGE_URI));
-//            bundle.putString(Constants.NotifiactionActivityConstantts.TITLE, intent.getStringExtra(Constants.NotifiactionActivityConstantts.TITLE));
-//            bundle.putString(Constants.NotifiactionActivityConstantts.MESSAGE, intent.getStringExtra(Constants.NotifiactionActivityConstantts.MESSAGE));
-//            if (intent.hasExtra(Constants.NotifiactionActivityConstantts.NOTI_ACT_TRUE_OR_FALSE)) {
-//                Intent intent1 = new Intent(MainActivity.this, NotificationsActivity.class);
-//                intent1.putExtras(bundle);
-//                startActivity(intent1);
-//                finish();
-//            }
-//        }
-
-//            for (String key : getIntent().getExtras().keySet()) {
-//                String value = getIntent().getExtras().getString(key);
-//
-//                if (key.equals(Constants.NotifiactionActivityConstantts.NOTI_ACT_TRUE_OR_FALSE) && value.equals("True")) {
-//                    Intent intent = new Intent(this, NotificationsActivity.class);
-//                    intent.putExtra("value", value);
-//                    startActivity(intent);
-//                    finish();
-//                }
-//
-//            }
-
 
         subscribeToPushService();
+        toolbarTitle.setText("Home");
+        HomeFragment homeFragment = new HomeFragment();
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.container_main, homeFragment,"HOME").commit();
+        exit=false;
 
     }
     @Override
@@ -373,12 +353,18 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.nav_thalassaemia) {
+        if (id == R.id.nav_home) {
+            HomeFragment homeFragment= new HomeFragment();
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.container_main,homeFragment,"HOME").commit();
+            toolbarTitle.setText("Home");
+            exit=false;
+        } else if (id == R.id.nav_thalassaemia) {
             ThalassaemiaFragment thalassaemiaFragment= new ThalassaemiaFragment();
             android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.container_main,thalassaemiaFragment,"HOME").commit();
+            transaction.replace(R.id.container_main,thalassaemiaFragment).commit();
             toolbarTitle.setText("Thalassaemia");
             exit=false;
         } else if (id == R.id.nav_be_a_blood_donor) {
@@ -428,6 +414,10 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_explore) {
             toolbarTitle.setText("Explore");
+            ExploreFragment exploreFragment = new ExploreFragment();
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.container_main, exploreFragment).commit();
             exit=false;
 
         } else if (id == R.id.nav_about) {

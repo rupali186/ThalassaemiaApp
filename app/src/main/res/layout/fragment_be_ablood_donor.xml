@@ -2,6 +2,7 @@
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BeABloodDonorFragment">
@@ -10,7 +11,6 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray"
         android:padding="20dp">
 
         <EditText
@@ -389,16 +389,18 @@
 
         <Button
             android:id="@+id/submit_form"
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="Submit"
             android:background="@drawable/submit_button_bg"
+            android:text="Submit"
+            android:drawableRight="@drawable/ic_menu_send"
+            android:drawableTint="@color/submit_button"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -11,7 +11,7 @@
 
 
     <stroke android:width="2dp"
-        android:color="#50a730"/>
+        android:color="@color/submit_button"/>
     <padding
         android:bottom="0dp"
         android:left="0dp"
