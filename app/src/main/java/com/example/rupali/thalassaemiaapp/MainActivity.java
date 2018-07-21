@@ -20,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity
     TextView emailVerification;
     boolean isEmailVerified=false;
     boolean islogInWithGoogle=false;
-    String RegList[]={"Thalassaemia Carrier Test","Bone Marrow Matching","Stem Cells Donation"};
+    String RegList[]={"Registeration for:","Thalassaemia Carrier Test","Bone Marrow Matching","Stem Cells Donation"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,23 +116,84 @@ public class MainActivity extends AppCompatActivity
         Checkout.preload(getApplicationContext());
 
         subscribeToPushService();
-        toolbarTitle.setText("Home");
-        HomeFragment homeFragment = new HomeFragment();
-        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.container_main, homeFragment,"HOME").commit();
-        exit=true;
-//        Spinner spinner = (Spinner) navigationView.getMenu().findItem(R.id.nav_reg_spinner).getActionView();
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,RegList) {
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent)
+            {
+                View v = null;
+
+                // If this is the initial dummy entry, make it hidden
+                if (position == 0) {
+                    TextView tv = new TextView(getContext());
+                    tv.setHeight(0);
+                    tv.setVisibility(View.GONE);
+                    v = tv;
+                }
+                else {
+                    // Pass convertView as null to prevent reuse of special case views
+                    v = super.getDropDownView(position, null, parent);
+                }
+
+                // Hide scroll bar because it appears sometimes unnecessarily, this does not prevent scrolling
+                parent.setVerticalScrollBarEnabled(false);
+                return v;
+            }
+        };
+
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        mySpinner.setAdapter(dataAdapter);
+        Spinner spinner = (Spinner) navigationView.getMenu().findItem(R.id.nav_reg_spinner).getActionView();
 //        spinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,RegList));
-//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//
-//            }
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//            }
-//        });
+        spinner.setPrompt("Registeration for:");
+        spinner.setAdapter(dataAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!loggedIn){
+                    Toast.makeText(MainActivity.this,"You need to be logged in to continue! ",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(!isEmailVerified){
+                    Toast.makeText(MainActivity.this,"Verify your email to continue! ",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(position==0){
+                    toolbarTitle.setText("Home");
+                    HomeFragment homeFragment = new HomeFragment();
+                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.container_main, homeFragment,"HOME").commit();
+                    exit=true;
+                }else if(position==1){
+                    toolbarTitle.setText("Thalassaemia Carrier Test");
+                    exit = false;
+
+                }else if(position==2){
+                    toolbarTitle.setText("Bone Marrow Matching");
+                    exit = false;
+                }else if(position==3){
+                    toolbarTitle.setText("Stem Cells Donation");
+                    exit = false;
+
+                }
+                if(position!=0) {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(Constants.SPINNER_POS, position);
+                    RegisterationFragment registerationFragment = new RegisterationFragment();
+                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.container_main, registerationFragment);
+                    registerationFragment.setArguments(bundle);
+                    transaction.commit();
+                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
     }
     @Override

@@ -30,8 +30,7 @@ import java.util.Calendar;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BeABloodDonorFragment extends Fragment {
-
+public class RegisterationFragment extends Fragment {
     EditText nameEditText;
     TextView dobTextView;
     EditText contactNoEditText;
@@ -62,7 +61,9 @@ public class BeABloodDonorFragment extends Fragment {
     FirebaseDatabase database;
     DatabaseReference myRef;
     Button submitForm;
-    public BeABloodDonorFragment() {
+    int position;
+
+    public RegisterationFragment() {
         // Required empty public constructor
     }
 
@@ -71,7 +72,9 @@ public class BeABloodDonorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_be_ablood_donor, container, false);
+        View view= inflater.inflate(R.layout.fragment_registeration, container, false);
+        Bundle bundle = this.getArguments();
+        position=bundle.getInt(Constants.SPINNER_POS);
         nameEditText=view.findViewById(R.id.patient_name);
         dobTextView=view.findViewById(R.id.patient_dob);
         contactNoEditText=view.findViewById(R.id.patient_phone);
@@ -111,19 +114,26 @@ public class BeABloodDonorFragment extends Fragment {
             }
         });
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Donor");
+        if(position==1) {
+            myRef = database.getReference("ThalassaemiaCarrierTest");
+        }
+        else if(position==2){
+            myRef =database.getReference("BoneMarrowMatching");
+        }
+        else if(position==3){
+            myRef=database.getReference("StemCellsDonation");
+        }
         submitForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addDonor(view);
+                register(view);
             }
         });
-
 
         return view;
     }
 
-    private void addDonor(View view) {
+    private void register(View view) {
         name=nameEditText.getText().toString();
         if(name.isEmpty()){
             Toast.makeText(getContext(),"Name is required",Toast.LENGTH_SHORT).show();
@@ -196,6 +206,7 @@ public class BeABloodDonorFragment extends Fragment {
         }
         String id=myRef.push().getKey();
         Donor donor=new Donor(name,dob,contactNo,email,country,state,city,completePostalAd,pincode,gender,bloodGroup,declarationIsChecked);
+       // myRef.child(id).setValue(donor);
         myRef.child(id).setValue(donor, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {

@@ -8,7 +8,7 @@
 
     <string name="facebook_app_id">2031797653740303</string>
     <string name="fb_login_protocol_scheme">fb2031797653740303</string>
-
+    <string name="nav_spinner_title">Registeration for:</string>
     <string name="action_settings">Settings</string>
     <string name="about_content"> Foundation Against Thalassaemia (Regd.) is an NGO registered under Indian Societies
         Act 1860/21, working for the Care and Welfare of thalassaemic children since 1995, with a vision to make India
@@ -88,7 +88,6 @@ If one gene is missing or damaged: Your red blood cells might be smaller than no
         Act 1860/21, working for the Care and Welfare of thalassaemic children since 1995, with a vision to make India
         Thalassaemia Free.</string>
     <string name="thali_quote">Let\'s help India become Thalassaemia Free by 2025.</string>
-
 
 
 </resources>

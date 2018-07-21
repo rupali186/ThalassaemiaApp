@@ -168,14 +168,13 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="Address"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patient_email" />
+            app:layout_constraintTop_toBottomOf="@+id/patient_blood_group_radiogroup" />
 
         <EditText
             android:id="@+id/patient_address"
@@ -325,11 +324,9 @@
             android:id="@+id/patient_declaration_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patient_blood_group_radiogroup" />
+            app:layout_constraintTop_toBottomOf="@+id/patient_pin_code" />
 
         <RadioGroup
             android:id="@+id/patient_gender_radiogroup"
@@ -365,14 +362,13 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="Gender"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patient_pin_code" />
+            app:layout_constraintTop_toBottomOf="@+id/patient_email" />
 
         <EditText
             android:id="@+id/donor_phone_code"

@@ -9,6 +9,7 @@ public class Constants {
     static final int VERSION=10;
     final static String SHARED_PREF_NAME="loginInfo";
     final static String PREVIOUSLY_STARTED="previouslyStarted";
+    final static String SPINNER_POS="spinnerPosition";
 
     public class NotifiactionActivityConstantts{
         static final String IMAGE_URI="image";
