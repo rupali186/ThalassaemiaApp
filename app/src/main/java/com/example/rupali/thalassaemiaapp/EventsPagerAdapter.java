@@ -31,6 +31,7 @@ public class EventsPagerAdapter extends PagerAdapter {
         View viewItem = inflater.inflate(R.layout.events_and_supporters, container, false);
         ImageView imageView = (ImageView) viewItem.findViewById(R.id.event_image);
         imageView.setImageResource(imagesArray[position]);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         TextView textView1 = (TextView) viewItem.findViewById(R.id.event_des);
         textView1.setText(namesArray[position]);
         ((ViewPager)container).addView(viewItem);

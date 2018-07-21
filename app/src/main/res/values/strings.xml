@@ -84,9 +84,11 @@ If one gene is missing or damaged: Your red blood cells might be smaller than no
         5,100/- per month:\n\nMedicines: Rs 5,100/-\nComplete Care and Welfare: Rs 11,000/-\n\n</string>
     <string name="title_activity_login1">LoginActivity1</string>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="home_content"><b>Foundation Against Thalassaemia (Regd.)</b>, is an NGO registered under Indian Societies
+    <string name="home_content">Foundation Against Thalassaemia (Regd.), is an NGO registered under Indian Societies
         Act 1860/21, working for the Care and Welfare of thalassaemic children since 1995, with a vision to make India
         Thalassaemia Free.</string>
+    <string name="thali_quote">Let\'s help India become Thalassaemia Free by 2025.</string>
+
 
 
 </resources>

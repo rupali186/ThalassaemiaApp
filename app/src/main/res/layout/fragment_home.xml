@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v4.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
-    <android.support.constraint.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".HomeFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/imageView7"
             android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:background="@drawable/thali_bg_image"
+            android:layout_height="90dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="56dp"
+            android:background="@drawable/thali_logo3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +25,11 @@
             android:id="@+id/imageView8"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/logo_min"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/logo_transparent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,50 +47,94 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="0dp"
+        <ScrollView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Events gallery"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_highlight_text">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="@dimen/follow_icon_width"
+                    android:layout_height="@dimen/follow_icon_width"
+                    android:layout_margin="@dimen/follow_icon_margin"
+                    android:src="@drawable/facebook_circle_min" />
+
+                <ImageView
+                    android:layout_width="@dimen/follow_icon_width"
+                    android:layout_height="@dimen/follow_icon_width"
+                    android:layout_margin="@dimen/follow_icon_margin"
+                    android:src="@drawable/twitter" />
+
+                <ImageView
+                    android:layout_width="@dimen/follow_icon_width"
+                    android:layout_height="@dimen/follow_icon_width"
+                    android:layout_margin="@dimen/follow_icon_margin"
+                    android:src="@drawable/youtube_round_icon_min" />
+
+                <ImageView
+                    android:layout_width="@dimen/follow_icon_width"
+                    android:layout_height="@dimen/follow_icon_width"
+                    android:layout_margin="@dimen/follow_icon_margin"
+                    android:src="@drawable/instra_round_min" />
+
+
+                <ImageView
+                    android:layout_width="@dimen/follow_icon_width"
+                    android:layout_height="@dimen/follow_icon_width"
+                    android:layout_margin="@dimen/follow_icon_margin"
+                    android:src="@drawable/pinterest" />
+                <ImageView
+                    android:layout_width="@dimen/follow_icon_width"
+                    android:layout_height="@dimen/follow_icon_width"
+                    android:layout_margin="@dimen/follow_icon_margin"
+                    android:src="@drawable/linkedin_icon" />
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="140dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginStart="50dp"
+            android:src="@drawable/logo_4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/home_highlight_text"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="22dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="Pattrons And Supporters"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:layout_marginTop="8dp"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:text="Let's help India become Thalassaemia Free by 2025."
+            android:textAlignment="center"
+            android:textAppearance="@android:style/TextAppearance.StatusBar.Title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/events_viewpager" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/events_viewpager"
-            android:layout_width="0dp"
-            android:layout_height="300dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/pattrons_viewpager"
-            android:layout_width="0dp"
-            android:layout_height="300dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView14" />
     </android.support.constraint.ConstraintLayout>
+
 </android.support.v4.widget.NestedScrollView>

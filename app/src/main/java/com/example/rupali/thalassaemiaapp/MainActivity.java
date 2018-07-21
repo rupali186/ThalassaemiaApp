@@ -20,7 +20,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity
     TextView emailVerification;
     boolean isEmailVerified=false;
     boolean islogInWithGoogle=false;
+    String RegList[]={"Thalassaemia Carrier Test","Bone Marrow Matching","Stem Cells Donation"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,7 +120,18 @@ public class MainActivity extends AppCompatActivity
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.container_main, homeFragment,"HOME").commit();
-        exit=false;
+        exit=true;
+//        Spinner spinner = (Spinner) navigationView.getMenu().findItem(R.id.nav_reg_spinner).getActionView();
+//        spinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,RegList));
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//            }
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//            }
+//        });
 
     }
     @Override
@@ -379,7 +394,7 @@ public class MainActivity extends AppCompatActivity
                 android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.container_main, beABloodDonorFragment).commit();
-                toolbarTitle.setText("Be A Donor");
+                toolbarTitle.setText("Be A Blood Donor");
                 exit = false;
             }
         } else if (id == R.id.nav_regis_patients) {

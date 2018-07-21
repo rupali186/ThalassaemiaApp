@@ -1,12 +1,17 @@
 package com.example.rupali.thalassaemiaapp;
 
 
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -16,16 +21,8 @@ import java.util.TimerTask;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
-    ViewPager eventsViewPager;
-    EventsPagerAdapter eventsPagerAdapter;
-    ViewPager pattronsViewPager;
-    EventsPagerAdapter pattronsPagerAdapter;
-    Integer[] eventsImageId = {R.drawable.event_1, R.drawable.event_2, R.drawable.event_3, R.drawable.event_4};
-    String[] eventsImagesName = {"image1","image2","image3","image4"};
-    Integer[] pattronsImageId = {R.drawable.event_1, R.drawable.event_2, R.drawable.event_3, R.drawable.event_4};
-    String[] pattronsImageName = {"image1","image2","image3","image4"};
-    Timer eventsTimer;
-    Timer pattronsTimer;
+    TextView highlightTextView;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -36,41 +33,19 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_home, container, false);
-        eventsViewPager=view.findViewById(R.id.events_viewpager);
-        pattronsViewPager=view.findViewById(R.id.pattrons_viewpager);
-        eventsPagerAdapter = new EventsPagerAdapter(getActivity(),eventsImageId,eventsImagesName);
-        eventsViewPager.setAdapter(eventsPagerAdapter);
-        pattronsPagerAdapter = new EventsPagerAdapter(getActivity(),pattronsImageId,pattronsImageName);
-        pattronsViewPager.setAdapter(pattronsPagerAdapter);
-        TimerTask eventsTimerTask = new TimerTask() {
-            @Override
-            public void run() {
-                eventsViewPager.post(new Runnable(){
-
-                    @Override
-                    public void run() {
-                        eventsViewPager.setCurrentItem((eventsViewPager.getCurrentItem()+1)%eventsImageId.length);
-                    }
-                });
-            }
-        };
-        eventsTimer = new Timer();
-        eventsTimer.schedule(eventsTimerTask, 3000, 3000);
-        TimerTask pattronsTimerTask = new TimerTask() {
-            @Override
-            public void run() {
-                pattronsViewPager.post(new Runnable(){
-
-                    @Override
-                    public void run() {
-                        pattronsViewPager.setCurrentItem((pattronsViewPager.getCurrentItem()+1)%pattronsImageId.length);
-                    }
-                });
-            }
-        };
-        pattronsTimer = new Timer();
-        pattronsTimer.schedule(pattronsTimerTask, 3000, 3000);
+        highlightTextView=view.findViewById(R.id.home_highlight_text);
+        //TextView secondTextView = new TextView(getContext());
+        Shader textShader=new LinearGradient(0, 0, 0, 20,
+                new int[]{Color.GREEN, Color.BLUE},
+                new float[]{0, 1}, Shader.TileMode.CLAMP);
+        highlightTextView.getPaint().setShader(textShader);
+       // highlightTextView.startAnimation(AnimationUtils.loadAnimation(getContext(),android.R.anim.slide_in_left));
         return  view;
     }
 
+    @Override
+    public void onDestroy() {
+       // highlightTextView.clearAnimation();
+        super.onDestroy();
+    }
 }
