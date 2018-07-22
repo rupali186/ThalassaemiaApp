@@ -2,6 +2,9 @@ package com.example.rupali.thalassaemiaapp;
 
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -20,10 +24,10 @@ public class AboutFragment extends Fragment {
     ImageView twitter;
     ImageView insta;
     ImageView facebook;
-    ImageView whatsapp;
+    ImageView linkedln;
     ImageView youtube;
     ImageView pinterest;
-
+    TextView highlightTextView;
     public AboutFragment() {
         // Required empty public constructor
     }
@@ -35,11 +39,15 @@ public class AboutFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_about, container, false);
-
-        twitter = view.findViewById(R.id.twitter);
+                highlightTextView=view.findViewById(R.id.about_highlight_text);
+        //TextView secondTextView = new TextView(getContext());
+        Shader textShader=new LinearGradient(0, 0, 0, 20,
+                new int[]{Color.GREEN, Color.BLUE},
+                new float[]{0, 1}, Shader.TileMode.CLAMP);
+        highlightTextView.getPaint().setShader(textShader);        twitter = view.findViewById(R.id.twitter);
         insta=view.findViewById(R.id.insta);
         facebook = view.findViewById(R.id.facebook);
-        whatsapp =view.findViewById(R.id.whatsapp);
+        linkedln =view.findViewById(R.id.linkedln);
         youtube = view.findViewById(R.id.youtube);
         pinterest=view.findViewById(R.id.pinterest);
 
@@ -62,7 +70,7 @@ public class AboutFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
-                String url = "https://www.instagram.com/p/BjK92TABbOB/";
+                String url = "https://www.instagram.com/fa_thalassaemia//";
                 intent.setData(Uri.parse(url));
                 //intent.setType("text/plain");
                 startActivity(intent);
@@ -102,23 +110,17 @@ public class AboutFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        whatsapp.setOnClickListener(new View.OnClickListener() {
+        linkedln.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String toNumber = "+91 98110 89975"; //without '+'
-                //String toNumber = "+91 98765 43210"; // contains spaces.
-                toNumber = toNumber.replace("+", "").replace(" ", "");
-
-                Intent sendIntent = new Intent("android.intent.action.MAIN");
-                sendIntent.putExtra("jid", toNumber + "@s.whatsapp.net");
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "hello");
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.setPackage("com.whatsapp");
-                sendIntent.setType("text/plain");
-                startActivity(sendIntent);
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                String url = "https://www.linkedin.com/in/fa-thalassaemia-foundation-against-thalassaemia-9b7584166";
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
             }
         });
+
 
 
        return view;

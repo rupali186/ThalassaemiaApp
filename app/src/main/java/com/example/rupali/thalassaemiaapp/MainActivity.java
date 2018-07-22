@@ -114,86 +114,13 @@ public class MainActivity extends AppCompatActivity
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         Checkout.preload(getApplicationContext());
-
         subscribeToPushService();
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,RegList) {
-            @Override
-            public View getDropDownView(int position, View convertView, ViewGroup parent)
-            {
-                View v = null;
-
-                // If this is the initial dummy entry, make it hidden
-                if (position == 0) {
-                    TextView tv = new TextView(getContext());
-                    tv.setHeight(0);
-                    tv.setVisibility(View.GONE);
-                    v = tv;
-                }
-                else {
-                    // Pass convertView as null to prevent reuse of special case views
-                    v = super.getDropDownView(position, null, parent);
-                }
-
-                // Hide scroll bar because it appears sometimes unnecessarily, this does not prevent scrolling
-                parent.setVerticalScrollBarEnabled(false);
-                return v;
-            }
-        };
-
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        mySpinner.setAdapter(dataAdapter);
-        Spinner spinner = (Spinner) navigationView.getMenu().findItem(R.id.nav_reg_spinner).getActionView();
-//        spinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,RegList));
-        spinner.setPrompt("Registeration for:");
-        spinner.setAdapter(dataAdapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(!loggedIn){
-                    Toast.makeText(MainActivity.this,"You need to be logged in to continue! ",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                else if(!isEmailVerified){
-                    Toast.makeText(MainActivity.this,"Verify your email to continue! ",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if(position==0){
-                    toolbarTitle.setText("Home");
-                    HomeFragment homeFragment = new HomeFragment();
-                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction transaction = fragmentManager.beginTransaction();
-                    transaction.replace(R.id.container_main, homeFragment,"HOME").commit();
-                    exit=true;
-                }else if(position==1){
-                    toolbarTitle.setText("Thalassaemia Carrier Test");
-                    exit = false;
-
-                }else if(position==2){
-                    toolbarTitle.setText("Bone Marrow Matching");
-                    exit = false;
-                }else if(position==3){
-                    toolbarTitle.setText("Stem Cells Donation");
-                    exit = false;
-
-                }
-                if(position!=0) {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt(Constants.SPINNER_POS, position);
-                    RegisterationFragment registerationFragment = new RegisterationFragment();
-                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction transaction = fragmentManager.beginTransaction();
-                    transaction.replace(R.id.container_main, registerationFragment);
-                    registerationFragment.setArguments(bundle);
-                    transaction.commit();
-                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                    drawer.closeDrawer(GravityCompat.START);
-                }
-
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
+        toolbarTitle.setText("Home");
+        HomeFragment homeFragment = new HomeFragment();
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.container_main, homeFragment,"HOME").commit();
+        exit=true;
 
     }
     @Override
@@ -213,7 +140,7 @@ public class MainActivity extends AppCompatActivity
         FirebaseMessaging.getInstance().subscribeToTopic("global");
 
         Log.d("AndroidBash", "Subscribed");
-       // Toast.makeText(MainActivity.this, "Subscribed", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(MainActivity.this, "Subscribed", Toast.LENGTH_SHORT).show();
 
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( MainActivity.this,  new OnSuccessListener<InstanceIdResult>() {
             @Override
@@ -261,7 +188,7 @@ public class MainActivity extends AppCompatActivity
             Uri photoUrl = currentUser.getPhotoUrl();
             profileName.setText(email);
             // Check if user's email is verified
-             isEmailVerified = currentUser.isEmailVerified();
+            isEmailVerified = currentUser.isEmailVerified();
             if(!isEmailVerified){
                 Toast.makeText(MainActivity.this,"Verify email to accesss all the features...",Toast.LENGTH_SHORT).show();
                 isEmailVerified=false;
@@ -459,14 +386,71 @@ public class MainActivity extends AppCompatActivity
                 toolbarTitle.setText("Be A Blood Donor");
                 exit = false;
             }
-        } else if (id == R.id.nav_regis_patients) {
+        }else if (id == R.id.popup_bone_marrow) {
+            if(!loggedIn){
+                Toast.makeText(MainActivity.this,"You need to be logged in to continue! ",Toast.LENGTH_SHORT).show();
+            }
+            else if(!isEmailVerified){
+                Toast.makeText(MainActivity.this,"Verify your email to continue! ",Toast.LENGTH_SHORT).show();
+
+            }else {
+                Bundle bundle = new Bundle();
+                bundle.putInt(Constants.SPINNER_POS,2);
+                RegisterationFragment registerationFragment = new RegisterationFragment();
+                android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.container_main, registerationFragment);
+                registerationFragment.setArguments(bundle);
+                transaction.commit();
+                toolbarTitle.setText("Bone Marrow Matching");
+                exit = false;
+            }
+        }else if (id == R.id.popup_carrier) {
+            if(!loggedIn){
+                Toast.makeText(MainActivity.this,"You need to be logged in to continue! ",Toast.LENGTH_SHORT).show();
+            }
+            else if(!isEmailVerified){
+                Toast.makeText(MainActivity.this,"Verify your email to continue! ",Toast.LENGTH_SHORT).show();
+
+            }else {
+                Bundle bundle = new Bundle();
+                bundle.putInt(Constants.SPINNER_POS,1);
+                RegisterationFragment registerationFragment = new RegisterationFragment();
+                android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.container_main, registerationFragment);
+                registerationFragment.setArguments(bundle);
+                transaction.commit();
+                toolbarTitle.setText("Thalassaemia Carrier Test");
+                exit = false;
+            }
+        } else if (id == R.id.popup_stem_cells_donation) {
+            if(!loggedIn){
+                Toast.makeText(MainActivity.this,"You need to be logged in to continue! ",Toast.LENGTH_SHORT).show();
+            }
+            else if(!isEmailVerified){
+                Toast.makeText(MainActivity.this,"Verify your email to continue! ",Toast.LENGTH_SHORT).show();
+
+            }else {
+                Bundle bundle = new Bundle();
+                bundle.putInt(Constants.SPINNER_POS,3);
+                RegisterationFragment registerationFragment = new RegisterationFragment();
+                android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.container_main, registerationFragment);
+                registerationFragment.setArguments(bundle);
+                transaction.commit();
+                toolbarTitle.setText("Stem Cells Donation");
+                exit = false;
+            }
+        }else if (id == R.id.nav_regis_patients) {
             if(!loggedIn){
                 Toast.makeText(MainActivity.this,"You need to be logged in to continue! ",Toast.LENGTH_SHORT).show();
             } else if(!isEmailVerified){
                 Toast.makeText(MainActivity.this,"Verify your email to continue! ",Toast.LENGTH_SHORT).show();
 
             }else{
-                toolbarTitle.setText("Thalassaemics Reg");
+                toolbarTitle.setText("Thalassaemics Registeration");
                 ThalassaemicsRegistrationFragment thalassaemicsRegistrationFragment = new ThalassaemicsRegistrationFragment();
                 android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();

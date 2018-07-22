@@ -14,19 +14,6 @@
             android:icon="@drawable/ic_blood_drop_svg"
             android:title="Thalassaemia" />
         <item
-            android:id="@+id/nav_be_a_blood_donor"
-            android:icon="@drawable/ic_blood_donor"
-            android:title="Be a Blood Donor" />
-        <item
-            android:id="@+id/nav_regis_patients"
-            android:icon="@drawable/ic_add_patient"
-            android:title="Thalassaemics Registration" />
-        <item
-            android:id="@+id/nav_reg_spinner"
-            android:icon="@drawable/ic_expand_more_black_24dp"
-            android:title="Registeration For:"
-            app:actionLayout="@layout/nav_drawer_spinner_layout"/>
-        <item
             android:id="@+id/nav_be_a_support"
             android:icon="@drawable/ic_contribute_icon"
             android:title="Be A Support" />
@@ -34,27 +21,46 @@
             android:id="@+id/nav_explore"
             android:icon="@android:drawable/ic_menu_search"
             android:title="Explore" />
+    </group>
+    <item android:title="Registeraton For:">
+        <menu xmlns:android="http://schemas.android.com/apk/res/android">
+            <item
+                android:id="@+id/nav_be_a_blood_donor"
+                android:icon="@drawable/ic_blood_donor"
+                android:title="Be a Blood Donor" />
+            <item
+                android:id="@+id/nav_regis_patients"
+                android:icon="@drawable/ic_add_patient"
+                android:title="Thalassaemics Registration" />
+            <item android:id="@+id/popup_carrier"
+                android:icon="@drawable/ic_note_add_black_24dp"
+                android:title="Thalassaemia Carrier Test" />
+            <item android:id="@+id/popup_bone_marrow"
+                android:icon="@drawable/ic_note_add_black_24dp"
+                android:title="Bone Marrow Matching" />
+            <item android:id="@+id/popup_stem_cells_donation"
+                android:icon="@drawable/ic_note_add_black_24dp"
+                android:title="Stem Cells Donation" />
+
+        </menu>
+    </item>
+    <group android:id="@+id/group3" android:checkableBehavior="single" >
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_about_icon"
             android:title="About Us" />
+        <item
+            android:id="@+id/nav_contact_us"
+            android:icon="@android:drawable/stat_notify_chat"
+            android:title="Contact Us" />
+        <item
+            android:id="@+id/nav_report_a_bug"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Report A Bug" />
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Share" />
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_contact_us"
-                android:icon="@android:drawable/stat_notify_chat"
-                android:title="Contact Us" />
-            <item
-                android:id="@+id/nav_report_a_bug"
-                android:icon="@drawable/ic_menu_manage"
-                android:title="Report A Bug" />
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-        </menu>
-    </item>
 
 </menu>
