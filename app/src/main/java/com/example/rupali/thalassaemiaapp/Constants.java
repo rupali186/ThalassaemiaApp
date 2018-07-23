@@ -10,6 +10,9 @@ public class Constants {
     final static String SHARED_PREF_NAME="loginInfo";
     final static String PREVIOUSLY_STARTED="previouslyStarted";
     final static String SPINNER_POS="spinnerPosition";
+    static final int THALASSAEMIA_CARRIER_TEST=1;
+    static final int BONE_MARROW_MATCHING=2;
+    static final int STEM_CELLS_DONATION=3;
 
     public class NotifiactionActivityConstantts{
         static final String IMAGE_URI="image";

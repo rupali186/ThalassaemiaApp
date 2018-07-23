@@ -12,35 +12,26 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/logo2"
+            android:id="@+id/thalassaemia"
             android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:background="@drawable/thali_bg_with_alpha"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/thali_font"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/thalassaemia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="Thalassaemia"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="#3E2723"
-            android:textSize="40dp"
-            app:layout_constraintStart_toStartOf="@+id/logo2"
-            app:layout_constraintTop_toTopOf="@+id/logo2" />
-
-        <TextView
             android:id="@+id/thalassaemia_content"
-            android:padding="10dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
+            android:padding="10dp"
             android:text="@string/thalassaemia_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

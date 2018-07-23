@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -114,13 +115,13 @@ public class RegisterationFragment extends Fragment {
             }
         });
         database = FirebaseDatabase.getInstance();
-        if(position==1) {
+        if(position==Constants.THALASSAEMIA_CARRIER_TEST) {
             myRef = database.getReference("ThalassaemiaCarrierTest");
         }
-        else if(position==2){
+        else if(position==Constants.BONE_MARROW_MATCHING){
             myRef =database.getReference("BoneMarrowMatching");
         }
-        else if(position==3){
+        else if(position==Constants.STEM_CELLS_DONATION){
             myRef=database.getReference("StemCellsDonation");
         }
         submitForm.setOnClickListener(new View.OnClickListener() {
@@ -211,9 +212,14 @@ public class RegisterationFragment extends Fragment {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 if(databaseError==null) {
-                    Toast.makeText(getContext(), "Form successfully submitted ", Toast.LENGTH_SHORT).show();
-                    Log.d("RealtimeDatabase","success");
-                    getActivity().onBackPressed();
+//                    Toast.makeText(getContext(), "Form successfully submitted ", Toast.LENGTH_SHORT).show();
+//                    Log.d("RealtimeDatabase","success");
+//                    getActivity().onBackPressed();
+                    AnimationFragment animationFragment= new AnimationFragment();
+//                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                    android.support.v4.app.FragmentManager fragmentManager=getFragmentManager();
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.container_main,animationFragment).commit();
 
                 }
                 else{

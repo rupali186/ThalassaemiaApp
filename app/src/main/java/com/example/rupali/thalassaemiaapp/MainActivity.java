@@ -268,8 +268,9 @@ public class MainActivity extends AppCompatActivity
                     }
                 }
                 else {
-                    fragment = ThalassaemiaFragment.class.newInstance();
+                    fragment = HomeFragment.class.newInstance();
                     getFragmentManager().popBackStack();
+                    toolbarTitle.setText("HOME");
                     fragmentManager.beginTransaction().replace(R.id.container_main, fragment, "HOME").commit();
                 }
             } catch (Exception e) {
@@ -450,7 +451,7 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(MainActivity.this,"Verify your email to continue! ",Toast.LENGTH_SHORT).show();
 
             }else{
-                toolbarTitle.setText("Thalassaemics Registeration");
+                toolbarTitle.setText("Thalassaemic's Registeration");
                 ThalassaemicsRegistrationFragment thalassaemicsRegistrationFragment = new ThalassaemicsRegistrationFragment();
                 android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();

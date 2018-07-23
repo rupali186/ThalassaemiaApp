@@ -143,7 +143,6 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseAuth.getInstance().signOut();
                             Toast.makeText(LoginActivity.this,"Verification email sent. Verify" +
                                     " your email and sign in again to continue...",Toast.LENGTH_SHORT).show();
-                            email_edittext.setText("");
                             password_edittext.setText("");
                         }
                         else

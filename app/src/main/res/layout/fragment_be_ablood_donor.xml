@@ -402,6 +402,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/patient_declaration_checkbox" />
 
+
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>
 

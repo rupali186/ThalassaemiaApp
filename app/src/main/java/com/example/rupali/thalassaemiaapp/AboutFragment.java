@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
 
 
 /**
@@ -28,6 +31,7 @@ public class AboutFragment extends Fragment {
     ImageView youtube;
     ImageView pinterest;
     TextView highlightTextView;
+    TextView textView;
     public AboutFragment() {
         // Required empty public constructor
     }
@@ -41,10 +45,16 @@ public class AboutFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_about, container, false);
                 highlightTextView=view.findViewById(R.id.about_highlight_text);
         //TextView secondTextView = new TextView(getContext());
+        textView=view.findViewById(R.id.about_us_content);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            textView.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+        }
         Shader textShader=new LinearGradient(0, 0, 0, 20,
                 new int[]{Color.GREEN, Color.BLUE},
                 new float[]{0, 1}, Shader.TileMode.CLAMP);
-        highlightTextView.getPaint().setShader(textShader);        twitter = view.findViewById(R.id.twitter);
+        highlightTextView.getPaint().setShader(textShader);
+        highlightTextView.setSelected(true);
+        twitter = view.findViewById(R.id.twitter);
         insta=view.findViewById(R.id.insta);
         facebook = view.findViewById(R.id.facebook);
         linkedln =view.findViewById(R.id.linkedln);

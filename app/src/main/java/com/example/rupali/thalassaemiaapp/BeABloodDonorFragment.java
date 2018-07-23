@@ -1,11 +1,15 @@
 package com.example.rupali.thalassaemiaapp;
 
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.app.DatePickerDialog;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +24,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -31,7 +36,6 @@ import java.util.Calendar;
  * A simple {@link Fragment} subclass.
  */
 public class BeABloodDonorFragment extends Fragment {
-
     EditText nameEditText;
     TextView dobTextView;
     EditText contactNoEditText;
@@ -71,7 +75,7 @@ public class BeABloodDonorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_be_ablood_donor, container, false);
+        final View view= inflater.inflate(R.layout.fragment_be_ablood_donor, container, false);
         nameEditText=view.findViewById(R.id.patient_name);
         dobTextView=view.findViewById(R.id.patient_dob);
         contactNoEditText=view.findViewById(R.id.patient_phone);
@@ -200,9 +204,14 @@ public class BeABloodDonorFragment extends Fragment {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 if(databaseError==null) {
-                    Toast.makeText(getContext(), "Form successfully submitted ", Toast.LENGTH_SHORT).show();
-                    Log.d("RealtimeDatabase","success");
-                    getActivity().onBackPressed();
+//                    Toast.makeText(getContext(), "Form successfully submitted ", Toast.LENGTH_SHORT).show();
+//                    Log.d("RealtimeDatabase","success");
+//                    getActivity().onBackPressed();
+                    AnimationFragment animationFragment= new AnimationFragment();
+//                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                    android.support.v4.app.FragmentManager fragmentManager=getFragmentManager();
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.container_main,animationFragment).commit();
 
                 }
                 else{

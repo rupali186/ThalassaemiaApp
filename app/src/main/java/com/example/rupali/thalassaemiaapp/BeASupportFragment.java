@@ -2,6 +2,7 @@ package com.example.rupali.thalassaemiaapp;
 
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,12 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 
 import org.json.JSONObject;
+
+import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
 
 
 /**
@@ -25,6 +29,7 @@ public class BeASupportFragment extends Fragment {
     Button payViaRazorpay;
     EditText amountEdittext;
     int amount;
+    TextView textView;
     public BeASupportFragment() {
         // Required empty public constructor
     }
@@ -35,6 +40,10 @@ public class BeASupportFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_be_asupport, container, false);
+        textView=view.findViewById(R.id.support_content);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            textView.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+        }
         payViaRazorpay=view.findViewById(R.id.support_pay_buttton);
         amountEdittext=view.findViewById(R.id.support_amount);
         payViaRazorpay.setOnClickListener(new View.OnClickListener() {

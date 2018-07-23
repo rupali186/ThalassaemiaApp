@@ -47,6 +47,7 @@ public class HomeFragment extends Fragment {
                 new int[]{Color.GREEN, Color.BLUE},
                 new float[]{0, 1}, Shader.TileMode.CLAMP);
         highlightTextView.getPaint().setShader(textShader);
+        highlightTextView.setSelected(true);
        // highlightTextView.startAnimation(AnimationUtils.loadAnimation(getContext(),android.R.anim.slide_in_left));
         twitter = view.findViewById(R.id.twitter);
         insta=view.findViewById(R.id.insta);

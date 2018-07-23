@@ -22,7 +22,7 @@
             android:icon="@android:drawable/ic_menu_search"
             android:title="Explore" />
     </group>
-    <item android:title="Registeraton For:">
+    <item android:title="Register Yourself For:">
         <menu xmlns:android="http://schemas.android.com/apk/res/android">
             <item
                 android:id="@+id/nav_be_a_blood_donor"
@@ -31,7 +31,7 @@
             <item
                 android:id="@+id/nav_regis_patients"
                 android:icon="@drawable/ic_add_patient"
-                android:title="Thalassaemics Registration" />
+                android:title="Thalassaemic's Registration" />
             <item android:id="@+id/popup_carrier"
                 android:icon="@drawable/ic_note_add_black_24dp"
                 android:title="Thalassaemia Carrier Test" />

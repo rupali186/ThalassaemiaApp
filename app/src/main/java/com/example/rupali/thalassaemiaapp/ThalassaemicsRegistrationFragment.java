@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -225,9 +226,14 @@ public class ThalassaemicsRegistrationFragment extends Fragment {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 if(databaseError==null) {
-                    Toast.makeText(getContext(), "Form successfully submitted ", Toast.LENGTH_SHORT).show();
-                    Log.d("RealtimeDatabase","success");
-                    getActivity().onBackPressed();
+//                    Toast.makeText(getContext(), "Form successfully submitted ", Toast.LENGTH_SHORT).show();
+//                    Log.d("RealtimeDatabase","success");
+//                    getActivity().onBackPressed();
+                    AnimationFragment animationFragment= new AnimationFragment();
+//                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                    android.support.v4.app.FragmentManager fragmentManager=getFragmentManager();
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.container_main,animationFragment).commit();
 
                 }
                 else{
