@@ -29,8 +29,8 @@ public class SplashActivity extends Activity {
                     // do nothing
                 } finally {
                     finish();
-                    SharedPreferences sharedPreferences=getSharedPreferences(Constants.SHARED_PREF_NAME,MODE_PRIVATE);
-                    Boolean ispreviouslyStarted =sharedPreferences.getBoolean(Constants.PREVIOUSLY_STARTED, false);
+                    SharedPreferences sharedPreferences=getSharedPreferences(Constants.LoginSharedPref.SHARED_PREF_NAME,MODE_PRIVATE);
+                    Boolean ispreviouslyStarted =sharedPreferences.getBoolean(Constants.LoginSharedPref.PREVIOUSLY_STARTED, false);
                     if (!ispreviouslyStarted) {
                         //show start activity
                         startActivity(new Intent(SplashActivity.this, HomeActivity.class));

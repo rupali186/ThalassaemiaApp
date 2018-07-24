@@ -99,33 +99,6 @@ public class LoginActivity extends AppCompatActivity {
         // Initialize Facebook Login button
         mCallbackManager = CallbackManager.Factory.create();
 
-//        mfbButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this,Arrays.asList("email", "public_profile"));
-//                LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-//                    @Override
-//                    public void onSuccess(LoginResult loginResult) {
-//                        Log.d("fbsuccess", "facebook:onSuccess:" + loginResult);
-//                        handleFacebookAccessToken(loginResult.getAccessToken());
-//                    }
-//
-//                    @Override
-//                    public void onCancel() {
-//                        Log.d("fbcancel", "facebook:onCancel");
-//                        // ...
-//                    }
-//
-//                    @Override
-//                    public void onError(FacebookException error) {
-//                        Log.d("fberror", "facebook:onError", error);
-//                        // ...
-//                    }
-//                });
-//            }
-//        });
-
-
     }
     private void sendVerificationEmail()
     {
@@ -137,48 +110,20 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             // email sent
-
-
                             // after email is sent just logout the user and finish this activity
                             FirebaseAuth.getInstance().signOut();
                             Toast.makeText(LoginActivity.this,"Verification email sent. Verify" +
-                                    " your email and sign in again to continue...",Toast.LENGTH_SHORT).show();
+                                    " your email and sign in again to continue...",Toast.LENGTH_LONG).show();
                             password_edittext.setText("");
                         }
                         else
                         {
                             // email not sent, so display message and restart the activity or do whatever you wish to do
-
                             Toast.makeText(LoginActivity.this,"Email Verification pending! ",Toast.LENGTH_SHORT).show();
                             Intent intent=new Intent();
                             setResult(Constants.LOGIN_ACTIVITY_RESULT_CODE);
                             finish();
                         }
-                    }
-                });
-    }
-    private void handleFacebookAccessToken(AccessToken token) {
-        Log.d(TAG, "handleFacebookAccessToken:" + token);
-
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        mAuthfb.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                           // updateUI();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                           // updateUI();
-                        }
-
-                        // ...
                     }
                 });
     }
@@ -228,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this,"Email sent",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,"Password reset Email sent",Toast.LENGTH_SHORT).show();
                             Log.d("Authentication", "Email sent.");
                         }
                     }
@@ -257,7 +202,6 @@ public class LoginActivity extends AppCompatActivity {
                                     sendVerificationEmail();
                                 } else {
                                     // User is signed out
-
                                 }
 //                            updateUI(user);
                             } else {
@@ -294,7 +238,6 @@ public class LoginActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d("Authentication", "signInWithEmail:success");
-                                FirebaseUser user = mAuth.getCurrentUser();
                                 Toast.makeText(LoginActivity.this, "Logged in successfully .",
                                         Toast.LENGTH_SHORT).show();
                                 Intent intent=new Intent();
@@ -324,17 +267,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUserEmail = mAuth.getCurrentUser();
-
-        FirebaseUser currentUser = mAuthfb.getCurrentUser();
-        if(currentUser!=null){
-//            updateUI();
-        }
-    }
 
 //    private void updateUI() {
 //        Toast.makeText(LoginActivity.this,"Logged in with facebook",Toast.LENGTH_LONG).show();

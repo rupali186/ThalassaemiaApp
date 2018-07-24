@@ -2,6 +2,7 @@ package com.example.rupali.thalassaemiaapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.squareup.picasso.Picasso;
 
 public class HomeActivity extends AppCompatActivity {
     private LinearLayout llPagerDots;
@@ -84,9 +86,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void skipLogin() {
-        SharedPreferences sharedPreferences=getSharedPreferences(Constants.SHARED_PREF_NAME,MODE_PRIVATE);
+        SharedPreferences sharedPreferences=getSharedPreferences(Constants.LoginSharedPref.SHARED_PREF_NAME,MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putBoolean(Constants.PREVIOUSLY_STARTED,true);
+        editor.putBoolean(Constants.LoginSharedPref.PREVIOUSLY_STARTED,true);
+        editor.putBoolean(Constants.LoginSharedPref.LOGGED_IN,false);
+        editor.putBoolean(Constants.LoginSharedPref.LOGGED_IN_WITH_GOOGLE,false);
         editor.commit();
         Intent intent=new Intent(HomeActivity.this,MainActivity.class);
         startActivity(intent);
@@ -101,11 +105,6 @@ public class HomeActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
-        // Pass the activity result back to the Facebook SDK
-       // mCallbackManager.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == Constants.RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
@@ -118,9 +117,18 @@ public class HomeActivity extends AppCompatActivity {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             Log.w("Authentication", "signInResult:google success");
-            SharedPreferences sharedPreferences=getSharedPreferences(Constants.SHARED_PREF_NAME,MODE_PRIVATE);
+            SharedPreferences sharedPreferences=getSharedPreferences(Constants.LoginSharedPref.SHARED_PREF_NAME,MODE_PRIVATE);
             SharedPreferences.Editor editor=sharedPreferences.edit();
-            editor.putBoolean(Constants.PREVIOUSLY_STARTED,true);
+            editor.putBoolean(Constants.LoginSharedPref.PREVIOUSLY_STARTED,true);
+            editor.putBoolean(Constants.LoginSharedPref.LOGGED_IN_WITH_GOOGLE,true);
+            editor.putBoolean(Constants.LoginSharedPref.LOGGED_IN,true);
+            String email=account.getEmail();
+            String name=account.getDisplayName();
+            Uri photoUrl=account.getPhotoUrl();
+            editor.putString(Constants.LoginSharedPref.LOGIN_EMAIL,email);
+            editor.putString(Constants.LoginSharedPref.LOGIN_URENAME,name);
+            editor.putString(Constants.LoginSharedPref.PROFILE_URL,photoUrl.toString());
+            editor.putBoolean(Constants.LoginSharedPref.IS_EMAIL_VERIFIED,true);
             editor.commit();
             Intent intent=new Intent(HomeActivity.this,MainActivity.class);
             startActivity(intent);

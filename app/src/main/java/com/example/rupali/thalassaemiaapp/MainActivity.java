@@ -2,6 +2,7 @@ package com.example.rupali.thalassaemiaapp;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,6 +45,8 @@ import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 import com.squareup.picasso.Picasso;
 
+import static com.google.android.gms.common.internal.safeparcel.SafeParcelable.NULL;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,PaymentResultListener{
     TextView toolbarTitle;
@@ -59,7 +62,7 @@ public class MainActivity extends AppCompatActivity
     TextView emailVerification;
     boolean isEmailVerified=false;
     boolean islogInWithGoogle=false;
-    String RegList[]={"Registeration for:","Thalassaemia Carrier Test","Bone Marrow Matching","Stem Cells Donation"};
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,11 +85,13 @@ public class MainActivity extends AppCompatActivity
         profileImage=(ImageView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_profile_image);
         logInOrSignUp=(TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_login_text);
         emailVerification=(TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_head_email_verification);
-        if(isEmailVerified){
+        if(islogInWithGoogle){
             emailVerification.setVisibility(View.GONE);
         }
-        else if(loggedIn){
+        else if(loggedIn&&!isEmailVerified){
             emailVerification.setVisibility(View.VISIBLE);
+        }else{
+            emailVerification.setVisibility(View.GONE);
         }
         emailVerification.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,15 +132,73 @@ public class MainActivity extends AppCompatActivity
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        currentUser = mAuth.getCurrentUser();
-        account = GoogleSignIn.getLastSignedInAccount(this);
-        if(currentUser!=null) {
-            updateUI(currentUser);
+        sharedPreferences=getSharedPreferences(Constants.LoginSharedPref.SHARED_PREF_NAME,MODE_PRIVATE);
+        loggedIn =sharedPreferences.getBoolean(Constants.LoginSharedPref.LOGGED_IN, false);
+        islogInWithGoogle =sharedPreferences.getBoolean(Constants.LoginSharedPref.LOGGED_IN_WITH_GOOGLE, false);
+        if(loggedIn&&islogInWithGoogle){
+            updateGoogleUIFromDb();
+        }else if(loggedIn){
+            updateUIFromDb();
+        } else{
+            updateGoogleUI(null);
         }
-        else if(account!=null) {
-            updateGoogleUI(account);
-        }
+//        currentUser = mAuth.getCurrentUser();
+//        account = GoogleSignIn.getLastSignedInAccount(this);
+//        if(currentUser!=null) {
+//            updateUI(currentUser);
+//        }
+//        else if(account!=null) {
+//            updateGoogleUI(account);
+//        }
     }
+
+    private void updateUIFromDb() {
+        String email=sharedPreferences.getString(Constants.LoginSharedPref.LOGIN_EMAIL,"");
+        profileImage.setImageDrawable(null);
+        profileImage.setBackgroundResource(R.drawable.profile_i);
+        profileName.setText(email);
+        // Check if user's email is verified
+        isEmailVerified = sharedPreferences.getBoolean(Constants.LoginSharedPref.IS_EMAIL_VERIFIED,false);
+        if(!isEmailVerified){
+            Toast.makeText(MainActivity.this,"Verify email to accesss all the features...",Toast.LENGTH_SHORT).show();
+            isEmailVerified=false;
+            emailVerification.setVisibility(View.VISIBLE);
+        }
+        else{
+            isEmailVerified=true;
+            emailVerification.setVisibility(View.GONE);
+        }
+        islogInWithGoogle=false;
+        loggedIn=true;
+        logInOrSignUp.setText("Log Out!");
+
+    }
+
+    private void updateGoogleUIFromDb() {
+        String email=sharedPreferences.getString(Constants.LoginSharedPref.LOGIN_EMAIL,"");
+        String name=sharedPreferences.getString(Constants.LoginSharedPref.LOGIN_URENAME,"");
+        String profileUriString=sharedPreferences.getString(Constants.LoginSharedPref.PROFILE_URL,"");
+        isEmailVerified=sharedPreferences.getBoolean(Constants.LoginSharedPref.IS_EMAIL_VERIFIED,false);
+
+        if(!email.isEmpty()){
+            profileName.setText(email);
+        }else{
+            profileName.setText("Welcome "+name+"!");
+        }
+        if(!profileUriString.isEmpty()){
+            Uri photoUrl=Uri.parse(profileUriString);
+            Picasso.get().load(photoUrl).into(profileImage);
+        }else {
+            profileImage.setImageDrawable(null);
+            profileImage.setBackgroundResource(R.drawable.profile_i);
+        }
+        loggedIn=true;
+        islogInWithGoogle=true;
+        logInOrSignUp.setText("Log Out!");
+        if(isEmailVerified)
+          emailVerification.setVisibility(View.GONE);
+    }
+
     private void subscribeToPushService() {
         FirebaseMessaging.getInstance().subscribeToTopic("global");
 
@@ -166,17 +229,34 @@ public class MainActivity extends AppCompatActivity
                 Picasso.get().load(photoUrl).into(profileImage);
             }
             loggedIn=true;
+            isEmailVerified=true;
             islogInWithGoogle=true;
             logInOrSignUp.setText("Log Out!");
+            SharedPreferences.Editor editor=sharedPreferences.edit();
+            editor.putBoolean(Constants.LoginSharedPref.LOGGED_IN_WITH_GOOGLE,true);
+            editor.putBoolean(Constants.LoginSharedPref.LOGGED_IN,true);
+            editor.putBoolean(Constants.LoginSharedPref.IS_EMAIL_VERIFIED,isEmailVerified);
+            editor.putString(Constants.LoginSharedPref.LOGIN_EMAIL,email);
+            editor.putString(Constants.LoginSharedPref.LOGIN_URENAME,name);
+            editor.putString(Constants.LoginSharedPref.PROFILE_URL,photoUrl.toString());
+            editor.commit();
         }else {
             profileImage.setImageDrawable(null);
             profileImage.setBackgroundResource(R.drawable.profile_i);
             profileName.setText("Welcome !");
             logInOrSignUp.setText("Log In Or Sign Up!");
+            isEmailVerified=false;
             islogInWithGoogle=false;
             loggedIn=false;
+            SharedPreferences.Editor editor=sharedPreferences.edit();
+            editor.putBoolean(Constants.LoginSharedPref.LOGGED_IN_WITH_GOOGLE,false);
+            editor.putBoolean(Constants.LoginSharedPref.LOGGED_IN,false);
+            editor.putBoolean(Constants.LoginSharedPref.IS_EMAIL_VERIFIED,false);
+            editor.putString(Constants.LoginSharedPref.LOGIN_EMAIL,"");
+            editor.putString(Constants.LoginSharedPref.LOGIN_URENAME,"");
+            editor.putString(Constants.LoginSharedPref.PROFILE_URL,"");
+            editor.commit();
         }
-        isEmailVerified=true;
         emailVerification.setVisibility(View.GONE);
     }
 
@@ -185,10 +265,17 @@ public class MainActivity extends AppCompatActivity
             // Name, email address, and profile photo Url
             String name = currentUser.getDisplayName();
             String email = currentUser.getEmail();
-            Uri photoUrl = currentUser.getPhotoUrl();
             profileName.setText(email);
             // Check if user's email is verified
             isEmailVerified = currentUser.isEmailVerified();
+            SharedPreferences.Editor editor=sharedPreferences.edit();
+            editor.putBoolean(Constants.LoginSharedPref.LOGGED_IN_WITH_GOOGLE,false);
+            editor.putBoolean(Constants.LoginSharedPref.LOGGED_IN,true);
+            editor.putBoolean(Constants.LoginSharedPref.IS_EMAIL_VERIFIED,isEmailVerified);
+            editor.putString(Constants.LoginSharedPref.LOGIN_EMAIL,email);
+            editor.putString(Constants.LoginSharedPref.LOGIN_URENAME,name);
+            editor.putString(Constants.LoginSharedPref.PROFILE_URL,"");
+            editor.commit();
             if(!isEmailVerified){
                 Toast.makeText(MainActivity.this,"Verify email to accesss all the features...",Toast.LENGTH_SHORT).show();
                 isEmailVerified=false;
@@ -207,12 +294,20 @@ public class MainActivity extends AppCompatActivity
             loggedIn=true;
             logInOrSignUp.setText("Log Out!");
         }else {
+            SharedPreferences.Editor editor=sharedPreferences.edit();
+            editor.putBoolean(Constants.LoginSharedPref.LOGGED_IN_WITH_GOOGLE,false);
+            editor.putBoolean(Constants.LoginSharedPref.LOGGED_IN,false);
+            editor.putBoolean(Constants.LoginSharedPref.IS_EMAIL_VERIFIED,false);
+            editor.putString(Constants.LoginSharedPref.LOGIN_EMAIL,"");
+            editor.putString(Constants.LoginSharedPref.LOGIN_URENAME,"");
+            editor.putString(Constants.LoginSharedPref.PROFILE_URL,"");
+            editor.commit();
             profileImage.setImageDrawable(null);
             profileImage.setBackgroundResource(R.drawable.profile_i);
             profileName.setText("Welcome !");
             logInOrSignUp.setText("Log In Or Sign Up!");
             islogInWithGoogle=false;
-            isEmailVerified=true;
+            isEmailVerified=false;
             emailVerification.setVisibility(View.GONE);
             loggedIn=false;
         }
@@ -239,6 +334,12 @@ public class MainActivity extends AppCompatActivity
                     mGoogleSignInClient.signOut();
                     account=GoogleSignIn.getLastSignedInAccount(MainActivity.this);
                     updateGoogleUI(account);
+                }
+                if(currentUser==null&&account==null){
+                    Toast.makeText(MainActivity.this,"You are Logged out successfully.",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(MainActivity.this,"A problem occured" +
+                            " while signing out. Please Check your network connection.",Toast.LENGTH_SHORT).show();
                 }
                 dialogInterface.dismiss();
 
@@ -313,11 +414,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==Constants.LOGIN_ACTIVITY_REQUEST_CODE&&resultCode==Constants.LOGIN_ACTIVITY_RESULT_CODE){
-            FirebaseUser user = mAuth.getCurrentUser();
-            updateUI(user);
+        if (requestCode == Constants.LOGIN_ACTIVITY_REQUEST_CODE && resultCode == Constants.LOGIN_ACTIVITY_RESULT_CODE) {
+            currentUser = mAuth.getCurrentUser();
+            account = GoogleSignIn.getLastSignedInAccount(this);
+            if (currentUser != null) {
+                updateUI(currentUser);
+            } else if (account != null) {
+                updateGoogleUI(account);
+            }
+            super.onActivityResult(requestCode, resultCode, data);
         }
-        super.onActivityResult(requestCode, resultCode, data);
     }
     private void sendVerificationEmail()
     {
@@ -343,12 +449,6 @@ public class MainActivity extends AppCompatActivity
                             // email not sent, so display message and restart the activity or do whatever you wish to do
 
                             Toast.makeText(MainActivity.this,"Email Verification pending! ",Toast.LENGTH_SHORT).show();
-                            //restart this activity
-//                            overridePendingTransition(0, 0);
-//                            finish();
-//                            overridePendingTransition(0, 0);
-//                            startActivity(getIntent());
-
                         }
                     }
                 });

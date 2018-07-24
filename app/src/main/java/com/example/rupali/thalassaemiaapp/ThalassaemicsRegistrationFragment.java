@@ -81,8 +81,6 @@ public class ThalassaemicsRegistrationFragment extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_thalassaemics_registration, container, false);
 
-        //setContentView(R.layout.fragment_thalassaemics_registration);
-
         patients = FirebaseDatabase.getInstance().getReference("patients");
 
         dropdown = view.findViewById(R.id.patient_calender_dropdown);
@@ -138,6 +136,12 @@ public class ThalassaemicsRegistrationFragment extends Fragment {
 
     private void addPatient(View view)
     {
+//
+//        AnimationFragment animationFragment= new AnimationFragment();
+////                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+//        android.support.v4.app.FragmentManager fragmentManager=getFragmentManager();
+//        FragmentTransaction transaction = fragmentManager.beginTransaction();
+//        transaction.replace(R.id.container_main,animationFragment).commit();
 
         names=name.getText().toString();
         if(names.isEmpty()){
