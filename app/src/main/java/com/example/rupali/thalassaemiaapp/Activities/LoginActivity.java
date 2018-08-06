@@ -41,12 +41,14 @@ public class LoginActivity extends AppCompatActivity {
     TextView resetPassword;
     SignInButton googleLogin;
     TextView toolbarTitle;
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        sharedPreferences=getSharedPreferences(Constants.LoginSharedPref.SHARED_PREF_NAME,MODE_PRIVATE);
         toolbarTitle=findViewById(R.id.login_act_toolbar_text);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbarTitle.setText("LogIn Or SignUp");
@@ -60,17 +62,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Configure sign-in to request the user's ID, email address, and basic
 // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-        if(Constants.gso==null) {
-            Log.d(Constants.TAG,"gso new Instance");
-            Constants.gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id))
-                    .requestEmail().requestProfile()
-                    .build();
-        }
-        // Build a GoogleSignInClient with the options specified by gso.
-        if(Constants.mGoogleSignInClient==null) {
-            Log.d(Constants.TAG,"mGoogleSignInClient new Instance");
-            Constants.mGoogleSignInClient = GoogleSignIn.getClient(this, Constants.gso);
-        }
+
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,17 +108,43 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         else
                         {
+                            Constants.mAuth.signOut();
+                            password_edittext.setText("");
+                            Toast.makeText(LoginActivity.this,"Email Verification pending! Sign in again to continue.",Toast.LENGTH_SHORT).show();
                             // email not sent, so display message and restart the activity or do whatever you wish to do
-                            Toast.makeText(LoginActivity.this,"Email Verification pending! ",Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent();
-                            setResult(Constants.LOGIN_ACTIVITY_RESULT_CODE);
-                            finish();
+                            //deleteUser(Constants.user);
                         }
                     }
                 });
     }
 
+    private void deleteUser(FirebaseUser user) {
+        if(user!=null){
+            user.delete()
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Log.d(Constants.TAG, "User account deleted.");
+                                Constants.mAuth.signOut();
+                            }
+                        }
+                    });
+        }
+    }
+
     private void signInWithGoogle() {
+        if(Constants.gso==null) {
+            Log.d(Constants.TAG,"gso new Instance");
+            Constants.gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id))
+                    .requestEmail().requestProfile()
+                    .build();
+        }
+        // Build a GoogleSignInClient with the options specified by gso.
+        if(Constants.mGoogleSignInClient==null) {
+            Log.d(Constants.TAG,"mGoogleSignInClient new Instance");
+            Constants.mGoogleSignInClient = GoogleSignIn.getClient(this, Constants.gso);
+        }
         Intent signInIntent = Constants.mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, Constants.RC_SIGN_IN);
     }
@@ -203,6 +221,9 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "A link has been sent to your email. " +
                                         "Please use it to reset your password.", Toast.LENGTH_SHORT).show();
                                 Log.d(Constants.TAG, "password reset Email sent.");
+                            }else{
+                                Toast.makeText(LoginActivity.this, "Make sure you are using the correct email address. Use " +
+                                        "sign up for new accounts.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -213,6 +234,10 @@ public class LoginActivity extends AppCompatActivity {
         email_text=email_edittext.getText().toString();
         password_text=password_edittext.getText().toString();
        // phone_no=phone_no_edittext.getText().toString();
+        if(!email_text.isEmpty()&&password_text.length()<6){
+            Toast.makeText(LoginActivity.this,"Password should have minimum 6 characters ",Toast.LENGTH_SHORT).show();
+            return;
+        }
         if(!email_text.isEmpty()&&!password_text.isEmpty()){
             if(Constants.mAuth==null){
                 Constants.mAuth=FirebaseAuth.getInstance();
@@ -229,8 +254,8 @@ public class LoginActivity extends AppCompatActivity {
                                     // User is signed in
                                     // NOTE: this Activity should get onpen only when the user is not signed in, otherwise
                                     // the user will receive another verification email.
-                                    Toast.makeText(LoginActivity.this,"New account created, verify your email to" +
-                                            " continue...",Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(LoginActivity.this,"New account created, verify your email to" +
+//                                            " continue...",Toast.LENGTH_SHORT).show();
                                     sendVerificationEmail(Constants.user);
                                 } else {
                                     Toast.makeText(LoginActivity.this,"A problem occured while signing in. Sign in again" +
@@ -279,12 +304,12 @@ public class LoginActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(Constants.TAG, "signInWithEmail:success");
-                                Toast.makeText(LoginActivity.this, "Logged in successfully .",
-                                        Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent();
-                                setResult(Constants.LOGIN_ACTIVITY_RESULT_CODE);
-                                finish();
-//                            updateUI(user);
+
+                                Constants.user=Constants.mAuth.getCurrentUser();
+//                                Intent intent = new Intent();
+//                                setResult(Constants.LOGIN_ACTIVITY_RESULT_CODE);
+//                                finish();
+                                updateUI(Constants.user);
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.d(Constants.TAG, "signInWithEmail:failure", task.getException());
@@ -313,44 +338,36 @@ public class LoginActivity extends AppCompatActivity {
             // Name, email address, and profile photo Url
             String name = currentUser.getDisplayName();
             String email = currentUser.getEmail();
-            profileName.setText(email);
             // Check if user's email is verified
-            isEmailVerified = currentUser.isEmailVerified();
+            boolean isEmailVerified = currentUser.isEmailVerified();
             Uri photoUrl=currentUser.getPhotoUrl();
             SharedPreferences.Editor editor=sharedPreferences.edit();
-            Log.d(Constants.TAG," Photo Uri send to Picasso: "+photoUrl.toString());
-            if(photoUrl!=null){
-                Picasso.get().load(photoUrl).into(profileImage,new com.squareup.picasso.Callback() {
-                    @Override
-                    public void onSuccess() {
-                        Log.d(Constants.TAG," Photo Uri send to Picasso: success");
-
-                    }
-
-                    @Override
-                    public void onError(Exception ex) {
-                        Log.d(Constants.TAG," Photo Uri send to Picasso: failure exp: "+ex.toString());
-
-                    }
-                });
-                editor.putString(Constants.LoginSharedPref.PROFILE_URL,photoUrl.toString());
-            }
-            editor.putBoolean(Constants.LoginSharedPref.LOGGED_IN,true);
-            editor.putBoolean(Constants.LoginSharedPref.IS_EMAIL_VERIFIED,isEmailVerified);
-            editor.putString(Constants.LoginSharedPref.LOGIN_EMAIL,email);
-            editor.putString(Constants.LoginSharedPref.LOGIN_URENAME,name);
-            editor.commit();
             if(!isEmailVerified){
-                Toast.makeText(MainActivity.this,"Verify email to accesss all the features...",Toast.LENGTH_SHORT).show();
-                isEmailVerified=false;
-                emailVerification.setVisibility(View.VISIBLE);
+                editor.putBoolean(Constants.LoginSharedPref.IS_EMAIL_VERIFIED,false);
+                sendVerificationEmail(currentUser);
+                //Toast.makeText(LoginActivity.this,"Verify email to accesss all the features...",Toast.LENGTH_SHORT).show();
+//                isEmailVerified=false;
+                //emailVerification.setVisibility(View.VISIBLE);
+
             }
             else{
-                isEmailVerified=true;
-                emailVerification.setVisibility(View.GONE);
+                if(photoUrl!=null){
+                    Log.d(Constants.TAG," Photo Uri send to db: "+ photoUrl.toString());
+                    editor.putString(Constants.LoginSharedPref.PROFILE_URL,photoUrl.toString());
+                }
+                editor.putBoolean(Constants.LoginSharedPref.LOGGED_IN,true);
+                editor.putBoolean(Constants.LoginSharedPref.IS_EMAIL_VERIFIED,true);
+                editor.putString(Constants.LoginSharedPref.LOGIN_EMAIL,email);
+                editor.putString(Constants.LoginSharedPref.LOGIN_URENAME,name);
+                editor.commit();
+                Toast.makeText(LoginActivity.this, "Logged in successfully .",
+                        Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent();
+                setResult(Constants.LOGIN_ACTIVITY_RESULT_CODE);
+                finish();
             }
-            loggedIn=true;
-            logInOrSignUp.setText("Log Out!");
+//            loggedIn=true;
+//            logInOrSignUp.setText("Log Out!");
         }else {
             SharedPreferences.Editor editor=sharedPreferences.edit();
             editor.putBoolean(Constants.LoginSharedPref.LOGGED_IN,false);
@@ -358,16 +375,18 @@ public class LoginActivity extends AppCompatActivity {
             editor.putString(Constants.LoginSharedPref.LOGIN_EMAIL,"");
             editor.putString(Constants.LoginSharedPref.LOGIN_URENAME,"");
             editor.putString(Constants.LoginSharedPref.PROFILE_URL,"");
+            Toast.makeText(LoginActivity.this, "An error occured while signing in. Use reset password in case you forgot your password.",
+                    Toast.LENGTH_SHORT).show();
             editor.commit();
-            profileImage.setImageDrawable(null);
-            profileImage.setBackgroundResource(R.drawable.profile_i);
-            profileName.setText("Welcome !");
-            logInOrSignUp.setText("Log In Or Sign Up!");
-            isEmailVerified=false;
-            emailVerification.setVisibility(View.GONE);
-            Constants.account=null;
-            Constants.user=null;
-            loggedIn=false;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        boolean isEmailVerified=sharedPreferences.getBoolean(Constants.LoginSharedPref.IS_EMAIL_VERIFIED,false);
+        if(Constants.user!=null&&!isEmailVerified){
+            deleteUser(Constants.user);
+        }
+        super.onBackPressed();
     }
 }

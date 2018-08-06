@@ -45,14 +45,6 @@
             android:text="Log In Or Sign Up!" />
 
     </LinearLayout>
-    <TextView
-        android:layout_marginTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/nav_head_email_verification"
-        android:textColor="@android:color/white"
-        android:layout_marginLeft="5dp"
-        android:visibility="invisible"
-        android:text="Send Verification Email!" />
+
 
 </LinearLayout>

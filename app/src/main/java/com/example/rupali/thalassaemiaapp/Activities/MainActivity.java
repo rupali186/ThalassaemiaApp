@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity
     TextView logInOrSignUp;
     boolean loggedIn=false;
     private boolean exit=false;
-    TextView emailVerification;
     boolean isEmailVerified=false;
     SharedPreferences sharedPreferences;
     @Override
@@ -83,18 +82,6 @@ public class MainActivity extends AppCompatActivity
         profileName=(TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_name);
         profileImage=(ImageView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_profile_image);
         logInOrSignUp=(TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_login_text);
-        emailVerification=(TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_head_email_verification);
-//        if(loggedIn&&!isEmailVerified){
-//            emailVerification.setVisibility(View.VISIBLE);
-//        }else{
-//            emailVerification.setVisibility(View.GONE);
-//        }
-//        emailVerification.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                sendVerificationEmail(Constants.user);
-//            }
-//        });
         logInOrSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,7 +131,7 @@ public class MainActivity extends AppCompatActivity
         profileName.setText("Welcome !");
         logInOrSignUp.setText("Log In Or Sign Up!");
         isEmailVerified=false;
-        emailVerification.setVisibility(View.GONE);
+//        emailVerification.setVisibility(View.GONE);
         Constants.account=null;
         Constants.user=null;
         loggedIn=false;
@@ -174,11 +161,13 @@ public class MainActivity extends AppCompatActivity
 
                 @Override
                 public void onError(Exception ex) {
+
                     Log.d(Constants.TAG," Photo Uri send to Picasso: failure exp: "+ex.toString());
 
                 }
             });
         }else {
+            Log.d(Constants.TAG," Photo Uri empty so not set");
             profileImage.setImageDrawable(null);
             profileImage.setBackgroundResource(R.drawable.profile_i);
         }
@@ -186,11 +175,11 @@ public class MainActivity extends AppCompatActivity
         if(!isEmailVerified){
             Toast.makeText(MainActivity.this,"Verify email to accesss all the features...",Toast.LENGTH_SHORT).show();
             isEmailVerified=false;
-            emailVerification.setVisibility(View.VISIBLE);
+//            emailVerification.setVisibility(View.VISIBLE);
         }
         else{
             isEmailVerified=true;
-            emailVerification.setVisibility(View.GONE);
+//            emailVerification.setVisibility(View.GONE);
         }
         loggedIn=true;
         logInOrSignUp.setText("Log Out!");
@@ -200,7 +189,7 @@ public class MainActivity extends AppCompatActivity
 
     private void logout() {
         AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
-        builder.setMessage("Do you want to Log Out?");
+        builder.setMessage("Do you want to Logout?");
         builder.setTitle("Confirm Logout !");
         builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
