@@ -1,4 +1,4 @@
-package com.example.rupali.thalassaemiaapp;
+package com.example.rupali.thalassaemiaapp.JavaClass;
 
 public class Thalassaemics {
 

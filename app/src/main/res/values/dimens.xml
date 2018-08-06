@@ -6,6 +6,7 @@
     <dimen name="nav_header_height">186dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="follow_icon_margin">8dp</dimen>
-    <dimen name="follow_icon_width">40dp</dimen>
+    <dimen name="follow_icon_width">30dp</dimen>
+    <dimen name="follow_google_icon_width">30dp</dimen>
 
 </resources>

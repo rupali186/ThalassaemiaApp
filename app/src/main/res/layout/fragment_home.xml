@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".HomeFragment"
+    tools:context=".Fragments.HomeFragment"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -12,7 +12,7 @@
         <ImageView
             android:id="@+id/imageView7"
             android:layout_width="0dp"
-            android:layout_height="67dp"
+            android:layout_height="68dp"
             android:layout_marginEnd="32dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="56dp"
@@ -27,24 +27,11 @@
             android:layout_height="50dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:src="@drawable/logo_transparent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:padding="10dp"
-            android:text="@string/home_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <ScrollView
             android:id="@+id/scroll_view"
@@ -71,7 +58,12 @@
                     android:layout_height="@dimen/follow_icon_width"
                     android:layout_margin="@dimen/follow_icon_margin"
                     android:src="@drawable/facebook_circle_min" />
-
+                <ImageView
+                    android:id="@+id/goolePlus"
+                    android:layout_width="@dimen/follow_google_icon_width"
+                    android:layout_height="@dimen/follow_google_icon_width"
+                    android:layout_margin="@dimen/follow_icon_margin"
+                    android:src="@drawable/google_plus_icon" />
                 <ImageView
                     android:id="@+id/twitter"
                     android:layout_width="@dimen/follow_icon_width"
@@ -93,20 +85,18 @@
                     android:layout_margin="@dimen/follow_icon_margin"
                     android:src="@drawable/instra_round_min" />
 
-
-                <ImageView
-                    android:id="@+id/pinterest"
-                    android:layout_width="@dimen/follow_icon_width"
-                    android:layout_height="@dimen/follow_icon_width"
-                    android:layout_margin="@dimen/follow_icon_margin"
-                    android:src="@drawable/pinterest" />
-
                 <ImageView
                     android:id="@+id/linkedln"
                     android:layout_width="@dimen/follow_icon_width"
                     android:layout_height="@dimen/follow_icon_width"
                     android:layout_margin="@dimen/follow_icon_margin"
                     android:src="@drawable/linkedin_icon" />
+                <ImageView
+                    android:id="@+id/pinterest"
+                    android:layout_width="@dimen/follow_icon_width"
+                    android:layout_height="@dimen/follow_icon_width"
+                    android:layout_margin="@dimen/follow_icon_margin"
+                    android:src="@drawable/pinterest" />
 
             </LinearLayout>
 
@@ -119,10 +109,11 @@
             android:layout_height="120dp"
             android:layout_marginEnd="60dp"
             android:layout_marginStart="60dp"
+            android:layout_marginTop="32dp"
             android:src="@drawable/logo_4_transparent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <TextView
             android:id="@+id/home_highlight_text"
@@ -150,10 +141,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="50dp"
             android:text="@string/logo_below_text"
             android:textColor="@android:color/black"
-            android:textSize="10dp"
+            android:textSize="8dp"
             app:layout_constraintEnd_toEndOf="@+id/imageView7"
             app:layout_constraintStart_toStartOf="@+id/imageView7"
             app:layout_constraintTop_toBottomOf="@+id/imageView8" />

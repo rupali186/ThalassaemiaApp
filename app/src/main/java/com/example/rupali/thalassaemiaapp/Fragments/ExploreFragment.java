@@ -1,13 +1,14 @@
-package com.example.rupali.thalassaemiaapp;
+package com.example.rupali.thalassaemiaapp.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.rupali.thalassaemiaapp.Adapters.EventsPagerAdapter;
+import com.example.rupali.thalassaemiaapp.R;
 
 import java.util.Timer;
 import java.util.TimerTask;

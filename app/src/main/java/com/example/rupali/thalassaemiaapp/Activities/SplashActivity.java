@@ -1,14 +1,12 @@
-package com.example.rupali.thalassaemiaapp;
+package com.example.rupali.thalassaemiaapp.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
-import android.view.View;
 
-import com.squareup.picasso.Picasso;
+import com.example.rupali.thalassaemiaapp.JavaClass.Constants;
+import com.example.rupali.thalassaemiaapp.R;
 
 public class SplashActivity extends Activity {
 

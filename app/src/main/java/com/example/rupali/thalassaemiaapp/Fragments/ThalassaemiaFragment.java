@@ -1,4 +1,4 @@
-package com.example.rupali.thalassaemiaapp;
+package com.example.rupali.thalassaemiaapp.Fragments;
 
 
 import android.os.Build;
@@ -7,8 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.TextView;
+
+import com.example.rupali.thalassaemiaapp.R;
 
 import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
 

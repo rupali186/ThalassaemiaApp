@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView android:layout_width="match_parent"
+<android.support.v7.widget.CardView xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
@@ -27,9 +28,9 @@
 
     <TextView
         android:id="@+id/noti_title"
+        style="@style/TextAppearance.Compat.Notification.Title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/TextAppearance.Compat.Notification.Title"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -37,20 +38,23 @@
         android:maxLines="1"
         android:text="Foundation Against Thalassaemia"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/noti_logo"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/noti_image" />
 
     <TextView
         android:id="@+id/noti_message"
+        style="@style/TextAppearance.Compat.Notification"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/TextAppearance.Compat.Notification"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:text="Message"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/noti_logo"
         app:layout_constraintTop_toBottomOf="@+id/noti_title" />
@@ -60,10 +64,9 @@
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noti_message"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo2_min" />
 </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

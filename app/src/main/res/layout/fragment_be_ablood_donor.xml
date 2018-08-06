@@ -5,7 +5,7 @@
     android:background="@android:color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BeABloodDonorFragment">
+    tools:context=".Fragments.BeABloodDonorFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.constraint.ConstraintLayout
@@ -50,7 +50,7 @@
             app:layout_constraintStart_toEndOf="@+id/donor_phone_code"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-        <EditText
+        <TextView
             android:id="@+id/patient_email"
             android:layout_width="0dp"
             android:layout_height="44dp"
@@ -59,10 +59,11 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="18dp"
             android:background="@drawable/text_input_border"
             android:ems="10"
-            android:hint="example@gmail.com"
-            android:inputType="textEmailAddress"
+            android:text="example@gmail.com"
             android:padding="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -153,15 +154,14 @@
             android:id="@+id/declaration_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="declaration"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@string/donor_declaration_text"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintBottom_toBottomOf="@+id/patient_declaration_checkbox"
             app:layout_constraintStart_toEndOf="@+id/patient_declaration_checkbox"
-            app:layout_constraintTop_toTopOf="@+id/patient_declaration_checkbox" />
+            app:layout_constraintTop_toBottomOf="@+id/patient_pin_code" />
 
 
         <TextView
@@ -241,7 +241,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:hint="Pincode"
+            android:hint="PIN/ZIP"
             android:inputType="number"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/patient_country" />
@@ -324,9 +324,12 @@
             android:id="@+id/patient_declaration_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/declaration_text"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patient_pin_code" />
+            app:layout_constraintTop_toTopOf="@+id/declaration_text" />
 
         <RadioGroup
             android:id="@+id/patient_gender_radiogroup"
@@ -390,17 +393,17 @@
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/submit_button_bg"
-            android:text="Submit"
             android:drawableRight="@drawable/ic_menu_send"
             android:drawableTint="@color/submit_button"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
+            android:text="Submit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patient_declaration_checkbox" />
+            app:layout_constraintTop_toBottomOf="@+id/declaration_text" />
 
 
     </android.support.constraint.ConstraintLayout>

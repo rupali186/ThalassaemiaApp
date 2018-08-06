@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".AboutFragment">
+    tools:context=".Fragments.AboutFragment">
 
     <!-- TODO: Update blank fragment layout -->
    <android.support.constraint.ConstraintLayout
@@ -27,12 +27,12 @@
            android:id="@+id/about_us_content"
            android:layout_width="0dp"
            android:layout_height="wrap_content"
-           android:layout_marginEnd="8dp"
+           android:layout_marginEnd="0dp"
            android:layout_marginStart="8dp"
            android:layout_marginTop="8dp"
            android:padding="10dp"
            android:text="@string/about_content"
-           android:textColor="@color/brown"
+           android:textColor="@android:color/black"
            app:layout_constraintEnd_toEndOf="parent"
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintTop_toBottomOf="@+id/logo2" />
@@ -43,8 +43,10 @@
            android:layout_height="wrap_content"
            android:layout_marginEnd="8dp"
            android:layout_marginStart="8dp"
-           android:layout_marginTop="16dp"
-           android:padding="10dp"
+           android:layout_marginTop="8dp"
+           android:gravity="center"
+           android:padding="8dp"
+           android:textSize="20dp"
            android:text="Follow Us On"
            android:textAppearance="@style/TextAppearance.AppCompat.Large"
            app:layout_constraintEnd_toEndOf="parent"
@@ -55,10 +57,12 @@
            android:id="@+id/icons_scroll_view"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
+           android:layout_marginBottom="16dp"
            android:layout_marginEnd="8dp"
            android:layout_marginStart="8dp"
            android:layout_marginTop="8dp"
            android:orientation="horizontal"
+           app:layout_constraintBottom_toBottomOf="parent"
            app:layout_constraintEnd_toEndOf="parent"
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintTop_toBottomOf="@+id/contact_us">
@@ -74,7 +78,12 @@
                    android:layout_height="@dimen/follow_icon_width"
                    android:layout_margin="@dimen/follow_icon_margin"
                    android:src="@drawable/facebook_circle_min" />
-
+               <ImageView
+                   android:id="@+id/goolePlus"
+                   android:layout_width="@dimen/follow_google_icon_width"
+                   android:layout_height="@dimen/follow_google_icon_width"
+                   android:layout_margin="@dimen/follow_icon_margin"
+                   android:src="@drawable/google_plus_icon" />
                <ImageView
                    android:id="@+id/twitter"
                    android:layout_width="@dimen/follow_icon_width"
@@ -96,7 +105,12 @@
                    android:layout_margin="@dimen/follow_icon_margin"
                    android:src="@drawable/instra_round_min" />
 
-
+               <ImageView
+                   android:id="@+id/linkedln"
+                   android:layout_width="@dimen/follow_icon_width"
+                   android:layout_height="@dimen/follow_icon_width"
+                   android:layout_margin="@dimen/follow_icon_margin"
+                   android:src="@drawable/linkedin_icon" />
                <ImageView
                    android:id="@+id/pinterest"
                    android:layout_width="@dimen/follow_icon_width"
@@ -104,39 +118,11 @@
                    android:layout_margin="@dimen/follow_icon_margin"
                    android:src="@drawable/pinterest" />
 
-               <ImageView
-                   android:id="@+id/linkedln"
-                   android:layout_width="@dimen/follow_icon_width"
-                   android:layout_height="@dimen/follow_icon_width"
-                   android:layout_margin="@dimen/follow_icon_margin"
-                   android:src="@drawable/linkedin_icon" />
 
            </LinearLayout>
 
 
        </ScrollView>
-
-       <TextView
-           android:id="@+id/about_highlight_text"
-           android:layout_width="0dp"
-           android:layout_height="22dp"
-           android:layout_marginBottom="16dp"
-           android:layout_marginEnd="8dp"
-           android:layout_marginStart="8dp"
-           android:layout_marginTop="8dp"
-           android:ellipsize="marquee"
-           android:focusable="true"
-           android:focusableInTouchMode="true"
-           android:marqueeRepeatLimit="marquee_forever"
-           android:scrollHorizontally="true"
-           android:singleLine="true"
-           android:text="Let's help India become Thalassaemia Free by 2025."
-           android:textAlignment="center"
-           android:textAppearance="@android:style/TextAppearance.StatusBar.Title"
-           app:layout_constraintBottom_toBottomOf="parent"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/icons_scroll_view" />
 
 
    </android.support.constraint.ConstraintLayout>

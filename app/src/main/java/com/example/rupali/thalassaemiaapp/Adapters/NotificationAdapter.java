@@ -1,4 +1,4 @@
-package com.example.rupali.thalassaemiaapp;
+package com.example.rupali.thalassaemiaapp.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.rupali.thalassaemiaapp.JavaClass.NotificationContent;
+import com.example.rupali.thalassaemiaapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -72,7 +74,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             message=itemView.findViewById(R.id.noti_message);
         }
     }
-    interface OnItemClickListener{
+    public interface OnItemClickListener{
         void onItemClick(int position);
     }
 }

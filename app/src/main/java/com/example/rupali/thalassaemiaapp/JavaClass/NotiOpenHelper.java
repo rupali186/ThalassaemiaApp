@@ -1,4 +1,4 @@
-package com.example.rupali.thalassaemiaapp;
+package com.example.rupali.thalassaemiaapp.JavaClass;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

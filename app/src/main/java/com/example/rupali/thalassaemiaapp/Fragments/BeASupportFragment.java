@@ -1,4 +1,4 @@
-package com.example.rupali.thalassaemiaapp;
+package com.example.rupali.thalassaemiaapp.Fragments;
 
 
 import android.app.Activity;
@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.rupali.thalassaemiaapp.R;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 

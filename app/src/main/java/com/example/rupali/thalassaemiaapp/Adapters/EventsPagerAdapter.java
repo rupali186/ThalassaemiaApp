@@ -1,4 +1,4 @@
-package com.example.rupali.thalassaemiaapp;
+package com.example.rupali.thalassaemiaapp.Adapters;
 
 
 import android.app.Activity;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.rupali.thalassaemiaapp.R;
 
 public class EventsPagerAdapter extends PagerAdapter {
 

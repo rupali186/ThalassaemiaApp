@@ -1,7 +1,8 @@
-package com.example.rupali.thalassaemiaapp;
+package com.example.rupali.thalassaemiaapp.Fragments;
 
 
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,11 +22,18 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.rupali.thalassaemiaapp.Fragments.AnimationFragment;
+import com.example.rupali.thalassaemiaapp.JavaClass.Constants;
+import com.example.rupali.thalassaemiaapp.JavaClass.GMailSender;
+import com.example.rupali.thalassaemiaapp.JavaClass.Thalassaemics;
+import com.example.rupali.thalassaemiaapp.R;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 /**
@@ -36,7 +44,7 @@ public class ThalassaemicsRegistrationFragment extends Fragment {
 
     EditText name;
     EditText phoneNo;
-    EditText email;
+    TextView emailTextView;
     EditText countryEditText;
     EditText stateEditText;
     EditText cityEditText;
@@ -63,12 +71,8 @@ public class ThalassaemicsRegistrationFragment extends Fragment {
     String types;
     Button submitForm;
     Boolean declarationIsChecked;
-
+    SharedPreferences sharedPreferences;
     private int mYear, mMonth, mDay;
-
-    DatabaseReference patients;
-    FirebaseDatabase patientDatanase;
-
 
     public ThalassaemicsRegistrationFragment() {
         // Required empty public constructor
@@ -81,11 +85,10 @@ public class ThalassaemicsRegistrationFragment extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_thalassaemics_registration, container, false);
 
-        patients = FirebaseDatabase.getInstance().getReference("patients");
 
         dropdown = view.findViewById(R.id.patient_calender_dropdown);
         dob = view.findViewById(R.id.patient_dob);
-        email = view.findViewById(R.id.patient_email);
+        emailTextView = view.findViewById(R.id.patient_email);
         phoneNo = view.findViewById(R.id.patient_phone);
         phoneCodeEditText = view.findViewById(R.id.patient_phone_code);
         countryEditText = view.findViewById(R.id.patient_country);
@@ -99,7 +102,15 @@ public class ThalassaemicsRegistrationFragment extends Fragment {
         bloodGroupRadioGroup = view.findViewById(R.id.patient_blood_group_radiogroup);
         declarationCheckbox = view.findViewById(R.id.patient_declaration_checkbox);
         submitForm = view.findViewById(R.id.button_thallaesimic);
-
+        sharedPreferences=getActivity().getSharedPreferences(Constants.LoginSharedPref.SHARED_PREF_NAME,MODE_PRIVATE);
+        emails=sharedPreferences.getString(Constants.LoginSharedPref.LOGIN_EMAIL,"");
+        emailTextView.setText(emails);
+        emailTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(),"If you want to use another email address, please log in with that email.",Toast.LENGTH_SHORT).show();
+            }
+        });
         dropdown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,12 +147,40 @@ public class ThalassaemicsRegistrationFragment extends Fragment {
 
     private void addPatient(View view)
     {
-//
-//        AnimationFragment animationFragment= new AnimationFragment();
-////                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-//        android.support.v4.app.FragmentManager fragmentManager=getFragmentManager();
-//        FragmentTransaction transaction = fragmentManager.beginTransaction();
-//        transaction.replace(R.id.container_main,animationFragment).commit();
+        new Thread(new Runnable() {
+
+            public void run() {
+
+                try {
+
+                    GMailSender sender = new GMailSender(
+
+                            Constants.MAIL_EMAIL,
+
+                            Constants.MAIL_PASSWORD);
+
+
+
+                    // sender.addAttachment(Environment.getExternalStorageDirectory().getPath()+"/image.jpg");
+
+                    sender.sendMail("Test mail", "This mail has been sent from android app" +
+                                    " along with attachment",
+
+                            Constants.MAIL_EMAIL,
+
+                            "rupalichawla186@gmail.com");
+                    Log.d("GmailSenderError","mail sent");
+
+
+
+                } catch (Exception e) {
+                    Log.d("GmailSenderError",e.toString());
+
+                }
+
+            }
+
+        }).start();
 
         names=name.getText().toString();
         if(names.isEmpty()){
@@ -158,9 +197,9 @@ public class ThalassaemicsRegistrationFragment extends Fragment {
             Toast.makeText(getContext(),"Contact No. has to be 10 digits ",Toast.LENGTH_SHORT).show();
             return;
         }
-        emails=email.getText().toString();
+        emails=emailTextView.getText().toString();
         if(emails.isEmpty()){
-            Toast.makeText(getContext(),"Email is Required ",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"Email is empty. Make sure you are logged in.",Toast.LENGTH_SHORT).show();
             return;
         }
         country=countryEditText.getText().toString();
@@ -224,28 +263,15 @@ public class ThalassaemicsRegistrationFragment extends Fragment {
             Toast.makeText(getContext(),"Please accept the declaration to continue. ",Toast.LENGTH_SHORT).show();
             return;
         }
-        String id = patients.push().getKey();
-        Thalassaemics thalassaemic = new Thalassaemics(names,dobs,contactNo, emails, country, state, city, completePostalAd, pincode, gender, bloodGroup, types,declarationIsChecked);
-        patients.child(id).setValue(thalassaemic, new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                if(databaseError==null) {
-//                    Toast.makeText(getContext(), "Form successfully submitted ", Toast.LENGTH_SHORT).show();
-//                    Log.d("RealtimeDatabase","success");
-//                    getActivity().onBackPressed();
-                    AnimationFragment animationFragment= new AnimationFragment();
-//                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-                    android.support.v4.app.FragmentManager fragmentManager=getFragmentManager();
-                    FragmentTransaction transaction = fragmentManager.beginTransaction();
-                    transaction.replace(R.id.container_main,animationFragment).commit();
+        if(Constants.database==null){
+            Constants.database = FirebaseDatabase.getInstance();
+            Log.d(Constants.TAG,"new database instance ");
+        }
+        Constants.myRef = Constants.database.getReference("patients");
 
-                }
-                else{
-                    Toast.makeText(getContext(), "An error occured while submitting form. Try again", Toast.LENGTH_SHORT).show();
-                    Log.d("RealtimeDatabase","Failure "+databaseError.getMessage());
-                }
-            }
-        });
+        String id = Constants.myRef.push().getKey();
+        Thalassaemics thalassaemic = new Thalassaemics(names,dobs,contactNo, emails, country, state, city, completePostalAd, pincode, gender, bloodGroup, types,declarationIsChecked);
+        Constants.myRef.child(id).setValue(thalassaemic);
 
     }
 

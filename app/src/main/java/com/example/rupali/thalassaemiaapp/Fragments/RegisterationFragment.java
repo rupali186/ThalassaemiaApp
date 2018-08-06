@@ -1,10 +1,8 @@
-package com.example.rupali.thalassaemiaapp;
+package com.example.rupali.thalassaemiaapp.Fragments;
 
 
-import android.animation.Animator;
-import android.animation.ValueAnimator;
 import android.app.DatePickerDialog;
-import android.app.FragmentManager;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,23 +21,26 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.airbnb.lottie.LottieAnimationView;
+import com.example.rupali.thalassaemiaapp.JavaClass.Constants;
+import com.example.rupali.thalassaemiaapp.JavaClass.Donor;
+import com.example.rupali.thalassaemiaapp.R;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BeABloodDonorFragment extends Fragment {
+public class RegisterationFragment extends Fragment {
     EditText nameEditText;
     TextView dobTextView;
     EditText contactNoEditText;
-    EditText emailEditText;
+    TextView emailTextView;
     EditText countryEditText;
     EditText stateEditText;
     EditText cityEditText;
@@ -63,10 +64,10 @@ public class BeABloodDonorFragment extends Fragment {
     String bloodGroup;
     Boolean declarationIsChecked;
     private int mYear, mMonth, mDay;
-    FirebaseDatabase database;
-    DatabaseReference myRef;
     Button submitForm;
-    public BeABloodDonorFragment() {
+    int position;
+    SharedPreferences sharedPreferences;
+    public RegisterationFragment() {
         // Required empty public constructor
     }
 
@@ -75,12 +76,14 @@ public class BeABloodDonorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view= inflater.inflate(R.layout.fragment_be_ablood_donor, container, false);
+        View view= inflater.inflate(R.layout.fragment_registeration, container, false);
+        Bundle bundle = this.getArguments();
+        position=bundle.getInt(Constants.SPINNER_POS);
         nameEditText=view.findViewById(R.id.patient_name);
         dobTextView=view.findViewById(R.id.patient_dob);
         contactNoEditText=view.findViewById(R.id.patient_phone);
         phoneCodeEditText=view.findViewById(R.id.donor_phone_code);
-        emailEditText=view.findViewById(R.id.patient_email);
+        emailTextView=view.findViewById(R.id.patient_email);
         countryEditText=view.findViewById(R.id.patient_address);
         stateEditText=view.findViewById(R.id.donor_state);
         cityEditText=view.findViewById(R.id.donor_city);
@@ -114,20 +117,36 @@ public class BeABloodDonorFragment extends Fragment {
                 datePickerDialog.show();
             }
         });
-        database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Donor");
+        sharedPreferences=getActivity().getSharedPreferences(Constants.LoginSharedPref.SHARED_PREF_NAME,MODE_PRIVATE);
+        email=sharedPreferences.getString(Constants.LoginSharedPref.LOGIN_EMAIL,"");
+        emailTextView.setText(email);
+        emailTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(),"If you want to use another email address, please log in with that email.",Toast.LENGTH_SHORT).show();
+            }
+        });
+//        database = FirebaseDatabase.getInstance();
+//        if(position==Constants.THALASSAEMIA_CARRIER_TEST) {
+//            myRef = database.getReference("ThalassaemiaCarrierTest");
+//        }
+//        else if(position==Constants.BONE_MARROW_MATCHING){
+//            myRef =database.getReference("BoneMarrowMatching");
+//        }
+//        else if(position==Constants.STEM_CELLS_DONATION){
+//            myRef=database.getReference("StemCellsDonation");
+//        }
         submitForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addDonor(view);
+                register(view);
             }
         });
-
 
         return view;
     }
 
-    private void addDonor(View view) {
+    private void register(View view) {
         name=nameEditText.getText().toString();
         if(name.isEmpty()){
             Toast.makeText(getContext(),"Name is required",Toast.LENGTH_SHORT).show();
@@ -143,9 +162,9 @@ public class BeABloodDonorFragment extends Fragment {
             Toast.makeText(getContext(),"Contact No. has to be 10 digits ",Toast.LENGTH_SHORT).show();
             return;
         }
-        email=emailEditText.getText().toString();
+        email=emailTextView.getText().toString();
         if(email.isEmpty()){
-            Toast.makeText(getContext(),"Email is Required ",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"Email is empty. Make sure you are logged in.",Toast.LENGTH_SHORT).show();
             return;
         }
         country=countryEditText.getText().toString();
@@ -198,28 +217,24 @@ public class BeABloodDonorFragment extends Fragment {
             Toast.makeText(getContext(),"Please accept the declaration to continue. ",Toast.LENGTH_SHORT).show();
             return;
         }
-        String id=myRef.push().getKey();
+        if(Constants.database==null){
+            Log.d(Constants.TAG,"new database instance ");
+            Constants.database = FirebaseDatabase.getInstance();
+        }
+        if(position==Constants.THALASSAEMIA_CARRIER_TEST) {
+            Constants.myRef = Constants.database.getReference("ThalassaemiaCarrierTest");
+        }
+        else if(position==Constants.BONE_MARROW_MATCHING){
+            Constants.myRef  =Constants.database.getReference("BoneMarrowMatching");
+        }
+        else if(position==Constants.STEM_CELLS_DONATION){
+            Constants.myRef =Constants.database.getReference("StemCellsDonation");
+        }
+        String id=Constants.myRef .push().getKey();
         Donor donor=new Donor(name,dob,contactNo,email,country,state,city,completePostalAd,pincode,gender,bloodGroup,declarationIsChecked);
-        myRef.child(id).setValue(donor, new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                if(databaseError==null) {
-//                    Toast.makeText(getContext(), "Form successfully submitted ", Toast.LENGTH_SHORT).show();
-//                    Log.d("RealtimeDatabase","success");
-//                    getActivity().onBackPressed();
-                    AnimationFragment animationFragment= new AnimationFragment();
-//                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-                    android.support.v4.app.FragmentManager fragmentManager=getFragmentManager();
-                    FragmentTransaction transaction = fragmentManager.beginTransaction();
-                    transaction.replace(R.id.container_main,animationFragment).commit();
+       // myRef.child(id).setValue(donor);
+        Constants.myRef .child(id).setValue(donor);
 
-                }
-                else{
-                    Toast.makeText(getContext(), "An error occured while submitting form. Try again", Toast.LENGTH_SHORT).show();
-                    Log.d("RealtimeDatabase","Failure "+databaseError.getMessage());
-                }
-            }
-        });
     }
 
 }

@@ -11,34 +11,150 @@
     <string name="nav_spinner_title">Registeration for:</string>
     <string name="action_settings">Settings</string>
     <string name="logo_below_text">(An NGO Registered under Indian Societies Act 1860/21)</string>
+    <string name="privacy_policy">Foundation Against Thalassaemia has built this mobile app as a
+        free service to society. \n\nThis is to inform the visitors regarding our policies about the collection, use, and disclosure
+        of Personal Information.\n\nIf you choose to use our services, then you agree to the collection and use of information
+        for any purpose related to the social cause of eradication of Thalassaemia. The information so collected is used to
+        provide the required services.The terms used in this Privacy Policy have the same meanings as in our Terms and
+        Conditions, unless otherwise defined in this Privacy Policy.
+        \n\n<b>Information Collection and Use</b>
+
+\n\nIn order to provide efficient services, we require certain personal information of the users.
+       The services provided by us may link to third party websites and apps. The third party content is not reviewed or examined by us. The privacy practices of the third party may differ from those described in this policy. Therefore, we encourage you to carefully read the privacy policies and terms of use of the them.
+
+\nThe offering of the services provided by the third party does not imply our endorsement or association with any such third party.
+
+\nFurthermore, we reserve the right to share the Personal Information with our Third - Party partners.
+
+\nIt is the sole responsibility of the users to comply with the appropriate terms and conditions of the Third Party. In no event shall Foundation Against Thalassaemia be liable to any consequences arising from the sharing of personal information or the use of the third party content.
+
+\nFoundation Against Thalassaemia may, at its sole discretion, change the terms and conditions and modify the privacy policy. We may add, edit or remove, without notice, any link to any third party content from the service.
+\n\n<b>Log Data</b>
+
+\n\nWe want to inform you that whenever you use our services, in a case of an error in the app we collect data and information
+        (through third party products) on your phone called Log Data. This Log Data may include information such as your
+        device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when
+        utilizing our service, the time and date of your use of the Service, and other statistics.
+
+\n\n<b>Cookies</b>
+
+\n\nCookies are files with a small amount of data that are commonly used as anonymous unique identifiers. These are sent
+        to your browser from the websites that you visit and are stored on your device\'s internal memory.
+
+\nThis Service does not use these “cookies” explicitly. However, the app may use third party code and libraries that use
+        “cookies” to collect information and improve their services. You have the option to either accept or refuse these
+        cookies and know when a cookie is being sent to your device. If you choose to refuse our cookies, you may not be
+        able to use some portions of this Service.
+
+\n\n<b>Service Providers</b>
+
+\n\nWe may employ third-party companies and individuals due to the following reasons:
+
+\n\u25CF To facilitate our Service;
+
+\n\u25CF To provide the Service on our behalf;
+
+\n\u25CF To perform Service-related services; or
+
+\n\u25CF To assist us in analyzing how our Service is used.
+
+\n\nWe want to inform users of this Service that these third parties have access to your Personal Information. The reason is to perform the tasks assigned to them on our behalf. However, they are obligated not to disclose or use the information for any other purpose.
+
+\n\n<b>Security</b>
+
+\n\nWe value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.
+
+\n\n<b>Links to Other Sites</b>
+
+\n\nThis Service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by us. Therefore, we strongly advise you to review the Privacy Policy of these websites. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.
+
+\n\n<b>Changes to This Privacy Policy</b>
+
+\n\nWe may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. These changes are effective immediately after they are posted on this page.
+
+\n\n</string>
+
+    <string name="terms_of_service">By downloading or using the app, these terms will automatically apply to you – you
+        should make sure therefore that you read them carefully before using the app. You’re not allowed to copy, or
+        modify the app, any part of the app, or our trademarks in any way. You’re not allowed to attempt to extract the
+        source code of the app, and you also shouldn’t try to translate the app into other languages, or make derivative
+        versions. The app itself, and all the trade marks, copyright, database rights and other intellectual property
+        rights related to it, still belong to Foundation Against Thalassaemia. Foundation Against Thalassaemia is committed
+        to ensuring that the app is as useful and efficient as possible. For that reason, we reserve the right to make
+        changes to the app or to charge for its services, at any time and for any reason. We will never charge you for the
+        app or its services without making it very clear to you exactly what you’re paying for. \nThis app stores personal
+        data that is provided to us. It’s your responsibility to keep your phone and access to the app secure. We
+        therefore recommend that you do not jailbreak or root your phone, which is the process of removing software
+        restrictions and limitations imposed by the official operating system of your device. It could make your phone
+        vulnerable to malware/viruses/malicious programs, compromise your phone’s security features and it could mean that
+        the app won’t work properly or at all.
+        \n\nYou should be aware that there are certain things that Foundation Against Thalassaemia will not take
+        responsibility for. Certain functions of the app will require the app to have an active internet connection.
+        The connection can be Wi-Fi, or provided by your mobile network provider, but we cannot take responsibility
+        for the app not working at full functionality if you don’t have access to Wi-Fi, and you don’t have any of
+        your data allowance left.
+
+\n\nIf you’re using the app outside of an area with Wi-Fi, you should remember that your terms of the agreement with your
+        mobile network provider will still apply. As a result, you may be charged by your mobile provider for the cost
+        of data for the duration of the connection while accessing the app, or other third party charges. In using the app,
+        you’re accepting responsibility for any such charges, including roaming data charges if you use the app outside of
+        your home territory (i.e. region or country) without turning off data roaming. If you are not the bill payer for the
+        device on which you’re using the app, please be aware that we assume that you have received permission from the bill
+        payer for using the app.
+
+\n\nAlong the same lines, we cannot always take responsibility for the way you use the app i.e. You need to make sure that your
+        device stays charged – if it runs out of battery and you can’t turn it on to avail the Service, Foundation Against
+        Thalassaemia cannot accept responsibility
+
+\n\nWith respect to our responsibility for your use of the app, when you’re using the app, it’s important to bear in mind
+        that although we endeavour to ensure that it is updated and correct at all times, we do rely on third parties
+        to provide information to us so that we can make it available to you. We will not be liable for any loss, direct
+        or indirect, you experience as a result of relying wholly on this functionality of the app.
+
+At some point, we may wish to update the app. The app is currently available on Android and the requirements for the system
+        (and for any additional systems we decide to extend the availability of the app to) may change, and you’ll need
+        to download the updates if you want to keep using the app. We do not promise that it will always update the app
+        so that it is relevant to you and/or works with the Android version that you have installed on your device.
+        We may also wish to stop providing the app, and may terminate use of it at any time without giving notice of
+        termination to you. Unless we tell you otherwise, upon any termination, (a) the rights and licenses granted to you
+        in these terms will end; (b) you must stop using the app, and (if needed) delete it from your device.
+  \n\n<b>Refund Policy</b>
+        \n\nThe money received by us as donation is used towards charity for social and noble causes, including but
+        not limited to care and welfare of thalassaemic  children. Please note that donations, once received are not
+        liable to be refunded.
+
+\n\n<b>Changes to these Terms and Conditions</b>
+
+\n\nWe may update our Terms and Conditions from time to time. Thus, you are advised to review this page periodically
+        for any changes. These changes are effective immediately after they are posted on this page.\n
+ </string>
+    <string name="open_source_libraries">open source libraries</string>
     <string name="about_content"> Foundation Against Thalassaemia (Regd.) is an NGO registered under Indian Societies
         Act 1860/21, working for the Care and Welfare of thalassaemic children since 1995, with a vision to make India
         Thalassaemia Free.\n\nThalassaemia is a life threatening inherited blood disorder wherein the body cannot make healthy
         haemoglobin and the person is dependent on regular blood transfusions, at an interval of every 15-21 days, throughout
         life to survive.\n\nIt is disheartening that India is the Thalassaemia capital of the world with 50 million thalassaemia
         carriers and over 1,25,000 thalassaemia majors. Every year, approximately 100,000 children with Thalassaemia Major are
-        born in the world , of which 10-12% are born in India.\n\nOur Foundation provides free care to about 200 thalassaemic
+        born in the world, of which 10-12% are born in India.\n\nOur Foundation provides free care to about 200 thalassaemic
         children registered with us from Delhi NCR and farther areas of North India.  This involves providing free medicines,
         blood and blood transfusion set-up, regular health check-ups by doctors from reputed Hospitals and other activities like
         organising trips, painting competitions, cultural programs, skill development courses, meetings with celebrities etc.
         for their physical and psychological welfare and to make them self dependent. The average monthly expense for each such
-        child is INR 7,500-10,000 (US$ 100 - 125).\n\nOur objective is that every individual must be aware if he/she is a
-        thalassaemia carrier, to save a lifelong of pain and trauma for a child. And, our Mission is to *Make India Thalassaemia
-        Free by 2025*. This mission can be achieved only by creating mass level education and awareness and motivating people to
+        child is INR 7,500-10,000 (US$ 100 - 125).\n\nOur objective is that every individual must be aware if s/he is a
+        thalassaemia carrier, to save a lifelong of pain and trauma for a child. And, our Mission is to "Make India Thalassaemia Free by 2025". This mission can be achieved only by creating mass level education and awareness and motivating people to
         go for Thalassaemia Carrier (HbA2) screening during pre-marital, pre-conception or early-pregnency stages.\n\nOur
-        organization has endorsements, patronage and moral support from some of India's top personalities like Hon'ble President
-        of India Shri Ram Nath Kovind, late Dr  APJ Abdul Kalam, Shri Pranab Mukherjee, Smt Pratibha Patil, ex-Prime Minister
-        Dr. Manmohan Singh, Bollywood star Karishma Kapoor, Iconic Cricket Stars Kapil Dev, Virender Sehwag, Bhajan Samrat
-        Narender Chanchal, etc. to name a few.\n\nWe are a Member of Thalassaemia International Federation and have also been
-        granted exemption by Indian Government Us 80G of Income tax Act 1961.\n\n
+        organization has endorsements, patronage and moral support from some of India\'s top personalities from politics, bollywood,
+        sports, medical and other spheres of life.\n\nWe are a Member of Thalassaemia International Federation and have also been
+        granted exemption by Indian Government Us 80G of Income tax Act 1961.
     </string>
-    <string name="thalassaemia_content"><b>What is Thalassaemia ?</b>\n\nThalassaemia (originated from Greek words
+    <string name="thalassaemia_content"><b>What is Thalassaemia ?</b>\n\nThalassaemia (originated from Greek word \'Thalassa\' [sea]
+        and new Latin \'Emia\' from Greek \'haema\' [blood])
         is an inherited blood disorder that causes your body to make less haemoglobin or abnormal
-        haemoglobin. Haemoglobin helps red blood cells spread oxygen through your body. Low levels of haemoglobin may cause
+        haemoglobin. Haemoglobin is the protein molecule in red blood cells that carries oxygen through your body. Low levels of haemoglobin may cause
         anaemia, an illness that makes you feel weak and tired. Severe anaemia can damage organs and lead to death.\n\nThere
         are two main types:\nAlpha and Beta. Beta thalassaemia is the most common.
 
-\n\n<b>Beta thalassaeemia</b>\n\nYou need both alpha
+\n\n<b>Beta Thalassaeemia</b>\n\nYou need both alpha
         and beta globin to make haemoglobin. Beta thalassaemia occurs when one or both of the two genes that make
         beta-globin don\'t work or only partly work as they should.\n\nIf you have one damaged gene, you may
         have mild anaemia and probably won\'t need treatment. This is called beta thalassaemia minor or beta thalassaemia
@@ -50,7 +166,7 @@
 
 \n\nPeople with severe anaemia (called beta thalassaemia major or Cooley\'s anaemia) need blood transfusions throughout life. Symptoms of anemia usually begin within a few months after birth.
 
-\n\n<b>Alpha thalassaemia</b>\n\nThis type occurs when one or more of the four alpha-globin genes that make
+\n\n<b>Alpha Thalassaemia</b>\n\nThis type occurs when one or more of the four alpha-globin genes that make
         haemoglobin are missing or damaged.\n\nIf one gene is missing or damaged: Your red blood cells might be smaller
         than normal. You will have no symptoms and you
         will not need treatment. But you are a silent carrier. This means you don\'t have the disease but can pass the defective
@@ -78,7 +194,7 @@
         children registered with us from Delhi NCR and farther areas of North India.  This involves providing free medicines,
         blood and blood transfusion set-up, regular health check-ups by doctors from reputed Hospitals and other activities like
         organising trips, painting competitions, cultural programs, skill development courses, meetings with celebrities etc.
-        for their physical and psychological welfare and to make them self dependent. The average monthly expense for each such
+        for their physical and psychological welfare and to make them confident and self dependent. The average monthly expense for each such
         child is INR 7,500-10,000 (US$ 100 - 125).\n\nSponsor a Thalassaemic Child\'s Care and Welfare for as little as Rs
         5,100/- per month:\n\nMedicines: Rs 5,100/-\nComplete Care and Welfare: Rs 11,000/-\n\nYou can also donate any other
         amount of your choice.</string>
@@ -88,6 +204,17 @@
         Act 1860/21, working for the Care and Welfare of thalassaemic children since 1995, with a vision to make India
         Thalassaemia Free.</string>
     <string name="thali_quote">Let\'s help India become Thalassaemia Free by 2025.</string>
-
+    <string name="title_activity_policies">PoliciesActivity</string>
+    <string name="donor_declaration_text">I am providing the above information to register myself as a blood donor, and I hereby allow Foundation Against
+    Thalassaemia or any blood bank on its behalf to contact me for blood required in emergency and/or for the routine blood donation camps
+        organized by it,
+    on the contact details provided by me.</string>
+    <string name="thali_declaration_text">I am providing my details to Foundation Against Thalassaemia for the puspose of preparing a record of thalasaemia patients.
+        I understand that providing these details does not authorize me to claim any direct or indirect support from this NGO.
+    </string>
+    <string name="stem_cells_declaration_text">I am providing the above information to register myself as a potential donor for stem cells/bone marrow, and I hereby allow Foundation Against
+    Thalassaemia or any stem cell bank on its behalf, in case of need, to contact me on the contact details provided by me.</string>
+    <string name="thali_carrier_declaration_text">I am providing the above information to register myself for Thalassaemia Carrier(HBLC/HBA2) Test, and I hereby allow Foundation Against
+    Thalassaemia on its behalf to contact me for this on the contact details provided by me.</string>
 
 </resources>

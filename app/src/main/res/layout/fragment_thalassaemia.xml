@@ -4,21 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ThalassaemiaFragment">
+    tools:context=".Fragments.ThalassaemiaFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <TextView
             android:id="@+id/thalassaemia"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
-            android:src="@drawable/thali_font"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="THALASSAEMIA"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/colorPrimary"
+            android:textSize="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -26,6 +31,7 @@
         <TextView
             android:id="@+id/thalassaemia_content"
             android:layout_width="0dp"
+            android:textColor="@android:color/black"
             android:layout_height="wrap_content"
             android:layout_gravity="fill_horizontal"
             android:layout_marginEnd="8dp"

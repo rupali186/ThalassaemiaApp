@@ -1,4 +1,4 @@
-package com.example.rupali.thalassaemiaapp;
+package com.example.rupali.thalassaemiaapp.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.rupali.thalassaemiaapp.R;
 
 public class ViewPagerAdapter extends PagerAdapter {
     LayoutInflater inflater;
@@ -27,12 +29,12 @@ public class ViewPagerAdapter extends PagerAdapter {
             R.drawable.blood_donation_background_min
     };
     String [] des_list={
-            "A single pint can save 3 lives...",
-            "A single gesture can create million smiles.",
-            "Help us to support our mission of thalassaemia free India by 2025.",
-            "Register yourself a blood donor today and help in saving million lives.",
-            "Register for the thalassaemic carrier Hba2 test today and get your test done.",
-            "They need your support."
+            "A single pint of blood can save upto three lives...",
+            "A single gesture can create a million smiles.",
+            "Support our mission of 'Helping India become Thalassaemia Free by 2025'.",
+            "Register yourself as a Blood Donor today.",
+            "Register for the Thalassaemia Carrier (HbA2) test.",
+            "Support a Thalassaemia patient for medication and tests."
     };
     @Override
     public int getCount() {
