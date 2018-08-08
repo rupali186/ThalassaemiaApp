@@ -35,6 +35,7 @@ import com.example.rupali.thalassaemiaapp.Fragments.BeABloodDonorFragment;
 import com.example.rupali.thalassaemiaapp.Fragments.BeASupportFragment;
 import com.example.rupali.thalassaemiaapp.Fragments.ExploreFragment;
 import com.example.rupali.thalassaemiaapp.Fragments.HomeFragment;
+import com.example.rupali.thalassaemiaapp.JavaClass.Donor;
 import com.example.rupali.thalassaemiaapp.R;
 import com.example.rupali.thalassaemiaapp.Fragments.RegisterationFragment;
 import com.example.rupali.thalassaemiaapp.Fragments.ThalassaemiaFragment;
@@ -51,7 +52,7 @@ import com.razorpay.PaymentResultListener;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,PaymentResultListener{
+        implements NavigationView.OnNavigationItemSelectedListener,PaymentResultListener,RegisterationFragment.RegFragmentListenerInterface{
     TextView toolbarTitle;
     ImageView profileImage;
     TextView profileName;
@@ -152,6 +153,8 @@ public class MainActivity extends AppCompatActivity
         if(!profileUriString.isEmpty()){
             Uri photoUrl=Uri.parse(profileUriString);
             Log.d(Constants.TAG," Photo Uri send to Picasso: "+photoUrl.toString());
+           // profileImage.setImageDrawable(null);
+            profileImage.setBackgroundResource(0);
             Picasso.get().load(photoUrl).into(profileImage,new com.squareup.picasso.Callback() {
                 @Override
                 public void onSuccess() {
@@ -459,11 +462,13 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_explore) {
             toolbarTitle.setText("Explore");
-            ExploreFragment exploreFragment = new ExploreFragment();
+            Intent intent=new Intent(MainActivity.this,ExploreActivity.class);
+            startActivity(intent);
+            /*ExploreFragment exploreFragment = new ExploreFragment();
             android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.container_main, exploreFragment).commit();
-            exit=false;
+            exit=false;*/
 
         } else if (id == R.id.nav_about) {
 
@@ -487,15 +492,6 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_SENDTO);
             intent.setData(Uri.parse("mailto:fa.thalassaemia@gmail.com"));
-            //intent.putExtra(Intent.EXTRA_SUBJECT,"Feedback or subject");
-            startActivity(intent);
-
-        }
-        else if (id == R.id.nav_report_a_bug) {
-
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_SENDTO);
-            intent.setData(Uri.parse("mailto:rupalichawla186@gmail.com"));
             //intent.putExtra(Intent.EXTRA_SUBJECT,"Feedback or subject");
             startActivity(intent);
 
@@ -533,4 +529,8 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    @Override
+    public void register(Donor donor) {
+
+    }
 }

@@ -271,7 +271,26 @@ public class ThalassaemicsRegistrationFragment extends Fragment {
 
         String id = Constants.myRef.push().getKey();
         Thalassaemics thalassaemic = new Thalassaemics(names,dobs,contactNo, emails, country, state, city, completePostalAd, pincode, gender, bloodGroup, types,declarationIsChecked);
-        Constants.myRef.child(id).setValue(thalassaemic);
+        Constants.myRef.child(id).setValue(thalassaemic,new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                if(databaseError==null) {
+//                    Toast.makeText(getContext(), "Form successfully submitted ", Toast.LENGTH_SHORT).show();
+//                    Log.d("RealtimeDatabase","success");
+//                    getActivity().onBackPressed();
+                    AnimationFragment animationFragment= new AnimationFragment();
+//                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                    android.support.v4.app.FragmentManager fragmentManager=getFragmentManager();
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.container_main,animationFragment).commit();
+                }
+                else{
+                    Toast.makeText(getContext(), "An error occured while submitting form. Try again", Toast.LENGTH_SHORT).show();
+                    Log.d(Constants.TAG,"Realtime database Failure "+databaseError.getMessage());
+
+                }
+            }
+        });
 
     }
 

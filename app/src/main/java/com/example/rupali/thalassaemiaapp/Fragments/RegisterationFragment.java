@@ -2,6 +2,7 @@ package com.example.rupali.thalassaemiaapp.Fragments;
 
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -49,6 +50,7 @@ public class RegisterationFragment extends Fragment {
     RadioGroup genderRadioGroup;
     RadioGroup bloodGroupRadioGroup;
     CheckBox declarationCheckbox;
+    TextView declarationTextView;
     ImageView dropdown;
     EditText phoneCodeEditText;
     String name;
@@ -67,10 +69,19 @@ public class RegisterationFragment extends Fragment {
     Button submitForm;
     int position;
     SharedPreferences sharedPreferences;
+
     public RegisterationFragment() {
         // Required empty public constructor
     }
+    public interface RegFragmentListenerInterface
+    {
+        void register(Donor donor);
+    }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,6 +91,7 @@ public class RegisterationFragment extends Fragment {
         Bundle bundle = this.getArguments();
         position=bundle.getInt(Constants.SPINNER_POS);
         nameEditText=view.findViewById(R.id.patient_name);
+        declarationTextView=view.findViewById(R.id.declaration_text);
         dobTextView=view.findViewById(R.id.patient_dob);
         contactNoEditText=view.findViewById(R.id.patient_phone);
         phoneCodeEditText=view.findViewById(R.id.donor_phone_code);
@@ -127,15 +139,18 @@ public class RegisterationFragment extends Fragment {
             }
         });
 //        database = FirebaseDatabase.getInstance();
-//        if(position==Constants.THALASSAEMIA_CARRIER_TEST) {
-//            myRef = database.getReference("ThalassaemiaCarrierTest");
-//        }
-//        else if(position==Constants.BONE_MARROW_MATCHING){
-//            myRef =database.getReference("BoneMarrowMatching");
-//        }
-//        else if(position==Constants.STEM_CELLS_DONATION){
-//            myRef=database.getReference("StemCellsDonation");
-//        }
+        if(position==Constants.THALASSAEMIA_CARRIER_TEST) {
+            declarationTextView.setText(R.string.thali_carrier_declaration_text);
+            //myRef = database.getReference("ThalassaemiaCarrierTest");
+        }
+        else if(position==Constants.BONE_MARROW_MATCHING){
+            declarationTextView.setText(R.string.stem_cells_declaration_text);
+           // myRef =database.getReference("BoneMarrowMatching");
+        }
+        else if(position==Constants.STEM_CELLS_DONATION){
+            declarationTextView.setText(R.string.stem_cells_declaration_text);
+            //myRef=database.getReference("StemCellsDonation");
+        }
         submitForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -233,7 +248,26 @@ public class RegisterationFragment extends Fragment {
         String id=Constants.myRef .push().getKey();
         Donor donor=new Donor(name,dob,contactNo,email,country,state,city,completePostalAd,pincode,gender,bloodGroup,declarationIsChecked);
        // myRef.child(id).setValue(donor);
-        Constants.myRef .child(id).setValue(donor);
+        Constants.myRef .child(id).setValue(donor,new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                if(databaseError==null) {
+//                    Toast.makeText(getContext(), "Form successfully submitted ", Toast.LENGTH_SHORT).show();
+//                    Log.d("RealtimeDatabase","success");
+//                    getActivity().onBackPressed();
+                    AnimationFragment animationFragment= new AnimationFragment();
+//                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                    android.support.v4.app.FragmentManager fragmentManager=getFragmentManager();
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.container_main,animationFragment).commit();
+                }
+                else{
+                    Toast.makeText(getContext(), "An error occured while submitting form. Try again", Toast.LENGTH_SHORT).show();
+                    Log.d(Constants.TAG,"Realtime database Failure "+databaseError.getMessage());
+
+                }
+            }
+        });
 
     }
 

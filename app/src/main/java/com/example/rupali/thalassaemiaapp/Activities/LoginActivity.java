@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +33,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.squareup.picasso.Picasso;
 
 public class LoginActivity extends AppCompatActivity {
-
+    ProgressBar progressBar;
+    ConstraintLayout loginContent;
     EditText email_edittext;
     EditText password_edittext;
     Button signIn;
@@ -48,6 +51,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        loginContent=findViewById(R.id.login_act_content);
+        progressBar=findViewById(R.id.login_act_progress_bar);
         sharedPreferences=getSharedPreferences(Constants.LoginSharedPref.SHARED_PREF_NAME,MODE_PRIVATE);
         toolbarTitle=findViewById(R.id.login_act_toolbar_text);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -59,6 +64,8 @@ public class LoginActivity extends AppCompatActivity {
         signIn=findViewById(R.id.signin_button);
         signUp=findViewById(R.id.signup_button);
         googleLogin.setSize(SignInButton.SIZE_STANDARD);
+        loginContent.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
 
         // Configure sign-in to request the user's ID, email address, and basic
 // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -102,12 +109,16 @@ public class LoginActivity extends AppCompatActivity {
                                 Constants.mAuth=FirebaseAuth.getInstance();
                             }
                             Constants.mAuth.signOut();
+                            progressBar.setVisibility(View.GONE);
+                            loginContent.setVisibility(View.VISIBLE);
                             Toast.makeText(LoginActivity.this,"Verification email sent. Verify" +
                                     " your email and sign in again to continue...",Toast.LENGTH_LONG).show();
                             password_edittext.setText("");
                         }
                         else
                         {
+                            progressBar.setVisibility(View.GONE);
+                            loginContent.setVisibility(View.VISIBLE);
                             Constants.mAuth.signOut();
                             password_edittext.setText("");
                             Toast.makeText(LoginActivity.this,"Email Verification pending! Sign in again to continue.",Toast.LENGTH_SHORT).show();
@@ -134,6 +145,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void signInWithGoogle() {
+        loginContent.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
         if(Constants.gso==null) {
             Log.d(Constants.TAG,"gso new Instance");
             Constants.gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id))
@@ -191,11 +204,19 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(Constants.TAG, "signInResult:google success");
                             Toast.makeText(LoginActivity.this, "you are signed in successfully. ",
                                     Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent();
-                            setResult(Constants.LOGIN_ACTIVITY_RESULT_CODE);
-                            finish();
+//                            progressBar.setVisibility(View.GONE);
+                            Constants.user=Constants.mAuth.getCurrentUser();
+//                                Intent intent = new Intent();
+//                                setResult(Constants.LOGIN_ACTIVITY_RESULT_CODE);
+//                                finish();
+                            updateUI(Constants.user);
+//                            Intent intent=new Intent();
+//                            setResult(Constants.LOGIN_ACTIVITY_RESULT_CODE);
+//                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
+                            progressBar.setVisibility(View.GONE);
+                            loginContent.setVisibility(View.VISIBLE);
                             Log.d(Constants.TAG, "signInResult:google with firebase failure", task.getException());
                             Toast.makeText(LoginActivity.this, "An error occured while signing in. Check your network connection ",
                                     Toast.LENGTH_SHORT).show();
@@ -219,11 +240,11 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(LoginActivity.this, "A link has been sent to your email. " +
-                                        "Please use it to reset your password.", Toast.LENGTH_SHORT).show();
+                                        "Please use it to reset your password.", Toast.LENGTH_LONG).show();
                                 Log.d(Constants.TAG, "password reset Email sent.");
                             }else{
                                 Toast.makeText(LoginActivity.this, "Make sure you are using the correct email address. Use " +
-                                        "sign up for new accounts.", Toast.LENGTH_SHORT).show();
+                                        "sign up for new accounts.", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
@@ -235,7 +256,7 @@ public class LoginActivity extends AppCompatActivity {
         password_text=password_edittext.getText().toString();
        // phone_no=phone_no_edittext.getText().toString();
         if(!email_text.isEmpty()&&password_text.length()<6){
-            Toast.makeText(LoginActivity.this,"Password should have minimum 6 characters ",Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this,"Password should have minimum 6 characters ",Toast.LENGTH_LONG).show();
             return;
         }
         if(!email_text.isEmpty()&&!password_text.isEmpty()){
@@ -259,7 +280,7 @@ public class LoginActivity extends AppCompatActivity {
                                     sendVerificationEmail(Constants.user);
                                 } else {
                                     Toast.makeText(LoginActivity.this,"A problem occured while signing in. Sign in again" +
-                                            " to continue." ,Toast.LENGTH_SHORT).show();
+                                            " to continue." ,Toast.LENGTH_LONG).show();
                                     // User is signed out
                                 }
 //                            updateUI(user);
@@ -267,7 +288,7 @@ public class LoginActivity extends AppCompatActivity {
                                 // If sign in fails, display a message to the user.
                                 Log.d(Constants.TAG, "createUserWithEmail:failure", task.getException());
                                 Toast.makeText(LoginActivity.this, "An error occured while creating account. Use reset password in case you already have an account  ",
-                                        Toast.LENGTH_SHORT).show();
+                                        Toast.LENGTH_LONG).show();
 //                            updateUI(null);
                             }
 
@@ -276,15 +297,15 @@ public class LoginActivity extends AppCompatActivity {
                     });
         }
         else if(email_text.isEmpty()&&password_text.isEmpty()){
-            Toast.makeText(LoginActivity.this,"Email and password are required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this,"Email and password are required",Toast.LENGTH_LONG).show();
             return;
         }
         else if(email_text.isEmpty()){
-            Toast.makeText(LoginActivity.this,"Email is required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this,"Email is required",Toast.LENGTH_LONG).show();
             return;
         }
         else{
-            Toast.makeText(LoginActivity.this,"password is required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this,"password is required",Toast.LENGTH_LONG).show();
             return;
         }
     }
@@ -314,7 +335,7 @@ public class LoginActivity extends AppCompatActivity {
                                 // If sign in fails, display a message to the user.
                                 Log.d(Constants.TAG, "signInWithEmail:failure", task.getException());
                                 Toast.makeText(LoginActivity.this, "Authentication failed. use reset Password in case you forgot your password.",
-                                        Toast.LENGTH_SHORT).show();
+                                        Toast.LENGTH_LONG).show();
 //                            updateUI(null);
                             }
 
@@ -360,8 +381,10 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putString(Constants.LoginSharedPref.LOGIN_EMAIL,email);
                 editor.putString(Constants.LoginSharedPref.LOGIN_URENAME,name);
                 editor.commit();
+                progressBar.setVisibility(View.GONE);
+//                loginContent.setVisibility(View.VISIBLE);
                 Toast.makeText(LoginActivity.this, "Logged in successfully .",
-                        Toast.LENGTH_SHORT).show();
+                        Toast.LENGTH_LONG).show();
                 Intent intent=new Intent();
                 setResult(Constants.LOGIN_ACTIVITY_RESULT_CODE);
                 finish();
@@ -369,6 +392,8 @@ public class LoginActivity extends AppCompatActivity {
 //            loggedIn=true;
 //            logInOrSignUp.setText("Log Out!");
         }else {
+            progressBar.setVisibility(View.GONE);
+            loginContent.setVisibility(View.VISIBLE);
             SharedPreferences.Editor editor=sharedPreferences.edit();
             editor.putBoolean(Constants.LoginSharedPref.LOGGED_IN,false);
             editor.putBoolean(Constants.LoginSharedPref.IS_EMAIL_VERIFIED,false);
@@ -376,7 +401,7 @@ public class LoginActivity extends AppCompatActivity {
             editor.putString(Constants.LoginSharedPref.LOGIN_URENAME,"");
             editor.putString(Constants.LoginSharedPref.PROFILE_URL,"");
             Toast.makeText(LoginActivity.this, "An error occured while signing in. Use reset password in case you forgot your password.",
-                    Toast.LENGTH_SHORT).show();
+                    Toast.LENGTH_LONG).show();
             editor.commit();
         }
     }

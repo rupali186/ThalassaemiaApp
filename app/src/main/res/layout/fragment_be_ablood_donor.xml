@@ -41,6 +41,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:hint="Contact No."
             android:background="@drawable/text_input_border"
             android:ems="10"
             android:inputType="phone"
@@ -152,14 +153,17 @@
 
         <TextView
             android:id="@+id/declaration_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:ellipsize="end"
-            android:maxLines="2"
+            android:padding="2dp"
             android:text="@string/donor_declaration_text"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/declaration_text"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/patient_declaration_checkbox"
             app:layout_constraintTop_toBottomOf="@+id/patient_pin_code" />
 
@@ -393,7 +397,7 @@
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/submit_button_bg"
             android:drawableRight="@drawable/ic_menu_send"
             android:drawableTint="@color/submit_button"

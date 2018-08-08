@@ -48,6 +48,7 @@ public class AnimationFragment extends Fragment {
             @Override
             public void onAnimationEnd(Animator animator) {
                 animationView.setVisibility(View.INVISIBLE);
+                Toast.makeText(getContext(),"Form successfully submitted",Toast.LENGTH_SHORT).show();
                 Log.d(Constants.TAG,"REaltime database form success");
                 getActivity().onBackPressed();
             }

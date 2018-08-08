@@ -1,5 +1,6 @@
 package com.example.rupali.thalassaemiaapp.Fragments;
 
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -13,8 +14,10 @@ import com.example.rupali.thalassaemiaapp.R;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
-public class ExploreFragment extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class MediaFragment extends Fragment {
     ViewPager eventsViewPager;
     EventsPagerAdapter eventsPagerAdapter;
     ViewPager pattronsViewPager;
@@ -25,15 +28,17 @@ public class ExploreFragment extends Fragment {
     //String[] pattronsImageName = {"image1","image2","image3","image4"};
     Timer eventsTimer;
     Timer pattronsTimer;
-    public ExploreFragment() {
+
+    public MediaFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_explore, container, false);
+        View view= inflater.inflate(R.layout.fragment_media, container, false);
         eventsViewPager=view.findViewById(R.id.events_viewpager);
         pattronsViewPager=view.findViewById(R.id.pattrons_viewpager);
         eventsPagerAdapter = new EventsPagerAdapter(getActivity(),eventsImageId);
@@ -70,6 +75,5 @@ public class ExploreFragment extends Fragment {
         pattronsTimer.schedule(pattronsTimerTask, 3000, 3000);
         return  view;
     }
-
 
 }

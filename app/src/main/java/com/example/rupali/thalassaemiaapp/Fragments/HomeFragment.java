@@ -29,6 +29,8 @@ public class HomeFragment extends Fragment {
     ImageView youtube;
     ImageView pinterest;
     ImageView googlePlus;
+    ImageView web;
+    ImageView mail;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -41,11 +43,13 @@ public class HomeFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_home, container, false);
         highlightTextView=view.findViewById(R.id.home_highlight_text);
         //TextView secondTextView = new TextView(getContext());
-        Shader textShader=new LinearGradient(0, 0, 0, 20,
-                new int[]{Color.GREEN, Color.BLUE},
-                new float[]{0, 1}, Shader.TileMode.CLAMP);
-        highlightTextView.getPaint().setShader(textShader);
+        web=view.findViewById(R.id.web);
+        mail=view.findViewById(R.id.mail);
         highlightTextView.setSelected(true);
+//        Shader textShader=new LinearGradient(0, 0, 0, 20,
+//                new int[]{Color.GREEN, Color.BLUE},
+//                new float[]{0, 1}, Shader.TileMode.CLAMP);
+//        highlightTextView.getPaint().setShader(textShader);
        // highlightTextView.startAnimation(AnimationUtils.loadAnimation(getContext(),android.R.anim.slide_in_left));
         googlePlus=view.findViewById(R.id.goolePlus);
         twitter = view.findViewById(R.id.twitter);
@@ -131,6 +135,24 @@ public class HomeFragment extends Fragment {
                 intent.setAction(Intent.ACTION_VIEW);
                 String url = "https://www.linkedin.com/in/fa-thalassaemia-foundation-against-thalassaemia-9b7584166";
                 intent.setData(Uri.parse(url));
+                startActivity(intent);
+            }
+        });
+        web.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri uri = Uri.parse("http://www.thalassaemia.in"); // missing 'http://' will cause crashed
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+        mail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:fa.thalassaemia@gmail.com"));
+                //intent.putExtra(Intent.EXTRA_SUBJECT,"Feedback or subject");
                 startActivity(intent);
             }
         });

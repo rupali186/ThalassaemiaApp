@@ -40,12 +40,12 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_highlight_text">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -58,12 +58,14 @@
                     android:layout_height="@dimen/follow_icon_width"
                     android:layout_margin="@dimen/follow_icon_margin"
                     android:src="@drawable/facebook_circle_min" />
+
                 <ImageView
                     android:id="@+id/goolePlus"
                     android:layout_width="@dimen/follow_google_icon_width"
                     android:layout_height="@dimen/follow_google_icon_width"
                     android:layout_margin="@dimen/follow_icon_margin"
                     android:src="@drawable/google_plus_icon" />
+
                 <ImageView
                     android:id="@+id/twitter"
                     android:layout_width="@dimen/follow_icon_width"
@@ -91,6 +93,7 @@
                     android:layout_height="@dimen/follow_icon_width"
                     android:layout_margin="@dimen/follow_icon_margin"
                     android:src="@drawable/linkedin_icon" />
+
                 <ImageView
                     android:id="@+id/pinterest"
                     android:layout_width="@dimen/follow_icon_width"
@@ -109,7 +112,7 @@
             android:layout_height="120dp"
             android:layout_marginEnd="60dp"
             android:layout_marginStart="60dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="50dp"
             android:src="@drawable/logo_4_transparent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -118,10 +121,10 @@
         <TextView
             android:id="@+id/home_highlight_text"
             android:layout_width="0dp"
-            android:layout_height="22dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="50dp"
             android:ellipsize="marquee"
             android:focusable="true"
             android:focusableInTouchMode="true"
@@ -131,6 +134,8 @@
             android:text="Let's help India become Thalassaemia Free by 2025."
             android:textAlignment="center"
             android:textAppearance="@android:style/TextAppearance.StatusBar.Title"
+            android:textColor="@color/highligh_text"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -148,6 +153,35 @@
             app:layout_constraintEnd_toEndOf="@+id/imageView7"
             app:layout_constraintStart_toStartOf="@+id/imageView7"
             app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_highlight_text">
+
+
+            <ImageView
+                android:id="@+id/mail"
+                android:layout_width="@dimen/follow_icon_width"
+                android:layout_height="@dimen/follow_icon_width"
+                android:layout_margin="@dimen/follow_icon_margin"
+                android:src="@drawable/mail" />
+
+            <ImageView
+                android:id="@+id/web"
+                android:layout_width="@dimen/follow_icon_width"
+                android:layout_height="@dimen/follow_icon_width"
+                android:layout_margin="@dimen/follow_icon_margin"
+                android:src="@drawable/web" />
+
+        </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>
 

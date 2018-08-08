@@ -183,7 +183,58 @@ At some point, we may wish to update the app. The app is currently available on 
 \n\nA defect in one or more genes causes thalassaemia.
 
 \n\nIf you, either parent, or any of your siblings have thalassaemia or carry a gene for thalassaemia and you\'re thinking about having a child, you may want to talk to a genetic counselor before you get pregnant. A genetic counselor can tell you how likely it is that your child will have the disease and how severe it might be.
-    \n</string>
+    \n
+    \n<b>Diagnosis</b>
+\n\nThalassaemia can be diagnosed via a complete blood count, hemoglobin electrophoresis, and
+DNA testing.
+
+\n\n<b>Severity of Thalassaemia</b>
+\n\n<b>Thalassaemia minor</b>
+\nPeople with thalassaemia minor don\’t usually have any symptoms. If they do, it\’s likely to be
+minor anaemia. The condition is classified as either alpha or beta thalassaemia minor. In alpha
+minor cases, two genes are missing. In beta minor, one gene is missing. The lack of visible
+symptoms can make thalassemia minor difficult to detect. It\’s important to get tested if one of
+your parents or a relative has some form of the disease.
+\n\n<b>Thalassaemia Intermedia</b>
+\n\nThalassaemia intermedia is a less severe form. It develops because of alterations in both beta
+globin genes. People with thalassaemia intermedia don’t need blood transfusions
+\n\n<b>Thalassaemia Major</b>
+\n\nThalassaemia major is the most severe form of thalassaemia. It develops when beta globin
+genes are missing. The symptoms of thalassaemia major generally appear before a child’s
+second birthday. The severe anaemia related to this condition can be life-threatening. 
+
+\n\n<b>Signs and symptoms</b>
+\n\nIron overload: People with thalassaemia can get an overload of iron in their bodies, either from
+the disease itself or from frequent blood transfusions. Too much iron can result in damage to the
+heart, liver, and endocrine system, which includes glands that produce hormones that regulate
+processes throughout the body. The damage is characterized by excessive deposits of iron.
+Without adequate iron chelation therapy, almost all patients with beta-thalassaemia accumulate
+potentially fatal iron levels.
+\n\nInfection: People with thalassaemia have an increased risk of infection. This is especially true if
+the spleen has been removed.
+\n\nBone deformities: Thalassaemia can make the bone marrow expand, which causes bones to
+widen. This can result in abnormal bone structure, especially in the face and skull. Bone marrow
+expansion also makes bones thin and brittle, increasing the risk of broken bones.
+\n\nEnlarged spleen: The spleen aids in fighting infection and filters unwanted material, such as old
+or damaged blood cells. Thalassaemia is often accompanied by the destruction of a large
+number of red blood cells and the task of removing these cells causes the spleen to enlarge.
+Splenomegaly can make anaemia worse, and it can reduce the life of transfused red blood cells.
+Severe enlargement of the spleen may necessitate its removal.
+
+\n\nSlowed growth: Anaemia can cause a child is growth to slow. Puberty also may be delayed in
+children with thalassaemia.
+\n\nHeart problems: Diseases, such as congestive heart failure and abnormal heart rhythms, may
+be associated with severe thalassaemia.
+\n\nOther symptoms include: Fatigue, Weakness, Pale or yellow skin, Dark urine, Poor appetite etc.
+It may be noted that in some people, symptoms show up at birth; in others, it can take a couple
+of years to see anything. Some people who have thalassaemia might show no signs at all.
+
+\n\n<b>Thalassaemia Treatment / Management</b>
+\n\nWith regular blood transfusions and chelation medicines, as advised by the doctors,
+thalassaemia major patients can live a good life. It\’s also important to get tests like CBC
+(Complete Blood Count), LFT (Liver Function Test), KFT (Kidney Function Test), Thyroid,
+Vitamin D, Phosphorus, Calcium, Hepatitis B &amp;C, HIV etc. done at regular intervals.\n\n
+The permanent cure for Thalassaemia in the present scenario is Bone Marrow Transplant.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -209,12 +260,18 @@ At some point, we may wish to update the app. The app is currently available on 
     Thalassaemia or any blood bank on its behalf to contact me for blood required in emergency and/or for the routine blood donation camps
         organized by it,
     on the contact details provided by me.</string>
-    <string name="thali_declaration_text">I am providing my details to Foundation Against Thalassaemia for the puspose of preparing a record of thalasaemia patients.
+    <string name="thali_declaration_text">I am providing my details to Foundation Against Thalassaemia for the purpose of preparing a record of thalasaemia patients.
         I understand that providing these details does not authorize me to claim any direct or indirect support from this NGO.
     </string>
     <string name="stem_cells_declaration_text">I am providing the above information to register myself as a potential donor for stem cells/bone marrow, and I hereby allow Foundation Against
     Thalassaemia or any stem cell bank on its behalf, in case of need, to contact me on the contact details provided by me.</string>
     <string name="thali_carrier_declaration_text">I am providing the above information to register myself for Thalassaemia Carrier(HBLC/HBA2) Test, and I hereby allow Foundation Against
     Thalassaemia on its behalf to contact me for this on the contact details provided by me.</string>
+    <string name="title_activity_explore">ExploreActivity</string>
+    <string name="tab_text_1">Pictures</string>
+    <string name="tab_text_2">Media</string>
+    <string name="tab_text_3">Events</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_home">HomeAct</string>
 
 </resources>

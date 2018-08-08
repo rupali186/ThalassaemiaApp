@@ -16,13 +16,13 @@ public class EventsPagerAdapter extends PagerAdapter {
 
     private Activity activity;
     private Integer[] imagesArray;
-    private String[] namesArray;
+    //private String[] namesArray;
 
-    public EventsPagerAdapter(Activity activity,Integer[] imagesArray,String[] namesArray){
+    public EventsPagerAdapter(Activity activity,Integer[] imagesArray){
 
         this.activity = activity;
         this.imagesArray = imagesArray;
-        this.namesArray = namesArray;
+//        this.namesArray = namesArray;
     }
 
     @Override
@@ -34,8 +34,8 @@ public class EventsPagerAdapter extends PagerAdapter {
         ImageView imageView = (ImageView) viewItem.findViewById(R.id.event_image);
         imageView.setImageResource(imagesArray[position]);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        TextView textView1 = (TextView) viewItem.findViewById(R.id.event_des);
-        textView1.setText(namesArray[position]);
+//        TextView textView1 = (TextView) viewItem.findViewById(R.id.event_des);
+//        textView1.setText(namesArray[position]);
         ((ViewPager)container).addView(viewItem);
 
         return viewItem;
