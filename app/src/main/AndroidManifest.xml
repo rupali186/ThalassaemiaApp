@@ -66,10 +66,6 @@
             android:name=".Activities.ExploreActivity"
             android:label="@string/title_activity_explore"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Activities.HomeAct"
-            android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

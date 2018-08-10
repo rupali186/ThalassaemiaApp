@@ -19,7 +19,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     Context context;
     ArrayList<NotificationContent> notificationContentArrayList;
     OnItemClickListener listener;
-
     public NotificationAdapter(Context context, ArrayList<NotificationContent> notificationContentArrayList,OnItemClickListener listener) {
         this.context = context;
         this.notificationContentArrayList = notificationContentArrayList;
@@ -47,7 +46,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         if (!notification.getImageUri().isEmpty()) {
             Picasso.get().load(notification.getImageUri()).resize(350, 230).into(holder.notiImage);
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 listener.onItemClick(position);

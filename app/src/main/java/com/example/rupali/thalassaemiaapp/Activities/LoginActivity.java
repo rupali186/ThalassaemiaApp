@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,11 +31,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.squareup.picasso.Picasso;
 
 public class LoginActivity extends AppCompatActivity {
     ProgressBar progressBar;
-    ConstraintLayout loginContent;
+    ScrollView loginContent;
     EditText email_edittext;
     EditText password_edittext;
     Button signIn;
@@ -171,6 +171,11 @@ public class LoginActivity extends AppCompatActivity {
             // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
+        }else{
+            loginContent.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+            Toast.makeText(this,"Authentication failed. Please check your network connection",Toast.LENGTH_LONG).show();
+
         }
 
     }
@@ -181,6 +186,10 @@ public class LoginActivity extends AppCompatActivity {
             // Signed in successfully, show authenticated UI.
 //            updateUI(account);
         } catch (ApiException e) {
+            loginContent.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+            Toast.makeText(this,"Authentication failed. Please check your network connection",Toast.LENGTH_LONG).show();
+
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.d(Constants.TAG, "google signInResult:failed code=" + e.getStatusCode());
@@ -202,8 +211,8 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(Constants.TAG, "signInResult:google success");
-                            Toast.makeText(LoginActivity.this, "you are signed in successfully. ",
-                                    Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(LoginActivity.this, "you are signed in successfully. ",
+//                                    Toast.LENGTH_SHORT).show();
 //                            progressBar.setVisibility(View.GONE);
                             Constants.user=Constants.mAuth.getCurrentUser();
 //                                Intent intent = new Intent();
@@ -219,7 +228,7 @@ public class LoginActivity extends AppCompatActivity {
                             loginContent.setVisibility(View.VISIBLE);
                             Log.d(Constants.TAG, "signInResult:google with firebase failure", task.getException());
                             Toast.makeText(LoginActivity.this, "An error occured while signing in. Check your network connection ",
-                                    Toast.LENGTH_SHORT).show();
+                                    Toast.LENGTH_LONG).show();
                         }
 
                         // ...
@@ -228,6 +237,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void resetPassword() {
+        loginContent.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
+
         String emailAddress = email_edittext.getText().toString();
         if(!emailAddress.isEmpty()) {
             if(Constants.mAuth==null){
@@ -263,6 +275,8 @@ public class LoginActivity extends AppCompatActivity {
             if(Constants.mAuth==null){
                 Constants.mAuth=FirebaseAuth.getInstance();
             }
+            loginContent.setVisibility(View.INVISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
             Constants.mAuth.createUserWithEmailAndPassword(email_text, password_text)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -271,6 +285,8 @@ public class LoginActivity extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(Constants.TAG, "createUserWithEmail:success");
                                 Constants.user=Constants.mAuth.getCurrentUser();
+                                loginContent.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.GONE);
                                 if (Constants.user != null) {
                                     // User is signed in
                                     // NOTE: this Activity should get onpen only when the user is not signed in, otherwise
@@ -318,6 +334,8 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d(Constants.TAG,"mAuth new Instance");
                 Constants.mAuth = FirebaseAuth.getInstance();
             }
+            loginContent.setVisibility(View.INVISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
             Constants.mAuth.signInWithEmailAndPassword(email_text, password_text)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -333,6 +351,8 @@ public class LoginActivity extends AppCompatActivity {
                                 updateUI(Constants.user);
                             } else {
                                 // If sign in fails, display a message to the user.
+                                loginContent.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.GONE);
                                 Log.d(Constants.TAG, "signInWithEmail:failure", task.getException());
                                 Toast.makeText(LoginActivity.this, "Authentication failed. use reset Password in case you forgot your password.",
                                         Toast.LENGTH_LONG).show();
@@ -382,7 +402,7 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putString(Constants.LoginSharedPref.LOGIN_URENAME,name);
                 editor.commit();
                 progressBar.setVisibility(View.GONE);
-//                loginContent.setVisibility(View.VISIBLE);
+                loginContent.setVisibility(View.VISIBLE);
                 Toast.makeText(LoginActivity.this, "Logged in successfully .",
                         Toast.LENGTH_LONG).show();
                 Intent intent=new Intent();

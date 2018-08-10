@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent" android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Fragments.ContactUsFragment">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="fill_vertical"
+        android:orientation="vertical">
+        <!-- TODO: Update blank fragment layout -->
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="50dp"
+            android:layout_gravity="center"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/logo_transparent" />
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="0dp"
+            android:layout_gravity="center"
+            android:text="Serving Thalassaemic Children since 1995"
+            android:textColor="@android:color/black"
+            android:textSize="8dp" />
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            android:src="@drawable/logo_3_transparent" />
+
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="0dp"
+            android:layout_gravity="center"
+            android:text="@string/logo_below_text"
+            android:textColor="@android:color/black"
+            android:textSize="8dp" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="52dp"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            android:textSize="13dp"
+            android:text="1-F/35, N.I.T. Faridabad-121001, National Capital Region, Haryana, India" />
+
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:textSize="13dp"
+            android:text="+91 9868841164, 9811089975, 9313008888, 9811607051, 8826499449"
+            android:textColor="@android:color/black"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/contact_us_highlight_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="52dp"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:text="Let's help India become Thalassaemia Free by 2025"
+            android:textAlignment="center"
+            android:textAppearance="@android:style/TextAppearance.StatusBar.Title"
+            android:textColor="@color/highligh_text"
+            android:textSize="20dp" />
+
+        <LinearLayout
+            android:id="@+id/linear_layout_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/mail"
+                android:layout_width="@dimen/follow_icon_width"
+                android:layout_height="@dimen/follow_icon_width"
+                android:layout_margin="@dimen/follow_icon_margin"
+                android:src="@drawable/mail" />
+
+            <ImageView
+                android:id="@+id/web"
+                android:layout_width="@dimen/follow_icon_width"
+                android:layout_height="@dimen/follow_icon_width"
+                android:layout_margin="@dimen/follow_icon_margin"
+                android:src="@drawable/web" />
+
+        </LinearLayout>
+        <ScrollView
+            android:id="@+id/icons_scroll_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/facebook"
+                    android:layout_width="@dimen/follow_icon_width"
+                    android:layout_height="@dimen/follow_icon_width"
+                    android:layout_margin="@dimen/follow_icon_margin"
+                    android:src="@drawable/facebook_circle_min" />
+                <ImageView
+                    android:id="@+id/goolePlus"
+                    android:layout_width="@dimen/follow_google_icon_width"
+                    android:layout_height="@dimen/follow_google_icon_width"
+                    android:layout_margin="@dimen/follow_icon_margin"
+                    android:src="@drawable/google_plus_icon" />
+                <ImageView
+                    android:id="@+id/twitter"
+                    android:layout_width="@dimen/follow_icon_width"
+                    android:layout_height="@dimen/follow_icon_width"
+                    android:layout_margin="@dimen/follow_icon_margin"
+                    android:src="@drawable/twitter" />
+
+                <ImageView
+                    android:id="@+id/youtube"
+                    android:layout_width="@dimen/follow_icon_width"
+                    android:layout_height="@dimen/follow_icon_width"
+                    android:layout_margin="@dimen/follow_icon_margin"
+                    android:src="@drawable/youtube_round_icon_min" />
+
+                <ImageView
+                    android:id="@+id/insta"
+                    android:layout_width="@dimen/follow_icon_width"
+                    android:layout_height="@dimen/follow_icon_width"
+                    android:layout_margin="@dimen/follow_icon_margin"
+                    android:src="@drawable/instra_round_min" />
+
+                <ImageView
+                    android:id="@+id/linkedln"
+                    android:layout_width="@dimen/follow_icon_width"
+                    android:layout_height="@dimen/follow_icon_width"
+                    android:layout_margin="@dimen/follow_icon_margin"
+                    android:src="@drawable/linkedin_icon" />
+                <ImageView
+                    android:id="@+id/pinterest"
+                    android:layout_width="@dimen/follow_icon_width"
+                    android:layout_height="@dimen/follow_icon_width"
+                    android:layout_margin="@dimen/follow_icon_margin"
+                    android:src="@drawable/pinterest" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</ScrollView>

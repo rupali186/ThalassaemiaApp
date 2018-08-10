@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,17 +35,24 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 public class HomeActivity extends AppCompatActivity {
     private LinearLayout llPagerDots;
+    ProgressBar progressBar;
+    NestedScrollView contentHome;
     private ImageView[] ivArrayDotsPager;
     ViewPager viewPager;
     ViewPagerAdapter adapter;
     TextView skip;
     Button loginWithGoogle;
+    TextView dedicationTextview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         skip=findViewById(R.id.skip);
+        progressBar=findViewById(R.id.home_act_progress_bar);
+        contentHome=findViewById(R.id.content_home);
         loginWithGoogle=findViewById(R.id.home_login_button);
+        dedicationTextview=findViewById(R.id.home_dedication_text);
+        dedicationTextview.setSelected(true);
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,7 +65,8 @@ public class HomeActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         setupPagerIndidcatorDots();
         ivArrayDotsPager[0].setImageResource(R.drawable.selected_dot);
-
+        progressBar.setVisibility(View.INVISIBLE);
+        contentHome.setVisibility(View.VISIBLE);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
         {
@@ -78,17 +88,7 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
-        if(Constants.gso==null) {
-            Log.d(Constants.TAG,"gso new Instance");
-            Constants.gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id))
-                    .requestEmail().requestProfile()
-                    .build();
-        }
-        // Build a GoogleSignInClient with the options specified by gso.
-        if(Constants.mGoogleSignInClient==null) {
-            Log.d(Constants.TAG,"mGoogleSignInClient new Instance");
-            Constants.mGoogleSignInClient = GoogleSignIn.getClient(this, Constants.gso);
-        }
+
         loginWithGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,6 +114,19 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void signInWithGoogle() {
+        if(Constants.gso==null) {
+            Log.d(Constants.TAG,"gso new Instance");
+            Constants.gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id))
+                    .requestEmail().requestProfile()
+                    .build();
+        }
+        // Build a GoogleSignInClient with the options specified by gso.
+        if(Constants.mGoogleSignInClient==null) {
+            Log.d(Constants.TAG,"mGoogleSignInClient new Instance");
+            Constants.mGoogleSignInClient = GoogleSignIn.getClient(this, Constants.gso);
+        }
+        progressBar.setVisibility(View.VISIBLE);
+        contentHome.setVisibility(View.INVISIBLE);
         Intent signInIntent = Constants.mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, Constants.RC_SIGN_IN);
     }
@@ -126,6 +139,11 @@ public class HomeActivity extends AppCompatActivity {
             // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
+        }else{
+            progressBar.setVisibility(View.GONE);
+            contentHome.setVisibility(View.VISIBLE);
+            Toast.makeText(this,"Authentication failed. Please check your network connection",Toast.LENGTH_LONG).show();
+
         }
 
     }
@@ -138,6 +156,9 @@ public class HomeActivity extends AppCompatActivity {
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            progressBar.setVisibility(View.GONE);
+            contentHome.setVisibility(View.VISIBLE);
+            Toast.makeText(this,"Authentication failed. Please check your network connection",Toast.LENGTH_LONG).show();
             Log.d(Constants.TAG, "signInResult google:failed code=" + e.getStatusCode());
 //            updateUI(null);
         }
@@ -174,11 +195,15 @@ public class HomeActivity extends AppCompatActivity {
                             }
                             editor.putBoolean(Constants.LoginSharedPref.IS_EMAIL_VERIFIED,true);
                             editor.commit();
+                            progressBar.setVisibility(View.GONE);
+                            contentHome.setVisibility(View.VISIBLE);
                             Intent intent=new Intent(HomeActivity.this,MainActivity.class);
                             startActivity(intent);
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
+                            progressBar.setVisibility(View.GONE);
+                            contentHome.setVisibility(View.VISIBLE);
                             Log.d(Constants.TAG, "signInResult:google with firebase failure", task.getException());
                             Toast.makeText(HomeActivity.this, "An error occured while signing in. Check your network connection ",
                                     Toast.LENGTH_SHORT).show();

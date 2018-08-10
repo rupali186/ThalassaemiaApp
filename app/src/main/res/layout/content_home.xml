@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/white"
     android:id="@+id/content_home"
-    tools:context=".Activities.HomeAct">
+    tools:context=".Activities.HomeActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -52,6 +52,22 @@
             android:orientation="vertical"
             android:layout_gravity="center"
             android:layout_weight="1">
+            <TextView
+                android:id="@+id/home_dedication_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dedication_text"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:layout_margin="8dp"
+                android:textAppearance="@android:style/TextAppearance.StatusBar.Title"
+                android:textColor="@color/highligh_text"
+                android:textSize="20dp"/>
 
 
             <Button

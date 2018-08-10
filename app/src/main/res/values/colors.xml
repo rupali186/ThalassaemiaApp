@@ -14,5 +14,8 @@
     <color name="google">#DD4B39</color>
     <color name="submit_button">#50a730</color>
     <color name="highligh_text">#000000</color>
+    <color name="link">#0647f9</color>
+    <color name="icon_colour">#d50700</color>
+
 
 </resources>

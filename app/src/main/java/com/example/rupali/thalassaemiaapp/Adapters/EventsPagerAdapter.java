@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.rupali.thalassaemiaapp.R;
 
@@ -16,12 +15,14 @@ public class EventsPagerAdapter extends PagerAdapter {
 
     private Activity activity;
     private Integer[] imagesArray;
+    boolean picture_type=false;
     //private String[] namesArray;
 
-    public EventsPagerAdapter(Activity activity,Integer[] imagesArray){
+    public EventsPagerAdapter(Activity activity,Integer[] imagesArray,boolean picture_type){
 
         this.activity = activity;
         this.imagesArray = imagesArray;
+        this.picture_type=picture_type;
 //        this.namesArray = namesArray;
     }
 
@@ -29,8 +30,12 @@ public class EventsPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
 
         LayoutInflater inflater = ((Activity)activity).getLayoutInflater();
-
-        View viewItem = inflater.inflate(R.layout.events_and_supporters, container, false);
+        View viewItem=null;
+        if(picture_type) {
+             viewItem = inflater.inflate(R.layout.picture_item, container, false);
+        }else{
+            viewItem = inflater.inflate(R.layout.media_item, container, false);
+        }
         ImageView imageView = (ImageView) viewItem.findViewById(R.id.event_image);
         imageView.setImageResource(imagesArray[position]);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);

@@ -2,11 +2,7 @@ package com.example.rupali.thalassaemiaapp.Fragments;
 
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.Shader;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,18 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.example.rupali.thalassaemiaapp.R;
-
-import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
-
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AboutFragment extends Fragment {
+public class ContactUsFragment extends Fragment {
+    TextView highlightTextView;
     ImageView googlePlus;
     ImageView twitter;
     ImageView insta;
@@ -35,9 +27,7 @@ public class AboutFragment extends Fragment {
     ImageView pinterest;
     ImageView web;
     ImageView mail;
-    //TextView highlightTextView;
-    TextView textView;
-    public AboutFragment() {
+    public ContactUsFragment() {
         // Required empty public constructor
     }
 
@@ -45,20 +35,29 @@ public class AboutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_about, container, false);
-               // highlightTextView=view.findViewById(R.id.about_highlight_text);
-        //TextView secondTextView = new TextView(getContext());
-        textView=view.findViewById(R.id.about_us_content);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            textView.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-        }
-        Shader textShader=new LinearGradient(0, 0, 0, 20,
-                new int[]{Color.GREEN, Color.BLUE},
-                new float[]{0, 1}, Shader.TileMode.CLAMP);
-//        highlightTextView.getPaint().setShader(textShader);
-//        highlightTextView.setSelected(true);
+        View view= inflater.inflate(R.layout.fragment_contact_us, container, false);
+        mail=view.findViewById(R.id.mail);
+        highlightTextView=view.findViewById(R.id.contact_us_highlight_text);
+        highlightTextView.setSelected(true);
+        mail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:fa.thalassaemia@gmail.com"));
+                //intent.putExtra(Intent.EXTRA_SUBJECT,"Feedback or subject");
+                startActivity(intent);
+            }
+        });
+//        phone.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(Intent.ACTION_DIAL);
+//                intent.setData(Uri.parse("tel:9811089975"));
+//                startActivity(intent);
+//            }
+//        });
         web=view.findViewById(R.id.web);
         mail=view.findViewById(R.id.mail);
         googlePlus=view.findViewById(R.id.goolePlus);
@@ -166,9 +165,7 @@ public class AboutFragment extends Fragment {
             }
         });
 
-
-
-       return view;
+        return view;
     }
 
 }

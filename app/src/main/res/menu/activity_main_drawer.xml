@@ -51,14 +51,15 @@
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_about_icon"
             android:title="About Us" />
-        <item
-            android:id="@+id/nav_info"
-            android:icon="@drawable/ic_chevron_right_black_24dp"
-            android:title="More info" />
+
         <item
             android:id="@+id/nav_contact_us"
             android:icon="@android:drawable/stat_notify_chat"
             android:title="Contact Us" />
+        <item
+            android:id="@+id/nav_info"
+            android:icon="@drawable/ic_chevron_right_black_24dp"
+            android:title="More info" />
         <item
             android:id="@+id/nav_share"
             android:icon="@drawable/ic_menu_share"

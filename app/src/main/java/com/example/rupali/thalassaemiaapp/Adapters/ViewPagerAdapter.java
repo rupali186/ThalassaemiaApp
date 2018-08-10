@@ -32,9 +32,9 @@ public class ViewPagerAdapter extends PagerAdapter {
             "A single pint of blood can save upto three lives...",
             "A single gesture can create a million smiles.",
             "Support our mission of 'Helping India become Thalassaemia Free by 2025'.",
-            "Register yourself as a Blood Donor today.",
-            "Register for the Thalassaemia Carrier (HbA2) test.",
-            "Support a Thalassaemia patient for medication and tests."
+            "Register yourself as a Blood Donor.",
+            "Register for the Thalassaemia Carrier (HbA2) Test.",
+            "Sponser a Thalassaemia Child for medicines."
     };
     @Override
     public int getCount() {

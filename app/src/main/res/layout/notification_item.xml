@@ -16,16 +16,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/noti_logo"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/noti_message"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/noti_title"
-        app:srcCompat="@drawable/logo_transparent" />
-
     <TextView
         android:id="@+id/noti_title"
         style="@style/TextAppearance.Compat.Notification.Title"
@@ -34,12 +24,9 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:ellipsize="end"
-        android:maxLines="1"
         android:text="Foundation Against Thalassaemia"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/noti_logo"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noti_image" />
 
     <TextView
@@ -51,12 +38,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:ellipsize="end"
-        android:maxLines="2"
         android:text="Message"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/noti_logo"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noti_title" />
 
     <ImageView

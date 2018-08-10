@@ -131,7 +131,7 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
             android:singleLine="true"
-            android:text="Let's help India become Thalassaemia Free by 2025."
+            android:text="Let's help India become Thalassaemia Free by 2025"
             android:textAlignment="center"
             android:textAppearance="@android:style/TextAppearance.StatusBar.Title"
             android:textColor="@color/highligh_text"

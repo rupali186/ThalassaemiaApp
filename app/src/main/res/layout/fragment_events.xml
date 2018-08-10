@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
     android:layout_height="match_parent">
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
+        android:gravity="center"
         android:id="@+id/events_fb_text"
-        android:layout_height="match_parent"
-        android:text="Directing you to our Fb Page for upcoming events..." />
+        android:layout_gravity="center"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_height="wrap_content"
+        android:text="Directing you to our Facebook Page for our upcoming events.Please click the icon below..." />
+    <ImageView
+        android:id="@+id/click_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:tint="@color/submit_button"
+        android:src="@drawable/ic_forward_black_24dp"
+        />
 
-</FrameLayout>
+</LinearLayout>

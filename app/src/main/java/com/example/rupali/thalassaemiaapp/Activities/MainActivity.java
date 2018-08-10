@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -27,26 +25,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.rupali.thalassaemiaapp.Fragments.AnimationFragment;
+import com.example.rupali.thalassaemiaapp.Fragments.ContactUsFragment;
 import com.example.rupali.thalassaemiaapp.Fragments.MoreInfoFragment;
 import com.example.rupali.thalassaemiaapp.JavaClass.Constants;
 import com.example.rupali.thalassaemiaapp.Fragments.AboutFragment;
 import com.example.rupali.thalassaemiaapp.Fragments.BeABloodDonorFragment;
 import com.example.rupali.thalassaemiaapp.Fragments.BeASupportFragment;
-import com.example.rupali.thalassaemiaapp.Fragments.ExploreFragment;
 import com.example.rupali.thalassaemiaapp.Fragments.HomeFragment;
 import com.example.rupali.thalassaemiaapp.JavaClass.Donor;
 import com.example.rupali.thalassaemiaapp.R;
 import com.example.rupali.thalassaemiaapp.Fragments.RegisterationFragment;
 import com.example.rupali.thalassaemiaapp.Fragments.ThalassaemiaFragment;
 import com.example.rupali.thalassaemiaapp.Fragments.ThalassaemicsRegistrationFragment;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 import com.squareup.picasso.Picasso;
@@ -461,7 +453,7 @@ public class MainActivity extends AppCompatActivity
             }
 
         } else if (id == R.id.nav_explore) {
-            toolbarTitle.setText("Explore");
+//            toolbarTitle.setText("Explore");
             Intent intent=new Intent(MainActivity.this,ExploreActivity.class);
             startActivity(intent);
             /*ExploreFragment exploreFragment = new ExploreFragment();
@@ -488,12 +480,18 @@ public class MainActivity extends AppCompatActivity
             exit=false;
 
         } else if (id == R.id.nav_contact_us) {
+            ContactUsFragment contactUsFragment= new ContactUsFragment();
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.container_main,contactUsFragment).commit();
+            toolbarTitle.setText("Contact Us");
+            exit=false;
 
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_SENDTO);
-            intent.setData(Uri.parse("mailto:fa.thalassaemia@gmail.com"));
-            //intent.putExtra(Intent.EXTRA_SUBJECT,"Feedback or subject");
-            startActivity(intent);
+//            Intent intent = new Intent();
+//            intent.setAction(Intent.ACTION_SENDTO);
+//            intent.setData(Uri.parse("mailto:fa.thalassaemia@gmail.com"));
+//            //intent.putExtra(Intent.EXTRA_SUBJECT,"Feedback or subject");
+//            startActivity(intent);
 
         }
         else if (id == R.id.nav_share) {

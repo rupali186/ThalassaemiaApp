@@ -22,13 +22,13 @@
 \n\nIn order to provide efficient services, we require certain personal information of the users.
        The services provided by us may link to third party websites and apps. The third party content is not reviewed or examined by us. The privacy practices of the third party may differ from those described in this policy. Therefore, we encourage you to carefully read the privacy policies and terms of use of the them.
 
-\nThe offering of the services provided by the third party does not imply our endorsement or association with any such third party.
+\n\nThe offering of the services provided by the third party does not imply our endorsement or association with any such third party.
 
-\nFurthermore, we reserve the right to share the Personal Information with our Third - Party partners.
+\n\nFurthermore, we reserve the right to share the Personal Information with our Third - Party partners.
 
-\nIt is the sole responsibility of the users to comply with the appropriate terms and conditions of the Third Party. In no event shall Foundation Against Thalassaemia be liable to any consequences arising from the sharing of personal information or the use of the third party content.
+\n\nIt is the sole responsibility of the users to comply with the appropriate terms and conditions of the Third Party. In no event shall Foundation Against Thalassaemia be liable to any consequences arising from the sharing of personal information or the use of the third party content.
 
-\nFoundation Against Thalassaemia may, at its sole discretion, change the terms and conditions and modify the privacy policy. We may add, edit or remove, without notice, any link to any third party content from the service.
+\n\nFoundation Against Thalassaemia may, at its sole discretion, change the terms and conditions and modify the privacy policy. We may add, edit or remove, without notice, any link to any third party content from the service.
 \n\n<b>Log Data</b>
 
 \n\nWe want to inform you that whenever you use our services, in a case of an error in the app we collect data and information
@@ -41,7 +41,7 @@
 \n\nCookies are files with a small amount of data that are commonly used as anonymous unique identifiers. These are sent
         to your browser from the websites that you visit and are stored on your device\'s internal memory.
 
-\nThis Service does not use these “cookies” explicitly. However, the app may use third party code and libraries that use
+\n\nThis Service does not use these “cookies” explicitly. However, the app may use third party code and libraries that use
         “cookies” to collect information and improve their services. You have the option to either accept or refuse these
         cookies and know when a cookie is being sent to your device. If you choose to refuse our cookies, you may not be
         able to use some portions of this Service.
@@ -231,10 +231,9 @@ of years to see anything. Some people who have thalassaemia might show no signs 
 
 \n\n<b>Thalassaemia Treatment / Management</b>
 \n\nWith regular blood transfusions and chelation medicines, as advised by the doctors,
-thalassaemia major patients can live a good life. It\’s also important to get tests like CBC
+thalassaemia major patients can live a good life. \n\nIt\’s also important to get tests like CBC
 (Complete Blood Count), LFT (Liver Function Test), KFT (Kidney Function Test), Thyroid,
-Vitamin D, Phosphorus, Calcium, Hepatitis B &amp;C, HIV etc. done at regular intervals.\n\n
-The permanent cure for Thalassaemia in the present scenario is Bone Marrow Transplant.</string>
+Vitamin D, Phosphorus, Calcium, Hepatitis B &amp; C, HIV, Echocardiography, DEXA (Dual-energy X-ray Absorptiometry, i.e Bone Density scan) etc. done at regular intervals.\n\nThe permanent cure for Thalassaemia in the present scenario is Bone Marrow Transplant.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -273,5 +272,7 @@ The permanent cure for Thalassaemia in the present scenario is Bone Marrow Trans
     <string name="tab_text_3">Events</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_home">HomeAct</string>
+    <string name="dedication_text">Dedicating this app to all the Thalassaemic children of the world. </string>
+
 
 </resources>

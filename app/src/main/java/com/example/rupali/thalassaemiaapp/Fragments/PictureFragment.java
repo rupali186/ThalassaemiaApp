@@ -22,9 +22,9 @@ public class PictureFragment extends Fragment {
     EventsPagerAdapter eventsPagerAdapter;
     ViewPager pattronsViewPager;
     EventsPagerAdapter pattronsPagerAdapter;
-    Integer[] eventsImageId = {R.drawable.event_1, R.drawable.event_2, R.drawable.event_3, R.drawable.event_4};
+    Integer[] eventsImageId = {R.drawable.pic_gallery_3, R.drawable.pic_gallery_4,R.drawable.pic_gallery_5, R.drawable.pic_gallery_6, R.drawable.pic_gallery_7};
     //String[] eventsImagesName = {"image1","image2","image3","image4"};
-    Integer[] pattronsImageId = {R.drawable.event_1, R.drawable.event_2, R.drawable.event_3, R.drawable.event_4};
+    Integer[] pattronsImageId = { R.drawable.pic_gallery_2,R.drawable.pic_gallery_8,R.drawable.pic_gallery_12,R.drawable.pic_gallery_13};
     //String[] pattronsImageName = {"image1","image2","image3","image4"};
     Timer eventsTimer;
     Timer pattronsTimer;
@@ -41,9 +41,9 @@ public class PictureFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_picture, container, false);
         eventsViewPager=view.findViewById(R.id.events_viewpager);
         pattronsViewPager=view.findViewById(R.id.pattrons_viewpager);
-        eventsPagerAdapter = new EventsPagerAdapter(getActivity(),eventsImageId);
+        eventsPagerAdapter = new EventsPagerAdapter(getActivity(),eventsImageId,true);
         eventsViewPager.setAdapter(eventsPagerAdapter);
-        pattronsPagerAdapter = new EventsPagerAdapter(getActivity(),pattronsImageId);
+        pattronsPagerAdapter = new EventsPagerAdapter(getActivity(),pattronsImageId,true);
         pattronsViewPager.setAdapter(pattronsPagerAdapter);
         TimerTask eventsTimerTask = new TimerTask() {
             @Override
@@ -58,7 +58,7 @@ public class PictureFragment extends Fragment {
             }
         };
         eventsTimer = new Timer();
-        eventsTimer.schedule(eventsTimerTask, 3000, 3000);
+        eventsTimer.schedule(eventsTimerTask, 5000, 5000);
         TimerTask pattronsTimerTask = new TimerTask() {
             @Override
             public void run() {
@@ -72,7 +72,7 @@ public class PictureFragment extends Fragment {
             }
         };
         pattronsTimer = new Timer();
-        pattronsTimer.schedule(pattronsTimerTask, 3000, 3000);
+        pattronsTimer.schedule(pattronsTimerTask, 5000, 5000);
         return  view;
     }
 
